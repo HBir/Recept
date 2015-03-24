@@ -1,0 +1,207 @@
+/*Sidans struktur*/
+body {
+    background-image: url(p2_@2X.png);
+    font-family: sans-serif;
+    color: black;
+    width: 1920px;
+    
+}
+
+#wrapper{
+    margin: auto;
+    width: 1008px;
+    height: 100%;
+    /*border-left: 4px solid;
+    border-right: 4px solid;
+    border-color: #ff6a00;
+    border-radius: 25px;*/
+    background-color: white;
+    box-shadow: 0px -2px 2px rgba(34,34,34,0.6);
+    
+}
+
+header {
+    width: 1000px;
+    height: 180px;
+    font-size: 0px;
+    border: 4px solid;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background-image: url(recept.png);
+    clear:  both;
+}
+footer {
+    width: 1000px;
+    height: auto;
+    border: 4px solid;
+    border-color: black;
+    text-align: center;
+    color: yellow;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-top: 50px;
+}
+/*Stilklasser*/
+.kategoribox {
+    border-top: 4px solid;
+    border-right: 4px solid;
+    border-left:4px solid;
+    margin: 5px;
+    float: left;
+    height: 120px;
+    width: 120px;
+    text-align: center;
+    line-height: 120px;
+    border-radius: 25px;
+    font-size:  0px;
+    display: block;
+    
+}
+
+.kategoribox#kott {
+    background-image: url(kott.jpg);
+    margin-left:  200px;
+}
+.kategoribox#Pasta {
+    background-image: url(pasta.jpg);
+}
+.kategoribox#Mejeri {
+    background-image: url(mejeriprodukter.jpg);
+}
+.kategoribox#Veggies {
+    background-image: url(veggies.jpg);
+}
+.kursbox#forratt {
+    margin-left:  270px;
+    
+}
+.kursbox#efterratt {
+    
+}
+.kursbox#huvudratt {
+    
+}
+
+.kursbox {
+    border-top: 4px solid;
+    border-right: 4px solid;
+    border-left:4px solid;
+    margin: 5px;
+    float: left;
+    height: 80px;
+    width: 120px;
+    text-align: center;
+    line-height: 80px;
+    border-radius: 25px;
+    font-size:  20px;
+    display: block;
+    background-color: #dab07b;
+    
+}
+/*Induviduella objekt*/
+#kursarea{
+    border-bottom: 4px solid;
+    border-right: 4px solid;
+    border-left:4px solid;
+    height: 100px;
+    width: 1000px;
+}
+#kategoriarea {
+    border-bottom: 4px solid;
+    border-right: 4px solid;
+    border-left:4px solid;
+    height: 150px;
+    width: 1000px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+#main {
+    width: 830px;
+    border-radius: 25px;
+    min-height: 590px;
+    
+    
+}
+#ingredienser {
+    border: 4px solid;
+    float: left;
+    width: 200px;
+    min-height: 300px;
+    border-radius: 25px;
+    position: absolute;
+    left: 1250px;
+    top:470px;
+    
+}
+#ingredienser ul {
+    padding: 20px;
+}
+#ingredienser ul span {
+    float: right;
+}
+#ingredienser button {
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 10px;
+}
+#ingredienser p {
+    text-align: center;
+}
+#sok {
+    margin-bottom: 0px;
+}
+#sokruta {
+    font-size: 20px;
+    margin: 10px;
+    margin-left: 300px;
+    margin-right: 0px;
+}
+#sokknapp {
+    font-size: 18px;
+    margin-left: 0px;
+}
+#main h2 {
+    margin-top: 0px;
+    margin-left: 60px;
+}
+#pagenav {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+#row1 {
+    float: left;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+#row2 {
+    float: left;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+#row3 {
+    float: left;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+/*Länkstil*/
+#main ul a {
+    text-decoration: none;
+}
+#main ul a:hover {
+    text-decoration: underline;
+}
+#main ul a:visited {
+    
+}
+
+#ingredienser ul span a {
+    color: red;
+}
+
+#pagenav a {
+    text-decoration: none;
+    color: gray;
+}
