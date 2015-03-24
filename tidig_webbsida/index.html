@@ -8,29 +8,25 @@
     </head>
     <body>
         <div id="wrapper">
-            <header>
+            <a href="index.html"><header>
                 <h1>Receptsökare!</h1>
-            </header>
+            </header></a>
             <div id="main">
                 <div id="kursarea">
-                    <div class="kursbox" id="forratt">Förrätt</div>
-                    <div class="kursbox" id="huvudratt">Huvudrätt</div>
-                    <div class="kursbox" id="efterratt">Efterrätt</div>
+                    <a href="#"><div class="kursbox" id="forratt">Förrätt</div></a>
+                    <a href="#"><div class="kursbox" id="huvudratt">Huvudrätt</div></a>
+                    <a href="#"><div class="kursbox" id="efterratt">Efterrätt</div></a>
                 </div>
                 <div id="kategoriarea">
                     
-                    <div class="kategoribox" id="kott">
-                        <a href="#">Kött</a>
-                    </div>
-                    <div class="kategoribox" id="Mejeri">
-                        <a href="#">Mejeriprodukter</a>
-                    </div>
-                    <div class="kategoribox" id="Pasta">
-                        <a href="#">Pasta</a>
-                    </div>
-                    <div class="kategoribox" id="Veggies">
-                        <a href="#">Grönsaker</a>
-                    </div>
+                    <a href="#"><div class="kategoribox" id="kott">
+                    </div></a>
+                    <a href="#"><div class="kategoribox" id="Mejeri">
+                    </div></a>
+                    <a href="#"><div class="kategoribox" id="Pasta">
+                    </div></a>
+                    <a href="#"><div class="kategoribox" id="Veggies">
+                    </div></a>
                 </div>
                 <div id="sok">
                     <input type="text" id="sokruta" name="sok" placeholder="Sök">
@@ -84,19 +80,25 @@
                         <li><a href="#">Absens</a></li>
                         <li><a href="#">Absent</a></li>
                         <li><a href="#">Absolution</a></li>
-                        <li><a href="#">Absorbera</a></li>	
+                        <li><a href="#">Absorbera</a></li>
                     </ul>
                 </div>
 
 
                 <div id="ingredienser">
-                    <p>Dina valda ingredienser:</p>
+                    <p id="ingrrubrik"><span class="bold">Dina valda ingredienser:</span></p>
+                    <a href="#"></a><button type="button" id="rensa">Rensa lista</button></a>
                     <ul>
                         <li>Mjölk <span><a href="#">X</a></span></li>
                         <li>Ägg<span><a href="#">X</a></span></li>
                         <li>Bacon<span><a href="#">X</a></span></li>
                     </ul>
-                    <button type="button" id="button">Hitta recept</button>
+                    
+
+                    <!--<a href="#"></a><button type="button" id="button">Hitta recept</button></a>-->
+                    <FORM METHOD="LINK" ACTION="searchresult.html">
+                    <INPUT TYPE="submit" id="button" VALUE="Hitta recept">
+                    </FORM>
                 </div>
             </div>
             <footer>
