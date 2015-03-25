@@ -109,6 +109,10 @@ footer {
     border-radius: 10px;
     
 }
+.row {
+    text-align: left;
+}
+
 /*Induviduella objekt*/
 #kursarea{
     border-bottom: 4px solid;
