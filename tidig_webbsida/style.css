@@ -1,0 +1,274 @@
+/*Sidans struktur*/
+body {
+    background-image: url(p2_@2X.png);
+    font-family: sans-serif;
+    color: black;
+    width: 1920px;
+    
+}
+
+#wrapper{
+    margin: auto;
+    width: 1008px;
+    height: 100%;
+    /*border-left: 4px solid;
+    border-right: 4px solid;
+    border-color: #ff6a00;
+    border-radius: 25px;*/
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px -2px 2px rgba(34,34,34,0.6);
+    
+}
+
+header {
+    width: 1000px;
+    height: 180px;
+    font-size: 0px;
+    border: 4px solid;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background-image: url(recept.png);
+    clear:  both;
+}
+footer {
+    width: 1000px;
+    height: auto;
+    border: 4px solid;
+    border-color: black;
+    text-align: center;
+    color: yellow;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+/*Stilklasser*/
+.bold {
+    font-weight: bold;
+}
+.kategoribox {
+
+    border-right: 4px solid;
+    border-left:4px solid;
+    margin: 5px;
+    float: left;
+    height: 120px;
+    width: 120px;
+    text-align: center;
+    line-height: 120px;
+    border-radius: 25px;
+    font-size:  0px;
+    display: block;
+    
+}
+
+.kategoribox#kott {
+    background-image: url(kott.jpg);
+    margin-left:  200px;
+}
+.kategoribox#Pasta {
+    background-image: url(pasta.jpg);
+}
+.kategoribox#Mejeri {
+    background-image: url(mejeriprodukter.jpg);
+}
+.kategoribox#Veggies {
+    background-image: url(veggies.jpg);
+}
+.kursbox#forratt {
+    margin-left:  270px;
+    
+}
+.kursbox#efterratt {
+    
+}
+.kursbox#huvudratt {
+    
+}
+
+.kursbox {
+
+    border-right: 4px solid;
+    border-left:4px solid;
+    margin: 5px;
+    float: left;
+    height: 80px;
+    width: 120px;
+    text-align: center;
+    line-height: 80px;
+    border-radius: 25px;
+    font-size:  20px;
+    display: block;
+    background-color: #dab07b;
+    
+}
+.resultbox {
+    border: 3px solid lightgray;
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    
+}
+/*Induviduella objekt*/
+#kursarea{
+    border-bottom: 4px solid;
+    border-right: 4px solid;
+    border-left:4px solid;
+    height: 100px;
+    width: 1000px;
+    font-family: Tahoma;
+}
+#kategoriarea {
+    border-bottom: 4px solid;
+    border-right: 4px solid;
+    border-left:4px solid;
+    height: 150px;
+    width: 1000px;
+    /*border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;*/
+}
+#main {
+    width: 1010px;
+    
+    min-height: 590px;
+    overflow: hidden;
+    
+    
+}
+#ingredienser {
+    border: 4px solid;
+    float: right;
+    width: 200px;
+    min-height: 10px;
+    border-radius: 25px;
+    background-color:  #eeeeee;
+    margin: 10px;
+    margin-bottom: 50px;
+    
+}
+#ingredienser ul {
+    padding: 20px;
+}
+#ingredienser ul span {
+    float: right;
+}
+#ingredienser #button {
+    font-weight: bold;
+    margin-left: 30px;
+    padding: 10px;
+    font-size: 20px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    width: 130px;
+    height: 50px;
+    border-radius: 10px;
+}
+#ingredienser p {
+    text-align: center;
+}
+#sok {
+    margin-bottom: 0px;
+    margin-right: 0px;
+}
+#sokruta {
+    font-size: 20px;
+    margin: 10px;
+    margin-left: 300px;
+    margin-right: 0px;
+}
+#sokknapp {
+    font-size: 18px;
+    margin-left: 0px;
+}
+#main h2 {
+    margin-top: 0px;
+    margin-left: 60px;
+}
+#pagenav {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+#row1 {
+    float: left;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+#row2 {
+    float: left;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+#row3 {
+    float: left;
+    margin-left: 60px;
+    /*margin-right: 60px;*/
+}
+#ingrrubrik {
+    margin-bottom: 5px;
+}
+#resultatarea {
+    /*border: 4px solid;*/
+    width: 600px;
+    min-height: 500px;
+    margin: 10px;
+    float: left;
+}
+#next {
+    float: right;
+}
+#sort {
+    margin: 10px;
+}
+/*Länkstil*/
+#rensa {
+    position: relative;
+    margin-top: 0px;
+    margin-left: 30%;
+    color: #d23e3e;
+}
+#main ul a {
+    text-decoration: none;
+}
+#main ul a:hover {
+    text-decoration: underline;
+}
+#main ul a:visited {
+    
+}
+
+#ingredienser ul span a {
+    color: red;
+}
+
+#pagenav a {
+    text-decoration: none;
+    color: gray;
+}
+#kursarea a {
+    color: black;
+}
+#kursarea a:hover {
+    color: #d23e3e;
+
+}
+#kursarea a:focus {
+    color: #d23e3e;
+
+}
+
+#kategoriarea a {
+    color: black;
+}
+#kategoriarea a:hover {
+    color: #d23e3e;
+
+}
+#kategoriarea a:focus {
+    color: #d23e3e;
+
+}
+a header {
+    color: black;
+}
