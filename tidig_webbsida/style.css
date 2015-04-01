@@ -112,7 +112,25 @@ footer {
 .row {
     text-align: left;
 }
+.bildbox {
+    border: 3px solid lightgray;
+    width: 120px;
+    height: 120px;
+    float:  left;
+    margin: 10px;
+}
+.receptrubrik{
+    /*border: 3px solid lightgray;*/
+    margin: 10px;
+    font-weight: bold;
+    
+}
 
+.recepttext {
+    /*border: 3px solid lightgray;*/
+    text-align: left;
+    overflow: hide;
+}
 /*Induviduella objekt*/
 #kursarea{
     border-bottom: 4px solid;
