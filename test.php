@@ -59,7 +59,6 @@ EOF;
 	//$db->init_table();
 	//$db->populate();
 
-	/* Exempelgrejer
 	$huhu = $db->query("SELECT rowid, * FROM Recipes WHERE Rating > 2");
 
 	while ($row = $huhu->fetchArray()) {
@@ -67,6 +66,6 @@ EOF;
 		echo "<br>";
 	}
 
-	echo $db->get_recipe(2)["Name"]; 
-	$db->close(); */
+	echo $db->get_recipe(2)["Name"];
+	$db->close();
 ?>
