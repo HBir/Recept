@@ -50,14 +50,14 @@
                     <?php
                     $result = 1;
                     while ($row = $ret->fetchArray()) {
-                        echo <<<RESULTBOX
+                        echo <<<HTML
                         <div class="resultbox" id="result$result">
-                        <div class="bildbox">
+                            <div class="bildbox">
+                            </div>
+                            <div class="receptrubrik">{$row['Name']}</div>
+                            <div class="recepttext">{$row['Text']}</div>
                         </div>
-                        <div class="receptrubrik">{$row['Name']}</div>
-                        <div class="recepttext">{$row['Text']}</div>
-                        </div>
-RESULTBOX;
+HTML;
                         $result++;
                     }
                     ?>
