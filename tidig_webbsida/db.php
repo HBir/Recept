@@ -53,7 +53,7 @@ EOF;
 	if(!$db){
 		echo $db->lastErrorMsg();
 	} else {
-		//echo "Opened database<br>\n\n";
+		echo "Opened database<br>\n\n";
 	}
 
 	//$db->init_table();
