@@ -49,18 +49,17 @@
                     </div>
                     <?php
                     $result = 1;
-                    while ($row = $ret->fetchArray()) {
-                        echo <<<RESULTBOX
-                        <div class="resultbox" id="result$result">
+                    while ($row = $ret->fetchArray()) { ?>
+                        <div class="resultbox" id="result<?= $result ?>">
                         <div class="bildbox">
                         </div>
-                        <div class="receptrubrik">{$row['Name']}</div>
-                        <div class="recepttext">{$row['Text']}</div>
-                        </div>
-RESULTBOX;
-                        $result++;
+                        <div class="receptrubrik"><?= $row['Name'] ?></div>
+                        <div class="recepttext"><?= $row['Text'] ?></div>
+                    </div>
+                <?php
+                    $result++;
                     }
-                    ?>
+                ?>
                     <div id="next">
                         <a href="#">Nästa sida</a>
                     </div>
