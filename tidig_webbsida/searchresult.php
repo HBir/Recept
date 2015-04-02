@@ -5,15 +5,21 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $search = $_POST["search"];
 
-        $istring = "SELECT * FROM Recipes WHERE Ingredients LIKE '%" . $search . "%'";
-        $ret = $db->query($istring);
+        $query = <<<SQL
+        SELECT * FROM Recipes WHERE
+              Ingredients LIKE '%,{$search},%' --middle
+              OR
+              Ingredients LIKE '{$search},%' --start
+              OR
+              Ingredients LIKE '%,{$search}' --end
+              OR 
+              Ingredients = '{$search}'
+SQL;
+        //$istring = "SELECT * FROM Recipes WHERE Ingredients LIKE '%" . $search . "%'";
+        $ret = $db->query($query);
         if(!$ret) {
             echo $db->lastErrorMsg();
-        } else {
-            
         }
-        //$db->close();
-        
     }
 ?>
 <html lang="en">
@@ -49,6 +55,7 @@
                     </div>
                     <?php
                     $result = 1;
+                    // Loopa genom resultaten och skapar en div för varje.
                     while ($row = $ret->fetchArray()) {
                         echo <<<HTML
                         <div class="resultbox" id="result$result">
