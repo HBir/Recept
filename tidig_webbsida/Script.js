@@ -2,10 +2,10 @@ window.onload = setUp;
 var ingrds = []
 
 function setUp() {
-	//alert("Nu har sidan laddats");
+    //Lyssnare för att skapa händelser på tryck
 	document.getElementById("knapp").onclick = skapalank;
     document.getElementById("rensa").onclick = rensa;
-    if (document.body.addEventListener) {
+    if (document.body.addEventListener) { //För äldre versioner av IE
         document.body.addEventListener('click',addItem,false);
 		document.body.addEventListener('click',removeItem,false);
     }
@@ -13,19 +13,18 @@ function setUp() {
         document.body.attachEvent('onclick',addItem);
 		document.body.attachEvent('onclick',removeItem);
     }
-	
 }
 
-
 function skapalank() {
-    //var ingrds = ["Mjölk", "Ägg", "Bacon"];
+    //Tar alla rader i listan på valda ingredienser och gör en URL av dem
     var ingrdsStr = ingrds.join("+");
-    alert(".../search/" + ingrdsStr);
-    console.log(ingrdsStr);
+    alert(".../search/" + ingrdsStr);//För tillfället skrivs de bara ut som ett meddelande, men ska senare även skicka användare till länkens destination.
+    console.log(ingrdsStr); 
 
 }
 function rensa() {
-    ingrds.length = 0;
+    
+    ingrds.length = 0; //Tömmer 
     var div = document.getElementById('Ingredienslista');
     div.innerHTML = "";
 }
