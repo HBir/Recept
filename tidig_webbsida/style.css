@@ -1,4 +1,4 @@
-/*Sidans struktur*/
+﻿/*Sidans struktur*/
 body {
     background-image: url(bilder/p2_@2X.png);
     font-family: sans-serif;
@@ -111,6 +111,9 @@ footer {
 }
 .row {
     text-align: left;
+    float: left;
+    margin-left: 60px;
+    margin-right: 60px;
 }
 .bildbox {
     border: 3px solid lightgray;
@@ -171,7 +174,7 @@ footer {
 #ingredienser ul {
     padding: 20px;
 }
-#ingredienser ul span {
+#cross {
     float: right;
 }
 .button {
@@ -214,20 +217,9 @@ footer {
     font-size: 20px;
     margin-bottom: 20px;
 }
-#row1 {
-    float: left;
-    margin-left: 60px;
-    margin-right: 60px;
-}
-#row2 {
-    float: left;
-    margin-left: 60px;
-    margin-right: 60px;
-}
-#row3 {
-    float: left;
-    margin-left: 60px;
-    /*margin-right: 60px;*/
+
+.row3 {
+    margin-right: 0px;
 }
 #ingrrubrik {
     margin-bottom: 5px;
