@@ -145,6 +145,130 @@ footer {
     text-align: left;
     overflow: hidden;
 }
+/* för recipepage.html*/
+hr.side { 
+    border: solid #ddd; 
+    border-width: 1px 0 0; 
+    clear: both; 
+    margin: 20px 0; 
+    height: 0; 
+}
+.recipebox{
+    min-height: 230px;
+    padding-left: 5px;
+}
+.title{
+    margin-top: 0;
+    margin-bottom: 7px;
+    max-width: 500px;
+    padding:5px;
+    font-weight: bold;
+    line-height: : 1.1em;
+    float: left;
+}
+/*orangea cirklar som rating för tillfället*/
+.rating{
+    float:left;
+    position: relative;
+    width:180px;
+    padding-left:5px; 
+}
+.rating span { 
+    float:right; 
+    position:relative; 
+}
+.rating span input {
+    position:absolute;
+    top:0px;
+    left:0px;
+    opacity:0;
+}
+.rating span label {
+    display:inline-block;
+    width:20px;
+    height:20px;        
+    margin-left:4px;
+    text-align:center;
+    color:#fff;
+    background:#ccc;
+    margin-right:2px;
+    line-height:30px;
+    border-radius:50%;
+}
+.rating span:hover ~ span label,
+.rating span:hover label,
+.rating span.checked label,
+.rating span.checked ~ span label {
+    background:#f90;
+    color:#fff;
+}
+.recipepic img{
+    position: relative;
+    float: right;
+    clear: none;
+    max-height: 250px;
+    max-width: 250px;
+    margin-top:10px;
+    padding:0;
+    box-shadow: 0px 2px 8px #888888
+}
+.recipedescription{
+    float:left;
+    width:320px;
+    text-align: left;
+    padding: 5px;
+    clear:left;
+}
+.recipecontent{
+    margin-top: 20px;
+    clear:both;
+    width: 700px;
+}
+.ingridients{
+    float:left;
+    position: relative;
+    width: 200px;
+    text-align: left;
+    margin-top: 20px;
+    margin-right:20px;
+    display: block;
+    line-height: 1.8em;    
+}
+.instructions{
+    float:left;
+    position: relative;
+    width: 400px;
+    text-align: left;
+    margin-top: 20px;
+    line-height: 1.8em;
+    display: block;
+}
+.teaser{
+    width:150px;
+    clear:both;
+    margin:0;
+    position: absolute;    
+    overflow: hidden;
+}
+.teaser li {
+    list-style: none;
+    display:inline-block;
+    max-width:100px; 
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+figcaption {
+    padding-top: 5px;
+}
+.teaser a:hover, a:focus{
+    text-decoration: none;
+    color: #f59300;
+}
+.teaser img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
 /*Induviduella objekt*/
 #kursarea{
     border-bottom: 4px solid;
@@ -295,4 +419,19 @@ footer {
 }
 a header {
     color: black;
+}
+/* för recipepage.html*/
+#recipepage {
+    width: 720px;
+    min-height: 500px;
+    padding:20px;
+    float:left;
+    color: #323233;
+}
+#related_recipe{
+    float:right;
+    margin-top:10px;
+    color: #666666;
+    padding: 20px 30px 0 0;
+    font-size: 14px;
 }
