@@ -17,10 +17,11 @@ function setUp() {
 
 function skapalank() {
     //Tar alla rader i listan på valda ingredienser och gör en URL av dem
-    if (ingrds.length == 0) {                                                  //Ser till att inte listan är tom
+    if (ingrds.length <= 0) {                                                  //Ser till att inte listan är tom
         alert("Var god välj de ingredienser du vill använda");
         return false;
     }
+    
     var ingrdsStr = ingrds.join("+");
     var destination = "/search/" + ingrdsStr;
 
@@ -45,6 +46,10 @@ function addItem(e) {
     if (target.className.match(/\bItem\b/)) {
         if (ingrds.indexOf(target.innerHTML) != -1) {
             alert("Du har redan lagt till denna ingrediens");
+            return false;
+        }
+        if (ingrds.length >= 10) {
+            alert("Du kan inte lägga till fler ingredienser");
             return false;
         }
         ingrds.push(target.innerHTML)
