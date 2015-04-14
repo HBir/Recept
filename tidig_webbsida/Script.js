@@ -1,5 +1,5 @@
 window.onload = setUp;
-var ingrds = []
+var ingrds = [] //Skapar en global array för att hantera valda ingredienser
 
 function setUp() {
     //Lyssnare för att skapa händelser på tryck
@@ -17,19 +17,28 @@ function setUp() {
 
 function skapalank() {
     //Tar alla rader i listan på valda ingredienser och gör en URL av dem
+    if (ingrds.length == 0) {                                                  //Ser till att inte listan är tom
+        alert("Var god välj de ingredienser du vill använda");
+        return false;
+    }
     var ingrdsStr = ingrds.join("+");
-    alert(".../search/" + ingrdsStr);//För tillfället skrivs de bara ut som ett meddelande, men ska senare även skicka användare till länkens destination.
+    var destination = "/search/" + ingrdsStr;
+
+    window.location.href = destination;
+    //alert(".../search/" + ingrdsStr);
     console.log(ingrdsStr); 
 
 }
 function rensa() {
-    
-    ingrds.length = 0; //Tömmer 
+    //Tömmer både ingredienslistans innehåll, samt tar bort dem från att visas som valda på sidan.
+    ingrds.length = 0;
     var div = document.getElementById('Ingredienslista');
     div.innerHTML = "";
 }
 
 function addItem(e) {
+    //Lägger till en vald ingrediens i listan över valda ingredienser och visar upp dem som valda i sidans HTML. 
+    //(Rader med "||" är för kompabilitetssyfte)
     e = e || window.event;
     var target;
     target = e.target || e.srcElement;
@@ -46,6 +55,7 @@ function addItem(e) {
 }
 
 function removeItem(e) {
+    //Tar bort markerat objekt, och tar bort dem från att visas som valda. 
     e = e || window.event;
     var target;
     target = e.target || e.srcElement;
