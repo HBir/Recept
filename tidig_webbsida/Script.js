@@ -23,7 +23,7 @@ function skapalank() {
     }
     
     var ingrdsStr = ingrds.join("+");
-    var destination = "/search/" + ingrdsStr;
+    var destination = "/search.php?s=" + ingrdsStr;
 
     window.location.href = destination;
     //alert(".../search/" + ingrdsStr);
