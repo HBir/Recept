@@ -1,9 +1,26 @@
 <!DOCTYPE html>
+<?php
+    include("db.php");
 
+    $db = new DB();
+    if(!$db){
+        echo $db->lastErrorMsg();
+        exit();
+    }
+    if ($_GET['id'] == '') {
+        echo 'inget id';
+    } else {
+        $q = $db->prepare("SELECT rowid,* FROM Recipes WHERE rowid=:id");
+        $q->bindValue(':id', $_GET['id'], SQLITE3_INTEGER);
+        $ret = $q->execute();
+        $recipe = $ret->fetchArray();
+        //var_dump($ret->fetchArray());
+    }
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Välj recept</title>
+        <title><?= $recipe['Name'] ?></title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -25,9 +42,9 @@
                 <div id="recipepage">
                     
                     <div class="recipebox" id="recipeheader">
-                        <h1 class="title">Amerikanska pannkakor</h1> 
+                        <h1 class="title"><?= $recipe['Name'] ?></h1> 
                         
-                        <div class="recipepic"><img alt="pancakes" src="bilder/pancakes.jpg"/></div>
+                        <div class="recipepic"><img alt="pancakes" src="bilder/<?= $recipe['Picture'] ?>"/></div>
                        
                        <div class="rating"><strong>Betyg</strong>
                            <span><a href="#"title="5 stjärnor"><input type="radio" name="rating" id="star5" value="5"><label for="star5">
@@ -44,7 +61,7 @@
 
                            
                         <div class="recipedescription">
-                            <p class="r_description">Lorem ipsum dolor sit amet, option eripuit eam eu, pro id vero debitis. In sit modus convenire, oratio iuvaret vim ad. Eum sale utinam libris ea. Te mea illud simul voluptua. Stet iuvaret nec eu, et eos alienum erroribus, at eum cibo facilis contentiones.</p>
+                            <p class="r_description"><?= $recipe['Text'] ?></p>
                             <p class="">4 portioner</p>
 
                         </div>

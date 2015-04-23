@@ -23,7 +23,7 @@ function skapalank() {
     }
     
     var ingrdsStr = ingrds.join("+");
-    var destination = "/search.php?s=" + ingrdsStr;
+    var destination = "/ae2502/recept/search.php?s=" + ingrdsStr;
 
     window.location.href = destination;
     //alert(".../search/" + ingrdsStr);

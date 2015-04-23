@@ -2,25 +2,30 @@
 <!DOCTYPE html>
 <?php
     include("db.php");
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $search = $_POST["search"];
 
-        $query = <<<SQL
-        SELECT * FROM Recipes WHERE
-              Ingredients LIKE '%,{$search},%' --middle
-              OR
-              Ingredients LIKE '{$search},%' --start
-              OR
-              Ingredients LIKE '%,{$search}' --end
-              OR 
-              Ingredients = '{$search}'
-SQL;
-        //$istring = "SELECT * FROM Recipes WHERE Ingredients LIKE '%" . $search . "%'";
-        $ret = $db->query($query);
-        if(!$ret) {
-            echo $db->lastErrorMsg();
-        }
+    $db = new DB();
+    if(!$db){
+        echo $db->lastErrorMsg();
+        exit();
     }
+
+    if ($_GET['s'] == '') {
+        echo 'ingen söksträng';
+    } else {
+        //$ingredients = explode(' ',$_GET['s']);
+        // Bygg sträng i format 'foo','bar','apa'
+        $ingredients = "'" . implode("','", explode(' ', mb_strtolower($_GET['s'], 'UTF-8'))) . "'";
+        $sql = <<<SQL
+        SELECT Recipes.rowid, * FROM Recipes
+        JOIN RecipesIngredients ON Recipes.rowid = RecipesIngredients.RecipeID
+        WHERE RecipesIngredients.Ingredient IN ({$ingredients})
+SQL;
+       //$q = $db->prepare($sql); 
+       //$q->bindValue(':ingredients', $ingredients, SQLITE3_TEXT);
+       $ret = $db->query($sql);
+       //var_dump($ret->fetchArray());
+    }
+    $db->close();
 ?>
 <html lang="en">
     <head>
@@ -61,7 +66,7 @@ SQL;
                         <div class="resultbox" id="result$result">
                             <div class="bildbox">
                             </div>
-                            <div class="receptrubrik">{$row['Name']}</div>
+                            <div class="receptrubrik"><a href="recipe.php?id={$row['rowid']}">{$row['Name']}</a></div>
                             <div class="recepttext">{$row['Text']}</div>
                         </div>
 HTML;
