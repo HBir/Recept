@@ -20,10 +20,10 @@
         JOIN RecipesIngredients ON Recipes.rowid = RecipesIngredients.RecipeID
         WHERE RecipesIngredients.Ingredient IN ({$ingredients})
 SQL;
-       //$q = $db->prepare($sql); 
-       //$q->bindValue(':ingredients', $ingredients, SQLITE3_TEXT);
-       $ret = $db->query($sql);
-       //var_dump($ret->fetchArray());
+        // Här vill man ha prepared statements för att undvika injektion,
+        // Men det är knepigt med ett godtyckligt antal ingredienser.
+        // http://stackoverflow.com/questions/327274/mysql-prepared-statements-with-a-variable-size-variable-list
+        $ret = $db->query($sql);
     }
     $db->close();
 ?>
