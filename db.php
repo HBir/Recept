@@ -32,15 +32,18 @@ SQL;
 				CREATE TABLE Recipes
 				(Name          TEXT NOT NULL,
 				Picture        TEXT NOT NULL,
-				Text           TEXT NOT NULL,
-				Rating          INT);
+				Instructions   TEXT NOT NULL,
+				Description    TEXT,
+				Course 		   TEXT,
+				Views		   INT,
+				Rating         INT);
 				
 				CREATE TABLE Ingredients
 				(Ingredient TEXT NOT NULL UNIQUE,
 				Category    TEXT);
 
 				CREATE TABLE RecipesIngredients
-				(RecipeID INT NOT NULL,
+				(RecipeID  INT NOT NULL,
 				Ingredient TEXT NOT NULL);
 SQL;
 			$this->execute($sql, "Created tables.");

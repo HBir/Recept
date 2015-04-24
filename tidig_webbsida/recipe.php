@@ -14,7 +14,9 @@
         $q->bindValue(':id', $_GET['id'], SQLITE3_INTEGER);
         $ret = $q->execute();
         $recipe = $ret->fetchArray();
-        //var_dump($ret->fetchArray());
+        $q = $db->prepare("SELECT Ingredient FROM RecipesIngredients WHERE RecipeID=:id");
+        $q->bindValue(':id', $_GET['id'], SQLITE3_INTEGER);
+        $ingredients = $q->execute();
     }
 ?>
 <html lang="en">
@@ -44,7 +46,7 @@
                     <div class="recipebox" id="recipeheader">
                         <h1 class="title"><?= $recipe['Name'] ?></h1> 
                         
-                        <div class="recipepic"><img alt="pancakes" src="bilder/<?= $recipe['Picture'] ?>"/></div>
+                        <div class="recipepic"><img alt="<?= $recipe['Name'] ?>" src="bilder/<?= $recipe['Picture'] ?>"/></div>
                        
                        <div class="rating"><strong>Betyg</strong>
                            <span><a href="#"title="5 stjärnor"><input type="radio" name="rating" id="star5" value="5"><label for="star5">
@@ -61,7 +63,7 @@
 
                            
                         <div class="recipedescription">
-                            <p class="r_description"><?= $recipe['Text'] ?></p>
+                            <p class="r_description"><?= $recipe['Description'] ?></p>
                             <p class="">4 portioner</p>
 
                         </div>
@@ -74,26 +76,15 @@
                         <div class="ingridients">
                             <h2 class"">Ingredienser</h2>
                                 <ul class="ingridient-list">
-                                    <li>4 ägg </li>
-                                    <li>4 ägg</li>
-                                    <li>4 ägg</li>
-                                    <li>4 ägg</li>
-                                    <li>4 ägg</li>
-                                    <li>4 ägg</li>
+                                    <?php // Ingredienslistan
+                                    while($i = $ingredients->fetchArray()) { ?>
+                                    <li><?= $i[0] ?></li>
+                                    <?php } ?>
                                 </ul>
                         </div>
                         <div class="instructions">
                             <h2>Gör såhär</h2>
-                                <ol>
-                                    <li>Kläck äggengggggg  gggggggg
-                                        ggggggggg  gggg gggg gggggg ggggg ggggg ggggg gggggg</li>
-                                    <li>Vispa</li>
-                                    <li>Vispa</li>
-                                    <li>Häll</li>
-                                    <li>Rör</li>
-                                    <li>Skopa</li>
-                                    <li></li>
-                                </ol>
+                            <?= $recipe['Instructions'] ?>
                         </div>
                     </div><!--end recipecontent-->
 

@@ -22,10 +22,13 @@
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		// Lägga till recept
 		if ($_POST["addtype"] == 1) {
-			$q = $db->prepare("INSERT INTO Recipes VALUES(:name,:image,:recipe,:rating)");
+			$q = $db->prepare("INSERT INTO Recipes VALUES(:name,:image,:instructions,:description,:course,:views,:rating)");
 			$q->bindValue(':name', $_POST["name"], SQLITE3_TEXT);
 			$q->bindValue(':image', $_POST["pic"], SQLITE3_TEXT);
-			$q->bindValue(':recipe', $_POST["recipe"], SQLITE3_TEXT);
+			$q->bindValue(':instructions', $_POST["instructions"], SQLITE3_TEXT);
+			$q->bindValue(':description', $_POST["description"], SQLITE3_TEXT);
+			$q->bindValue(':course', $_POST["course"], SQLITE3_TEXT);
+			$q->bindValue(':views', 0, SQLITE3_INTEGER);
 			$q->bindValue(':rating', $_POST["rating"], SQLITE3_INTEGER);
 			$ret = $q->execute();
 			if(!$ret){
@@ -94,7 +97,9 @@
 			<input type="text" name="name" id="name" placeholder="Namn"><br>
 			<input type="text" name="pic" id="pic" placeholder="Bild (filnamn)"><br>
 			<textarea name="ingredients" id="ingredients" placeholder="Ingredienser"></textarea><br>
-			<input type="text" name="recipe" id="recipe" placeholder="Receptet"><br>
+			<input type="text" name="instructions" id="instructions" placeholder="Instruktioner"><br>
+			<input type="text" name="description" id="description" placeholder="Kort beskrivning"><br>
+			<input type="text" name="course" id="course" placeholder="Course"><br>
 			<input type="number" name="rating" min="1" max="5"><br>
 			<input type="hidden" name="addtype" value="1">
 			<input type="submit" value="Klar" style="width:100px;">

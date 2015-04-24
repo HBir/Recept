@@ -11,22 +11,20 @@
     if ($_GET['s'] == '') {
         echo 'ingen söksträng';
     } else {
-        //$ingredients = explode(' ',$_GET['s']);
         // Bygg sträng i format 'foo','bar','apa' av ingredienserna i URLen.
-        $ingredients = "'" . implode("','", explode(' ', mb_strtolower($_GET['s'], 'UTF-8'))) . "'";
+        $ing_array = explode(' ', $_GET['s']);
+        $ingredients = "'" . mb_strtolower(implode("','", $ing_array), 'UTF-8') . "'";
+
         $sql = <<<SQL
         SELECT Recipes.rowid, Recipes.* FROM Recipes
         JOIN RecipesIngredients ON Recipes.rowid = RecipesIngredients.RecipeID
         WHERE RecipesIngredients.Ingredient IN ({$ingredients})
 SQL;
-        // Här vill man ha prepared statements för att undvika injektion,
+        // Här vill man nog ha prepared statements för att undvika injektion,
         // men det är knepigt med ett godtyckligt antal ingredienser.
         // http://stackoverflow.com/questions/327274/mysql-prepared-statements-with-a-variable-size-variable-list
         $ret = $db->query($sql);
-        //$recipes = $ret->fetchArray();
-        //var_dump($recipes);
     }
-    //$db->close();
 ?>
 <html lang="en">
     <head>
@@ -58,26 +56,29 @@ SQL;
                     </div>
                     <?php
                     while ($row = $ret->fetchArray()) {
-                        extract($row);
+                        extract($row); // Alla element i $row blir egna variabler.
                         $q = "SELECT Ingredient FROM RecipesIngredients WHERE RecipeID = " . $rowid;
                         $ing = $db->query($q);
                         ?>
+                        <a href="recipe.php?id=<?=$rowid?>">
                         <div class="resultbox">
                             <div class="bildbox">
                                 <img src="bilder/<?=$Picture?>" alt="bilder/<?=$Picture?>">
                             </div>
-                            <div class="receptrubrik"><a href="recipe.php?id=<?=$rowid?>"><?=$Name?></a></div>
-                            <div class="recepttext">detta receptet är bra</div>
+                            <div class="receptrubrik"><?=$Name?></div>
+                            <div class="recepttext"><?= $Description ?></div>
                             <div class="ingrlabel">Ingredienser:</div>
                             <div class="resultingrdbox">
                                 <ul>
                                     <?php
+                                    // Loopa genom ingredienserna i receptet och lägg i listan.
                                     while ($i = $ing->fetchArray()) { ?>
-                                        <li class="resultingrd"><?=$i[0]?></li>
+                                        <li class="resultingrd"><?= $i[0] ?></li>
                                     <?php } ?>
                                 </ul>
                             </div>
                         </div>
+                        </a>
                     <?php } ?>
                     <div id="previous">
                         <a href="#" id="nexttext">Föregående sida</a>
@@ -97,9 +98,11 @@ SQL;
                     <p>Dina valda ingredienser:</p>
                     
                     <ul>
-                        <li>Mjölk</li>
-                        <li>Ägg</li>
-                        <li>Bacon</li>
+                        <?php
+                        // Befolka listan över valda ingredienser.
+                        foreach($ing_array as $i) { ?>
+                        <li><?= $i ?></li>
+                        <?php } ?>
                     </ul>
                     
                     <FORM METHOD="LINK" ACTION="index.html">
