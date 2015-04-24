@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <?php
     include("db.php");
@@ -13,19 +12,21 @@
         echo 'ingen söksträng';
     } else {
         //$ingredients = explode(' ',$_GET['s']);
-        // Bygg sträng i format 'foo','bar','apa'
+        // Bygg sträng i format 'foo','bar','apa' av ingredienserna i URLen.
         $ingredients = "'" . implode("','", explode(' ', mb_strtolower($_GET['s'], 'UTF-8'))) . "'";
         $sql = <<<SQL
-        SELECT Recipes.rowid, * FROM Recipes
+        SELECT Recipes.rowid, Recipes.* FROM Recipes
         JOIN RecipesIngredients ON Recipes.rowid = RecipesIngredients.RecipeID
         WHERE RecipesIngredients.Ingredient IN ({$ingredients})
 SQL;
         // Här vill man ha prepared statements för att undvika injektion,
-        // Men det är knepigt med ett godtyckligt antal ingredienser.
+        // men det är knepigt med ett godtyckligt antal ingredienser.
         // http://stackoverflow.com/questions/327274/mysql-prepared-statements-with-a-variable-size-variable-list
         $ret = $db->query($sql);
+        //$recipes = $ret->fetchArray();
+        //var_dump($recipes);
     }
-    $db->close();
+    //$db->close();
 ?>
 <html lang="en">
     <head>
@@ -45,9 +46,6 @@ SQL;
                     <input type="text" id="sokruta" name="sok" placeholder="Sök">
                     <button type="button" id="sokknapp">Hitta</button>
                 </div>
-                <div id="pagenav">
-                    
-                </div>
                 <div id="resultatarea">
                     <div id="sort">
                         Sortera efter:
@@ -59,24 +57,39 @@ SQL;
                         </select>
                     </div>
                     <?php
-                    $result = 1;
-                    // Loopa genom resultaten och skapar en div för varje.
                     while ($row = $ret->fetchArray()) {
-                        echo <<<HTML
-                        <div class="resultbox" id="result$result">
+                        extract($row);
+                        $q = "SELECT Ingredient FROM RecipesIngredients WHERE RecipeID = " . $rowid;
+                        $ing = $db->query($q);
+                        ?>
+                        <div class="resultbox">
                             <div class="bildbox">
+                                <img src="bilder/<?=$Picture?>" alt="bilder/<?=$Picture?>">
                             </div>
-                            <div class="receptrubrik"><a href="recipe.php?id={$row['rowid']}">{$row['Name']}</a></div>
-                            <div class="recepttext">{$row['Text']}</div>
+                            <div class="receptrubrik"><a href="recipe.php?id=<?=$rowid?>"><?=$Name?></a></div>
+                            <div class="recepttext">detta receptet är bra</div>
+                            <div class="ingrlabel">Ingredienser:</div>
+                            <div class="resultingrdbox">
+                                <ul>
+                                    <?php
+                                    while ($i = $ing->fetchArray()) { ?>
+                                        <li class="resultingrd"><?=$i[0]?></li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
                         </div>
-HTML;
-                        $result++;
-                    }
-                    ?>
+                    <?php } ?>
+                    <div id="previous">
+                        <a href="#" id="nexttext">Föregående sida</a>
+                    </div>
+                    <div id="resultnav">
+                        <a href="#" id="nexttext">1 - 2 - 3 - 4 - 5</a>
+                    </div>
                     <div id="next">
-                        <a href="#">Nästa sida</a>
+                        <a href="#" id="nexttext">Nästa sida</a>
                     </div>
                 </div>
+
                 
                 
                 
@@ -94,6 +107,8 @@ HTML;
                     </FORM>
                     
                 </div>
+
+                
             </div>
             <footer>
                 <p>Hannes Birgersson, Martin Gustavsson, Johan Stubbengaard, Maria Nguyen, Jenny Vuong</p>
