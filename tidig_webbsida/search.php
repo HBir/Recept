@@ -62,8 +62,8 @@ SQL;
                         ?>
                         <a href="recipe.php?id=<?=$rowid?>">
                         <div class="resultbox">
-                            <div class="bildbox">
-                                <img src="bilder/<?=$Picture?>" alt="bilder/<?=$Picture?>">
+                            <div class="bildbox" style="background-image: url('bilder/<?=$Picture?>'), url('bilder/no_image.jpg')">
+                                <!--<img src="bilder/<?=$Picture?>" alt="bilder/<?=$Picture?>">-->
                             </div>
                             <div class="receptrubrik"><?=$Name?></div>
                             <div class="recepttext"><?= $Description ?></div>
@@ -105,7 +105,7 @@ SQL;
                         <?php } ?>
                     </ul>
                     
-                    <FORM METHOD="LINK" ACTION="index.html">
+                    <FORM ACTION="index.html">
                     <INPUT TYPE="submit" class="button" id="redobutton" VALUE="Gör om sökning">
                     </FORM>
                     
