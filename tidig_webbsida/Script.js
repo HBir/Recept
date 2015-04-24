@@ -1,5 +1,8 @@
+//Projekt: Receptsökare
+//Ansvarig: Hannes Birgersson
+
 window.onload = setUp;
-var ingrds = [] //Skapar en global array för att hantera valda ingredienser
+var ingrds = [] //Global array för att hantera valda ingredienser
 
 function setUp() {
     //Lyssnare för att skapa händelser på tryck

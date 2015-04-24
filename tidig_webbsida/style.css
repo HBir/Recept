@@ -1,493 +1,536 @@
-﻿/*Sidans struktur*/
+﻿/**********************/
+/*Sidans struktur*/
 body {
-    background-image: url(bilder/p2_@2X.png);
-    font-family: sans-serif;
-    color: black;
-    width: 100%;
-    text-align:center; 
+    background-image:url(bilder/p2_@2X.png);
+    font-family:sans-serif;
+    color:#000;
+    width:100%;
+    text-align:center
 }
 
-#wrapper{
-    margin: 0 auto;
-    width: 1008px;
-    height: 100%;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px -2px 2px rgba(34,34,34,0.6);
-    
+#wrapper {
+    margin:0 auto;
+    width:1008px;
+    height:100%;
+    background-color:#fff;
+    border-radius:10px;
+    box-shadow:0 -2px 2px rgba(34,34,34,0.6)
 }
 
 header {
-    width: 1000px;
-    height: 180px;
-    font-size: 0px;
-    border: 4px solid;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-    background-image: url(bilder/recept.png);
-    clear:  both;
+    width:1000px;
+    height:180px;
+    font-size:0;
+    border:4px solid;
+    border-top-right-radius:10px;
+    border-top-left-radius:10px;
+    background-image:url(bilder/recept.png);
+    clear:both
 }
-footer {
-    width: 1000px;
-    height: auto;
-    border: 4px solid;
-    border-color: black;
-    text-align: center;
-    color: gray;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-#main {
-    width: 1010px;
-    min-height: 590px;
-    overflow: hidden;
-}
-#contentbox {
-    height: 100%;
-    width: 76%;
-    overflow: hidden;
-    /*border: 5px solid black;*/
-    float: left;
-    
-}
-/*Stilklasser*/
-.bold {
-    font-weight: bold;
-}
-.kategoribox {
 
-    border-right: 4px solid;
+footer {
+    width:1000px;
+    height:auto;
+    border:4px solid;
+    border-color:#000;
+    text-align:center;
+    color:gray;
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px
+}
+
+#main {
+    width:1010px;
+    min-height:590px;
+    overflow:hidden
+}
+
+/**********************/
+/*Allmänna Stilklasser*/
+.bold {
+    font-weight:700
+}
+
+/**********************/
+/*Allmäna ID*/
+#ingredienser {
+    border:4px solid;
+    float:right;
+    width:200px;
+    min-height:10px;
+    border-radius:25px;
+    background-color:#eee;
+    margin:10px;
+    margin-bottom:50px
+/*margin-top: 100px;*/
+}
+
+#ingredienser ul {
+    padding:20px
+}
+
+.button {
+    font-weight:700;
+    font-size:20px;
+    margin-top:25px;
+    margin-bottom:15px;
+    width:130px;
+    height:60px;
+    border-radius:10px
+}
+
+#ingredienser p {
+    text-align:center
+}
+
+#main h2 {
+    margin-top:0;
+    margin-left:30px
+}
+
+#sok {
+    margin-bottom:0;
+    margin-right:0
+}
+
+#sokruta {
+    font-size:20px;
+    margin:10px;
+    margin-left:0;
+    margin-right:0
+}
+
+#sokknapp {
+    font-size:18px;
+    margin-left:0
+}
+
+/**********************/
+/*För index.html*/
+.kategoribox {
+    border-right:4px solid;
     border-left:4px solid;
-    margin: 5px;
-    float: left;
-    height: 120px;
-    width: 120px;
-    text-align: center;
-    line-height: 120px;
-    border-radius: 25px;
-    font-size:  0px;
-    display: block;
-    
+    margin:5px;
+    float:left;
+    height:120px;
+    width:120px;
+    text-align:center;
+    line-height:120px;
+    border-radius:25px;
+    font-size:0;
+    display:block
 }
 
 .kategoribox#kott {
-    background-image: url(bilder/kott.jpg);
-    margin-left:  200px;
+    background-image:url(bilder/kott.jpg);
+    margin-left:200px
 }
+
 .kategoribox#Pasta {
-    background-image: url(bilder/pasta.jpg);
+    background-image:url(bilder/pasta.jpg)
 }
+
 .kategoribox#Mejeri {
-    background-image: url(bilder/mejeriprodukter.jpg);
+    background-image:url(bilder/mejeriprodukter.jpg)
 }
+
 .kategoribox#Veggies {
-    background-image: url(bilder/veggies.jpg);
+    background-image:url(bilder/veggies.jpg)
 }
+
 .kursbox#forratt {
-    margin-left:  270px;
-    
+    margin-left:270px
 }
+
 .kursbox#efterratt {
-    
 }
+
 .kursbox#huvudratt {
-    
 }
 
 .kursbox {
-
-    border-right: 4px solid;
+    border-right:4px solid;
     border-left:4px solid;
-    margin: 5px;
-    float: left;
-    height: 80px;
-    width: 120px;
-    text-align: center;
-    line-height: 80px;
-    border-radius: 25px;
-    font-size:  20px;
-    display: block;
-    background-color: #dab07b;
-    
+    margin:5px;
+    float:left;
+    height:80px;
+    width:120px;
+    text-align:center;
+    line-height:80px;
+    border-radius:25px;
+    font-size:20px;
+    display:block;
+    background-color:#dab07b
 }
-.resultbox {
-    border: 3px solid lightgray;
-    width: 100%;
-    height: 150px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    overflow: hidden;
-    
-}
+
 .row {
-    text-align: left;
-    float: left;
-    margin-left: 40px;
-    margin-right: 40px;
-    width: 160px;
-    min-height: 250px;
+    text-align:left;
+    float:left;
+    margin-left:40px;
+    margin-right:40px;
+    width:160px;
+    min-height:250px
 }
+
+.row3 {
+    margin-right:0
+}
+
+#pagenav {
+    text-align:center;
+    margin-top:5px;
+    font-size:20px;
+    margin-bottom:20px
+}
+
+#contentbox {
+    height:100%;
+    width:76%;
+    overflow:hidden;
+    float:left
+}
+
+#rensa {
+    position:relative;
+    margin-top:0;
+    margin-left:0;
+    color:#d23e3e
+}
+
+#kursarea {
+    border-bottom:4px solid;
+    border-right:4px solid;
+    border-left:4px solid;
+    height:100px;
+    width:1000px;
+    font-family:Tahoma
+}
+
+#kategoriarea {
+    border-bottom:4px solid;
+    border-right:4px solid;
+    border-left:4px solid;
+    height:150px;
+    width:1000px
+}
+
+#redobutton {
+    font-size:15px
+}
+
+#cross {
+    float:right
+}
+
+#ingrrubrik {
+    margin-bottom:5px
+}
+
+/**********************/
+/*För searchresult.php*/
+.resultbox {
+    border:3px solid lightgray;
+    width:100%;
+    height:150px;
+    margin-bottom:10px;
+    border-radius:10px;
+    overflow:hidden
+}
+
 .bildbox {
-    border: 3px solid lightgray;
-    width: 120px;
-    height: 120px;
-    float:  left;
-    margin: 10px;
-    
+    border:3px solid lightgray;
+    width:120px;
+    height:120px;
+    float:left;
+    margin:10px
 }
+
 .bildbox img {
     width:100%;
-    height:100%;
+    height:100%
 }
-.receptrubrik{
-    /*border: 3px solid lightgray;*/
-    margin: 10px;
-    font-weight: bold;
-    
+
+.receptrubrik {
+    margin:10px;
+    font-weight:700
 }
 
 .recepttext {
-    /*border: 3px solid lightgray;*/
-    text-align: left;
-    overflow: hidden;
+    text-align:left;
+    overflow:hidden
 }
-/* för recipepage.html*/
-hr.side { 
-    border: solid #ddd; 
-    border-width: 1px 0 0; 
-    clear: both; 
-    margin: 20px 0; 
-    height: 0; 
+
+.resultingrd {
+    margin:5px;
+    margin-right:20px;
+    float:left
 }
-.recipebox{
-    min-height: 230px;
-    padding-left: 5px;
+
+.resultingrdbox {
+    margin:10px;
+    margin-top:0;
+    height:auto;
+    width:70%;
+    overflow:hidden
 }
-.title{
-    margin-top: 0;
-    margin-bottom: 7px;
-    max-width: 500px;
-    padding:5px;
-    font-weight: bold;
-    line-height: : 1.1em;
-    float: left;
+
+.resultingrdbox ul {
+    list-style:initial;
+    margin:0
 }
-/*orangea cirklar som rating för tillfället*/
-.rating{
+
+.ingrlabel {
     float:left;
-    position: relative;
+    font-weight:700;
+    padding:5px;
+    padding-bottom:0;
+    padding-left:0;
+    margin-bottom:0;
+    overflow:hidden
+}
+
+#resultatarea {
+    width:600px;
+    min-height:500px;
+    margin:10px;
+    float:left
+}
+
+#previous {
+    float:left;
+    margin-right:145px;
+    text-align:center
+}
+
+#resultnav {
+    float:left;
+    margin-right:145px;
+    text-align:center
+}
+
+#next {
+    float:left;
+    text-align:center
+}
+
+#sort {
+    margin:10px;
+    text-align:left
+}
+
+#ingredienser li {
+    text-align:left
+}
+
+/*****************/
+/* för recipepage.html*/
+hr.side {
+    border:solid #ddd;
+    border-width:1px 0 0;
+    clear:both;
+    margin:20px 0;
+    height:0
+}
+
+.recipebox {
+    min-height:230px;
+    padding-left:5px
+}
+
+.title {
+    margin-top:0;
+    margin-bottom:7px;
+    max-width:500px;
+    padding:5px;
+    font-weight:700;
+    line-height:1.1em;
+    float:left
+}
+
+/*orangea cirklar som rating för tillfället*/
+.rating {
+    float:left;
+    position:relative;
     width:180px;
-    padding-left:5px; 
+    padding-left:5px
 }
-.rating span { 
-    float:right; 
-    position:relative; 
+
+.rating span {
+    float:right;
+    position:relative
 }
+
 .rating span input {
     position:absolute;
-    top:0px;
-    left:0px;
-    opacity:0;
+    top:0;
+    left:0;
+    opacity:0
 }
+
 .rating span label {
     display:inline-block;
     width:20px;
-    height:20px;        
+    height:20px;
     margin-left:4px;
     text-align:center;
     color:#fff;
     background:#ccc;
     margin-right:2px;
     line-height:30px;
-    border-radius:50%;
+    border-radius:50%
 }
-.rating span:hover ~ span label,
-.rating span:hover label,
-.rating span.checked label,
-.rating span.checked ~ span label {
+
+.rating span:hover ~ span label,.rating span:hover label,.rating span.checked label,.rating span.checked ~ span label {
     background:#f90;
-    color:#fff;
+    color:#fff
 }
-.recipepic img{
-    position: relative;
-    float: right;
-    clear: none;
-    max-height: 250px;
-    max-width: 250px;
+
+.recipepic img {
+    position:relative;
+    float:right;
+    clear:none;
+    max-height:250px;
+    max-width:250px;
     margin-top:10px;
     padding:0;
-    box-shadow: 0px 2px 8px #888888
+    box-shadow:0 2px 8px #888
 }
-.recipedescription{
+
+.recipedescription {
     float:left;
     width:320px;
-    text-align: left;
-    padding: 5px;
-    clear:left;
+    text-align:left;
+    padding:5px;
+    clear:left
 }
-.recipecontent{
-    margin-top: 20px;
+
+.recipecontent {
+    margin-top:20px;
     clear:both;
-    width: 700px;
+    width:700px
 }
-.ingridients{
+
+.ingridients {
     float:left;
-    position: relative;
-    width: 200px;
-    text-align: left;
-    margin-top: 20px;
+    position:relative;
+    width:200px;
+    text-align:left;
+    margin-top:20px;
     margin-right:20px;
-    display: block;
-    line-height: 1.8em;    
+    display:block;
+    line-height:1.8em
 }
-.instructions{
+
+.instructions {
     float:left;
-    position: relative;
-    width: 400px;
-    text-align: left;
-    margin-top: 20px;
-    line-height: 1.8em;
-    display: block;
+    position:relative;
+    width:400px;
+    text-align:left;
+    margin-top:20px;
+    line-height:1.8em;
+    display:block
 }
-.teaser{
+
+.teaser {
     width:150px;
     clear:both;
     margin:0;
-    position: absolute;    
-    overflow: hidden;
+    position:absolute;
+    overflow:hidden
 }
+
 .teaser li {
-    list-style: none;
+    list-style:none;
     display:inline-block;
-    max-width:100px; 
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+    max-width:100px;
+    padding-bottom:10px;
+    margin-bottom:10px
 }
+
 figcaption {
-    padding-top: 5px;
-}
-.teaser a:hover, a:focus{
-    text-decoration: none;
-    color: #f59300;
-}
-.teaser img{
-    max-width: 100%;
-    max-height: 100%;
-}
-.resultingrd {
-    margin: 5px;
-    margin-right: 20px;
-    float: left;
-    /*border: 3px solid blue;
-    height: 20px;
-    width: auto;
-    
-    overflow: hidden;*/
-}
-.resultingrdbox {
-    margin: 10px;
-    margin-top: 0px;
-    /*border: 3px solid green;*/
-    height: auto;
-    width: 70%;
-    overflow: hidden;
-    
-}
-.resultingrdbox ul {
-    list-style: initial;
-    margin: 0px;
-}
-.ingrlabel {
-    float: left;
-    font-weight: bold;
-    padding: 5px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    margin-bottom: 0px;
-    
-    overflow: hidden;
-    
-}
-/*Induviduella objekt*/
-#kursarea{
-    border-bottom: 4px solid;
-    border-right: 4px solid;
-    border-left:4px solid;
-    height: 100px;
-    width: 1000px;
-    font-family: Tahoma;
-}
-#kategoriarea {
-    border-bottom: 4px solid;
-    border-right: 4px solid;
-    border-left:4px solid;
-    height: 150px;
-    width: 1000px;
+    padding-top:5px
 }
 
-#ingredienser {
-    border: 4px solid;
-    float: right;
-    width: 200px;
-    min-height: 10px;
-    border-radius: 25px;
-    background-color:  #eeeeee;
-    margin: 10px;
-    margin-bottom: 50px;
-    /*margin-top: 100px;*/
-    
-}
-#ingredienser ul {
-    padding: 20px;
-}
-#cross {
-    float: right;
-}
-.button {
-    font-weight: bold;
-    font-size: 20px;
-    margin-top: 25px;
-    margin-bottom: 15px;
-    width: 130px;
-    height: 60px;
-    border-radius: 10px;
-}
-#redobutton {
-    font-size: 15px;
-}
-#ingredienser p {
-    text-align: center;
-}
-#sok {
-    margin-bottom: 0px;
-    margin-right: 0px;
-}
-#sokruta {
-    font-size: 20px;
-    margin: 10px;
-    margin-left: 000px;
-    margin-right: 0px;
-}
-#sokknapp {
-    font-size: 18px;
-    margin-left: 0px;
-}
-#main h2 {
-    margin-top: 0px;
-    margin-left: 30px;
-}
-#pagenav {
-    text-align: center;
-    margin-top: 5px;
-    font-size: 20px;
-    margin-bottom: 20px;
+.teaser a:hover,a:focus {
+    text-decoration:none;
+    color:#f59300
 }
 
-.row3 {
-    margin-right: 0px;
-}
-#ingrrubrik {
-    margin-bottom: 5px;
-}
-#resultatarea {
-    /*border: 4px solid;*/
-    width: 600px;
-    min-height: 500px;
-    margin: 10px;
-    float: left;
-}
-#previous {
-    float: left;
-    margin-right: 145px;
-    text-align: center;
-}
-#resultnav {
-    float: left;
-    margin-right: 145px;
-    text-align: center;
-}
-#next {
-    float: left;
-    text-align: center;
+.teaser img {
+    max-width:100%;
+    max-height:100%
 }
 
-#sort {
-    margin: 10px;
-    text-align: left;
-}
-#ingredienser li {
-    text-align: left;
+#recipepage {
+    width:720px;
+    min-height:500px;
+    padding:20px;
+    float:left;
+    color:#323233
 }
 
+#related_recipe {
+    float:right;
+    margin-top:10px;
+    color:#666;
+    padding:20px 30px 0 0;
+    font-size:14px
+}
+
+/**********************/
 /*Länkstil*/
-#rensa {
-    position: relative;
-    margin-top: 0px;
-    margin-left: 0px;
-    color: #d23e3e;
-}
 #main ul a {
-    text-decoration: none;
+    text-decoration:none
 }
+
 #main ul a:hover {
-    text-decoration: underline;
+    text-decoration:underline
 }
+
 #main ul a:visited {
-    
 }
 
 #ingredienser ul span a {
-    color: red;
+    color:red
 }
 
 #pagenav a {
-    text-decoration: none;
-    color: gray;
+    text-decoration:none;
+    color:gray
 }
+
 #kursarea a {
-    color: black;
+    color:#000
 }
+
 #kursarea a:hover {
-    color: #d23e3e;
-
+    color:#d23e3e
 }
-#kursarea a:focus {
-    color: #d23e3e;
 
+#kursarea a:focus {
+    color:#d23e3e
 }
 
 #kategoriarea a {
-    color: black;
+    color:#000
 }
+
 #kategoriarea a:hover {
-    color: #d23e3e;
-
+    color:#d23e3e
 }
+
 #kategoriarea a:focus {
-    color: #d23e3e;
-
+    color:#d23e3e
 }
+
 a header {
-    color: black;
-}
-.resultbox a {
-    color: black;
-    text-decoration: none;
-    font-weight: bold;
+    color:#000
 }
 
-/* för recipepage.html*/
-#recipepage {
-    width: 720px;
-    min-height: 500px;
-    padding:20px;
-    float:left;
-    color: #323233;
+.resultbox a {
+    color:#000;
+    text-decoration:none;
+    font-weight:700
 }
-#related_recipe{
-    float:right;
-    margin-top:10px;
-    color: #666666;
-    padding: 20px 30px 0 0;
-    font-size: 14px;
-}
+
+/**********************/
