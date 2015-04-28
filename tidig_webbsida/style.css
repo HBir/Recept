@@ -510,20 +510,22 @@ figcaption {
 #kursarea a:hover {
     color:#d23e3e
 }
-
+/*
 #kursarea a:focus {
     color:#d23e3e
 }
+
+#kategoriarea a:focus {
+    color:#d23e3e
+}
+*/
+
 
 #kategoriarea a {
     color:#000
 }
 
 #kategoriarea a:hover {
-    color:#d23e3e
-}
-
-#kategoriarea a:focus {
     color:#d23e3e
 }
 
@@ -540,6 +542,9 @@ a header {
 .resultlank a  {
     color: #000;
     text-decoration:none;
+}
+.resultlank a:hover  {
+    opacity: 0.7;
 }
 
 a {
