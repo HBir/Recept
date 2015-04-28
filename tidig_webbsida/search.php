@@ -11,14 +11,22 @@
     if ($_GET['s'] == '') {
         echo 'ingen söksträng';
     } else {
+        // SCRIPT_NAME/URL, HTTP_HOST
+        //echo http_build_url(array("scheme" => "http", "host" => $_SERVER['HTTP_HOST'], "path" => $_SERVER['URL']));
+        // Om inget sidnummer anges i URLen, sätt $page till 1
+        $page = $_GET['p'] ?: 1;
+        $offset = $page * 10 - 10;
         // Bygg sträng i format 'foo','bar','apa' av ingredienserna i URLen.
         $ing_array = explode(' ', $_GET['s']);
         $ingredients = "'" . mb_strtolower(implode("','", $ing_array), 'UTF-8') . "'";
 
         $sql = <<<SQL
-        SELECT Recipes.rowid, Recipes.* FROM Recipes
+        SELECT Recipes.rowid, Recipes.*, COUNT(*) AS Count FROM Recipes
         JOIN RecipesIngredients ON Recipes.rowid = RecipesIngredients.RecipeID
         WHERE RecipesIngredients.Ingredient IN ({$ingredients})
+        GROUP BY Recipes.rowid
+        ORDER BY Count DESC, Recipes.Rating DESC
+        LIMIT 10 OFFSET {$offset}
 SQL;
         // Här vill man nog ha prepared statements för att undvika injektion,
         // men det är knepigt med ett godtyckligt antal ingredienser.
