@@ -79,6 +79,7 @@ footer {
     list-style: none;
     padding-left: 10px;
 }
+
 .button {
     font-weight:700;
     font-size:20px;
@@ -266,7 +267,11 @@ footer {
     min-height:150px;
     margin-bottom:10px;
     border-radius:10px;
-    overflow:hidden
+    overflow:hidden;
+    background-color: #fafafa;
+}
+.resultbox:hover {
+    background-color: #f0f0f0;
 }
 
 .bildbox {
@@ -278,6 +283,7 @@ footer {
     background-size: cover;
     background-position: center; 
     background-repeat: no-repeat;
+    
 }
 
 .bildbox img {
@@ -361,6 +367,15 @@ footer {
     text-align:left
 }
 
+resultingrd li{
+    background-color: lightgray;
+    border: 5px solid lightgray;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 3px;
+    list-style: none;
+    padding-left: 10px;
+}
 /*****************/
 /* för recipepage.html*/
 hr.side {
@@ -567,7 +582,7 @@ figcaption {
 a header {
     color:#000;
 }
-
+/*
 .resultbox a {
     color:#000;
     text-decoration:none;
@@ -581,7 +596,7 @@ a header {
 .resultlank a:hover  {
     opacity: 0.7;
 }
-
+*/
 a {
     color: black;
     text-decoration:none;
