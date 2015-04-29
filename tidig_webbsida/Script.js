@@ -55,9 +55,11 @@ function addItem(e) {
             alert("Du kan inte lägga till fler ingredienser");
             return false;
         }
-        ingrds.push(target.innerHTML)
-        var div = document.getElementById('Ingredienslista');
-        div.innerHTML += "<span><li>" + target.innerHTML + '<span id="cross"><a href="javaScript:void(0);" class="RemoveCross">X</a></span></li></span>';
+        console.log(target.innerHTML);
+        ingrds.push(target.innerHTML);
+        document.getElementById('Ingredienslista').innerHTML += 
+        "<span><li>" + target.innerHTML + 
+        '<span id="cross"><a href="javaScript:void(0);" class="RemoveCross">X</a></span></li></span>';
         return true;
     } 
 }
