@@ -124,7 +124,7 @@ footer {
 
 .kategoribox#kott {
     background-image:url(bilder/kott.jpg);
-    margin-left:200px
+    /*margin-left:200px*/
 }
 
 .kategoribox#Pasta {
@@ -138,7 +138,7 @@ footer {
 .kategoribox#Veggies {
     background-image:url(bilder/veggies.jpg)
 }
-
+/*
 .kursbox#forratt {
     margin-left:270px
 }
@@ -148,7 +148,7 @@ footer {
 
 .kursbox#huvudratt {
 }
-
+*/
 .kursbox {
     border-right:4px solid;
     border-left:4px solid;
@@ -225,6 +225,9 @@ footer {
 
 #ingrrubrik {
     margin-bottom:5px
+}
+#kurscenter, #kategoricenter {
+    display: inline-block;
 }
 
 /**********************/
@@ -557,12 +560,43 @@ a {
 }
 /**********************/
 /*Responsivitet*/
-@media screen and (max-width:480px) {
+@media screen and (max-width:780px) {
+    #wrapper, header, #main, footer  {
+        float:none;
+        width: 100%;
+	    margin:0;
+    }
 
-#wrapper, header, #main, footer  {
-float:none;
-width: 100%;
-	margin:0;
+    #kursarea, #kategoriarea {
+        float: none;
+        height:auto;
+        width:100%;
+        overflow: hidden;
+        text-align: center;
+        
+    }
+    #kurscenter, #kategoricenter {
+        display: inline-block;
+    }
+    .kursbox, .kategoribox {
+        border-right:4px solid;
+        border-left:4px solid;
+        height:80px;
+        width:80px;
+        line-height:80px;
+        font-size: 17px;
+        border-radius:15px;
+        background-size: 80px;
+    }
+        
+    header {
+        height: 100px;
+        
+        background-size: 600px;
+        background-position: center;
+    }
+    body {
+    width: 95%;
+    margin-left: 2%;
 }
-
 }
