@@ -1,7 +1,9 @@
 ﻿/**********************/
 /*Sidans struktur*/
 body {
-    background-image:url(bilder/p2_@2X.png);
+    background-image:url(bilder/footer_lodyas.png);
+    background-size: 60%;
+    background-position: -4% 0%;
     font-family:sans-serif;
     color:#000;
     width:100%;
@@ -21,7 +23,7 @@ header {
     width:1000px;
     height:180px;
     font-size:0;
-    border:4px solid;
+    border:4px solid #444444;
     border-top-right-radius:10px;
     border-top-left-radius:10px;
     background-image:url(bilder/recept.png);
@@ -31,8 +33,7 @@ header {
 footer {
     width:1000px;
     height:auto;
-    border:4px solid;
-    border-color:#000;
+    border:4px solid #444444;
     text-align:center;
     color:gray;
     border-bottom-left-radius:10px;
@@ -198,18 +199,18 @@ footer {
 }
 
 #kursarea {
-    border-bottom:4px solid;
-    border-right:4px solid;
-    border-left:4px solid;
+    border-bottom:4px solid #444444;
+    border-right:4px solid #444444;
+    border-left:4px solid #444444;
     height:100px;
     width:1000px;
     font-family:Tahoma
 }
 
 #kategoriarea {
-    border-bottom:4px solid;
-    border-right:4px solid;
-    border-left:4px solid;
+    border-bottom:4px solid #444444;
+    border-right:4px solid #444444;
+    border-left:4px solid #444444;
     height:150px;
     width:1000px
 }
@@ -303,18 +304,21 @@ footer {
 #previous {
     float:left;
     margin-right:145px;
-    text-align:center
+    text-align:center;
+    font-weight: bold;
 }
 
 #resultnav {
     float:left;
     margin-right:145px;
-    text-align:center
+    text-align:center;
+    font-weight: bold;
 }
 
 #next {
     float:left;
-    text-align:center
+    text-align:center;
+    font-weight: bold;
 }
 
 #sort {
@@ -552,4 +556,13 @@ a {
     text-decoration:none;
 }
 /**********************/
+/*Responsivitet*/
+@media screen and (max-width:480px) {
 
+#wrapper, header, #main, footer  {
+float:none;
+width: 100%;
+	margin:0;
+}
+
+}
