@@ -24,14 +24,10 @@ function skapalank() {
         alert("Var god välj de ingredienser du vill använda");
         return false;
     }
-    
     var ingrdsStr = ingrds.join("+");
-    var destination = "/search.php?s=" + ingrdsStr;
-
+    var destination = "search.php?s=" + ingrdsStr;
+    
     window.location.href = destination;
-    //alert(".../search/" + ingrdsStr);
-    console.log(ingrdsStr); 
-
 }
 function rensa() {
     //Tömmer både ingredienslistans innehåll, samt tar bort dem från att visas som valda på sidan.
@@ -55,7 +51,6 @@ function addItem(e) {
             alert("Du kan inte lägga till fler ingredienser");
             return false;
         }
-        console.log(target.innerHTML);
         ingrds.push(target.innerHTML);
         document.getElementById('Ingredienslista').innerHTML += 
         "<span><li>" + target.innerHTML + 
