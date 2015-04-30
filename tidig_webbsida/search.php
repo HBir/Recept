@@ -11,11 +11,10 @@
     if ($_GET['s'] == '') {
         echo 'ingen söksträng';
     } else {
-        // SCRIPT_NAME/URL, HTTP_HOST
-        //echo http_build_url(array("scheme" => "http", "host" => $_SERVER['HTTP_HOST'], "path" => $_SERVER['URL']));
         // Om inget sidnummer anges i URLen, sätt $page till 1
         $page = $_GET['p'] ?: 1;
-        $offset = $page * 10 - 10;
+        $offset = $page*10 - 10;
+
         // Bygg sträng i format 'foo','bar','apa' av ingredienserna i URLen.
         $ing_array = explode(' ', $_GET['s']);
         $ingredients = "'" . mb_strtolower(implode("','", $ing_array), 'UTF-8') . "'";
@@ -32,6 +31,20 @@ SQL;
         // men det är knepigt med ett godtyckligt antal ingredienser.
         // http://stackoverflow.com/questions/327274/mysql-prepared-statements-with-a-variable-size-variable-list
         $ret = $db->query($sql);
+
+        // Hämta totalt antal träffar.
+        $sql = <<<SQL
+        SELECT COUNT(*) AS Count FROM (
+        SELECT Recipes.rowid, Recipes.*, COUNT(*) AS Count FROM Recipes
+        JOIN RecipesIngredients ON Recipes.rowid = RecipesIngredients.RecipeID
+        WHERE RecipesIngredients.Ingredient IN ({$ingredients})
+        GROUP BY Recipes.rowid)
+SQL;
+        $hits = $db->query($sql)->fetchArray()['Count'];
+
+        $nextpage = sprintf("search.php?s=%s&p=%d", $_GET['s'], $page + 1);
+        $prevpage = sprintf("search.php?s=%s&p=%d", $_GET['s'], $page - 1);
+
     }
 ?>
 <html lang="en">
@@ -90,13 +103,19 @@ SQL;
                         </a>
                     <?php } ?>
                     <div id="previous">
-                        <a href="#" id="nexttext">Föregående sida</a>
+                        <?php
+                        if($page > 1) { ?>
+                        <a href="<?= $prevpage ?>" id="nexttext">Föregående sida</a>
+                        <?php } ?>
                     </div>
                     <div id="resultnav">
                         <a href="#" id="nexttext">1 - 2 - 3 - 4 - 5</a>
                     </div>
                     <div id="next">
-                        <a href="#" id="nexttext">Nästa sida</a>
+                        <?php
+                        if($hits > $page * 10) { ?>
+                        <a href="<?= $nextpage ?>" id="nexttext">Nästa sida</a>
+                        <?php } ?>
                     </div>
                 </div>
 
