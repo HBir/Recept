@@ -33,8 +33,18 @@ function rensa() {
     //Tömmer både ingredienslistans innehåll, samt tar bort dem från att visas som valda på sidan.
     ingrds.length = 0;
     var div = document.getElementById('Ingredienslista');
+    var x = document.getElementsByClassName("ItemMarked");
+    var i;
+    var l = x.length;
+
+    for (i = 0; i < l; i++) {
+        x[0].parentNode.innerHTML = x[0].parentNode.innerHTML.replace("Item ItemMarked", "Item");
+
+    }
     div.innerHTML = "";
 }
+
+
 
 function addItem(e) {
     //Lägger till en vald ingrediens i listan över valda ingredienser och visar upp dem som valda i sidans HTML. 
@@ -52,6 +62,14 @@ function addItem(e) {
             return false;
         }
         ingrds.push(target.innerHTML);
+        var parent;
+        var new_parent_Node;
+        parent_Node = target.parentNode.innerHTML;
+        new_parent_Node = parent_Node.replace("Item", "Item ItemMarked");
+        
+        target.parentNode.innerHTML = new_parent_Node;
+
+
         document.getElementById('Ingredienslista').innerHTML += 
         "<span><li>" + target.innerHTML + 
         '<span id="cross"><a href="javaScript:void(0);" class="RemoveCross">X</a></span></li></span>';
@@ -67,11 +85,24 @@ function removeItem(e) {
     if (target.className.match(/\bRemoveCross\b/)) {
 		var fullRow = target.parentNode.parentNode.parentNode.innerHTML;
 		var part = fullRow.substring(4,fullRow.lastIndexOf("<span id"));
+
+        /*Hittar objektet som ska tas bort och tar bort det från ingrds och listan*/
 		if (ingrds.indexOf(part) != -1) {
 			var index = ingrds.indexOf(part);
 			ingrds.splice(index,1);
 			target.parentNode.parentNode.parentNode.innerHTML = "";
 		} else {return false;}
+        
+        /*Hittar alla objekt som är markerade som valda, och tar bort stilklassen från den borttagna*/
+        var x = document.getElementsByClassName("ItemMarked");
+        var i;
+        for (i = 0; i < x.length; i++) {
+            if (x[i].parentNode.innerHTML.indexOf(part) != -1) {
+                x[i].parentNode.innerHTML = x[i].parentNode.innerHTML.replace("Item ItemMarked", "Item");
+                i = x.length;
+            }
+        }
+
         return true;
     } 
 }
