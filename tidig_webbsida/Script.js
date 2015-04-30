@@ -33,14 +33,15 @@ function rensa() {
     //Tömmer både ingredienslistans innehåll, samt tar bort dem från att visas som valda på sidan.
     ingrds.length = 0;
     var div = document.getElementById('Ingredienslista');
+    
+    
     var x = document.getElementsByClassName("ItemMarked");
     var i;
     var l = x.length;
-
     for (i = 0; i < l; i++) {
         x[0].parentNode.innerHTML = x[0].parentNode.innerHTML.replace("Item ItemMarked", "Item");
-
     }
+
     div.innerHTML = "";
 }
 
@@ -62,12 +63,11 @@ function addItem(e) {
             return false;
         }
         ingrds.push(target.innerHTML);
-        var parent;
-        var new_parent_Node;
-        parent_Node = target.parentNode.innerHTML;
-        new_parent_Node = parent_Node.replace("Item", "Item ItemMarked");
         
-        target.parentNode.innerHTML = new_parent_Node;
+        /*Hitta det tryckta elementet och lägg*/
+        var parent_Node = target.parentNode.innerHTML;
+        parent_Node = parent_Node.replace("Item", "Item ItemMarked");
+        target.parentNode.innerHTML = parent_Node;
 
 
         document.getElementById('Ingredienslista').innerHTML += 

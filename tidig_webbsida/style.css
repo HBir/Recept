@@ -251,7 +251,7 @@ footer {
 }
 
 .ItemMarked {
-    /*background-color: #f59300;*/
+    background-color: #f59300;
     border: 5px solid #f59300;
 }
 
@@ -349,6 +349,10 @@ footer {
     padding-left:0;
     margin-bottom:0;
     overflow:hidden
+}
+
+.resultingrdbox ul{
+	padding: 0;
 }
 
 #resultatarea {
@@ -629,7 +633,6 @@ a {
     width:100%;
     overflow: hidden;
     text-align: center;
-    
 }
 
 #kurscenter, #kategoricenter {
@@ -680,8 +683,13 @@ body {
 
 /*searchresult*/
 #resultatarea {
-    max-width: 600px;
+    width: 600px;
     width: 92%;
+    min-height: 0px;
+}
+.resultbox {
+    min-height: inherit;
+    width: 100%;
 }
 .bildbox {
     width: 80px;
@@ -689,5 +697,186 @@ body {
 }
 .resultingrdbox {
     text-align: left;
+}
+
+/**************/
+.recipebox {
+    min-height: 10px;
+    overflow: hidden;
+
+}
+.recipepic img {
+    position: initial;
+    float: none;
+    max-height:100px;
+    max-width:100px;
+}
+
+/********/
+hr.side {
+    border:solid #ddd;
+    border-width:1px 0 0;
+    clear:both;
+    margin:0px;
+    height:0
+}
+
+.recipebox {
+    min-height:100px;
+    padding-left:5px;
+    max-width: 800px;
+}
+
+.title {
+    margin-top:0;
+    margin-bottom:7px;
+    width:100%;
+    padding:5px;
+    font-weight:700;
+    line-height:1.1em;
+    float:left
+      
+}
+
+/*orangea cirklar som rating för tillfället*/
+.rating {
+    float:left;
+    position:relative;
+    width:180px;
+    padding-left:5px;
+    margin:10px;
+}
+
+.rating span {
+    float:right;
+    position:relative
+}
+
+.rating span input {
+    position:absolute;
+    top:0;
+    left:0;
+    opacity:0
+}
+
+.rating span label {
+    display:inline-block;
+    width:20px;
+    height:20px;
+    margin-left:4px;
+    text-align:center;
+    color:#fff;
+    background:#ccc;
+    margin-right:2px;
+    line-height:30px;
+    border-radius:50%
+}
+
+.rating span:hover ~ span label,.rating span:hover label,.rating span.checked label,.rating span.checked ~ span label {
+    background:#f90;
+    color:#fff
+}
+
+.recipepic img {
+    position: initial;
+    float:left;
+    clear: initial;
+    max-height:250px;
+    max-width:250px;
+    height: 50%;
+    width: 50%;
+    min-height: 100px;
+    min-width: 100px;
+    margin-top:10px;
+    padding:0;
+    box-shadow:0 2px 8px #888
+}
+
+.recipedescription {
+    float:left;
+    width:90%;
+    text-align:left;
+    padding:5px;
+    clear:left
+}
+
+.recipecontent {
+    margin-top:20px;
+    clear:both;
+    width:100%
+}
+
+.ingridients {
+    float:left;
+    position:relative;
+    width:100%;
+    text-align:left;
+    margin-top:20px;
+    margin-right:20px;
+    display:block;
+    line-height:1.8em
+}
+
+.instructions {
+    float:left;
+    position:relative;
+    width:100%;
+    text-align:left;
+    margin-top:20px;
+    line-height:1.8em;
+    display:block
+}
+
+.teaser {
+    width:150px;
+    clear:both;
+    margin:0;
+    position:initial;
+    overflow:hidden
+}
+
+.teaser li {
+    list-style:none;
+    display:inline-block;
+    max-width:100px;
+    padding-bottom:10px;
+    margin-bottom:10px
+}
+
+figcaption {
+    padding-top:5px
+}
+
+.teaser a:hover {
+    text-decoration:none;
+    color:#f59300
+}
+
+.teaser img {
+    max-width:100%;
+    max-height:100%
+}
+
+#recipepage {
+    width:96%;
+    min-height:500px;
+    padding:2%;
+    padding-top: 0px;
+    float:left;
+    color:#323233
+}
+
+#related_recipe {
+    float:right;
+    margin-top:10px;
+    color:#666;
+    padding:20px 30px 0 0;
+    font-size:14px
+}
+#pagenav {
+    text-align:center;
+    margin-top:5px;
+    font-size:20px;
+    margin-bottom:5px;
 }
 }
