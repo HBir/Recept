@@ -28,7 +28,6 @@ function skapalank() {
         alert("Var god välj de ingredienser du vill använda");
         return false;
     }
-    alert(course);
     var courseID;
     switch(course) {
         case "förrätt":

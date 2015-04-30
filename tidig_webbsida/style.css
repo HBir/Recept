@@ -277,6 +277,7 @@ footer {
     border-radius:10px;
     overflow:hidden;
     background-color: #fafafa;
+    position: relative;
 }
 .resultbox:hover {
     background-color: #f0f0f0;
@@ -301,7 +302,8 @@ footer {
 
 .receptrubrik {
     margin:10px;
-    font-weight:700
+    font-weight:700;
+    width:70%;
 }
 
 .recepttext {
@@ -394,6 +396,13 @@ footer {
     text-align:left
 }
 
+.ratinglbl {
+    width: 70px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 5px 5px;
+}
 
 /*****************/
 /* för recipepage.html*/
