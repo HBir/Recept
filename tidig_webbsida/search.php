@@ -19,10 +19,19 @@
         $ing_array = explode(' ', $_GET['s']);
         $ingredients = "'" . mb_strtolower(implode("','", $ing_array), 'UTF-8') . "'";
 
+        // Typ av rätt. 1 = förrätt, 2 = huvudrätt, 3 = efterrätt.
+        if (($_GET['c'] == '') || ($_GET['c'] == 0)) {
+            $course = "> 0";
+        } else {
+            $course = "= " . $_GET['c'];
+        }
+
+        // Själva sökningen.
         $sql = <<<SQL
         SELECT Recipes.rowid, Recipes.*, COUNT(*) AS Count FROM Recipes
         JOIN RecipesIngredients ON Recipes.rowid = RecipesIngredients.RecipeID
         WHERE RecipesIngredients.Ingredient IN ({$ingredients})
+        AND Course {$course}
         GROUP BY Recipes.rowid
         ORDER BY Count DESC, Recipes.Rating DESC
         LIMIT 10 OFFSET {$offset}
@@ -38,6 +47,7 @@ SQL;
         SELECT Recipes.rowid, Recipes.*, COUNT(*) AS Count FROM Recipes
         JOIN RecipesIngredients ON Recipes.rowid = RecipesIngredients.RecipeID
         WHERE RecipesIngredients.Ingredient IN ({$ingredients})
+        AND Course {$course}
         GROUP BY Recipes.rowid)
 SQL;
         $hits = $db->query($sql)->fetchArray()['Count'];
@@ -90,6 +100,7 @@ SQL;
                             <div class="receptrubrik"><?=$Name?></div>
                             <div class="recepttext"><?= $Description ?></div>
                             <div class="ingrlabel">Ingredienser:</div>
+                            <div class="ratinglbl"> Betyg: <?= $Rating ?></div>
                             <div class="resultingrdbox">
                                 <ul>
                                     <?php

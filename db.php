@@ -7,17 +7,6 @@ class DB extends SQLite3
 		$this->open('test2.db');
 	}
 
-	// Exekvera en sql-query och skriv ut felmeddelande
-	// eller $message vid framgång.
-	function execute($sql, $message)
-	{
-		$ret = $this->exec($sql);
-		if(!$ret){
-			echo $this->lastErrorMsg();
-		} else {
-			echo "<br>" . $message;
-		}
-	}
 	// Töm databasen.
 	function drop_tables()
 	{
@@ -26,7 +15,12 @@ class DB extends SQLite3
 			DROP TABLE Ingredients;
 			DROP TABLE RecipesIngredients;
 SQL;
-		$this->execute($sql, "Dropped tables.");
+		$ret = $this->exec($sql);
+		if(!$ret){
+			echo $this->lastErrorMsg();
+		} else {
+			echo "<br>" . "Dropped tables.";
+		}
 	}
 
 	// Bygg tabellerna
@@ -50,7 +44,12 @@ SQL;
 			(RecipeID  INT NOT NULL,
 			Ingredient TEXT NOT NULL);
 SQL;
-		$this->execute($sql, "Created tables.");
+		$ret = $this->exec($sql);
+		if(!$ret){
+			echo $this->lastErrorMsg();
+		} else {
+			echo "<br>" . "Created tables.";
+		}
 	}
 }
 ?>
