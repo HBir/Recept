@@ -71,8 +71,26 @@ function addItem(e) {
     target = e.target || e.srcElement;
     if (target.className.match(/\bItem\b/)) {
         if (ingrds.indexOf(target.innerHTML) != -1) {
-            alert("Du har redan lagt till denna ingrediens");
-            return false;
+            //alert("Du har redan lagt till denna ingrediens");
+        	var name = target.innerHTML;
+        	var fullrow = target.parentNode.innerHTML;
+        	var newrow = fullrow.replace("Item ItemMarked", "Item");
+			target.parentNode.innerHTML = newrow;
+			
+			var index = ingrds.indexOf(name);
+			ingrds.splice(index,1);
+
+			var x = document.getElementsByClassName("addedItem");
+			console.log(x[0].parentNode.innerHTML);
+			var i;
+			for (i = 0; i < x.length; i++) {
+				if (x[i].innerHTML.indexOf(name) != -1) {
+					x[i].innerHTML = "";
+					i = x.length;
+				}
+			}
+
+			return false;
         }
         if (ingrds.length >= 10) {
             alert("Du kan inte lägga till fler ingredienser");
@@ -86,7 +104,7 @@ function addItem(e) {
         target.parentNode.innerHTML = parent_Node;
 
         document.getElementById('Ingredienslista').innerHTML += 
-        "<span><li>" + target.innerHTML + 
+        "<span class='addedItem'><li>" + target.innerHTML + 
         '<span id="cross"><a href="javaScript:void(0);" class="RemoveCross">X</a></span></li></span>';
         return true;
     } 
@@ -120,6 +138,7 @@ function removeItem(e) {
         return true;
     } 
 }
+
 
 function courseselect(ratt) {
     /**/
