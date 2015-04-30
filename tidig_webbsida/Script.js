@@ -2,12 +2,16 @@
 //Ansvarig: Hannes Birgersson
 
 window.onload = setUp;
-var ingrds = [] //Global array för att hantera valda ingredienser
+var ingrds = []; //Global array för att hantera valda ingredienser
+var course;
 
 function setUp() {
     //Lyssnare för att skapa händelser på tryck
 	document.getElementById("knapp").onclick = skapalank;
     document.getElementById("rensa").onclick = rensa;
+    document.getElementById("forratt").onclick = forratt;
+    document.getElementById("huvudratt").onclick = huvudratt;
+    document.getElementById("efterratt").onclick = efterratt;
     if (document.body.addEventListener) { //För äldre versioner av IE
         document.body.addEventListener('click',addItem,false);
 		document.body.addEventListener('click',removeItem,false);
@@ -25,7 +29,7 @@ function skapalank() {
         return false;
     }
     var ingrdsStr = ingrds.join("+");
-    var destination = "search.php?s=" + ingrdsStr;
+    var destination = "search.php?c=" + course + "&s=" + ingrdsStr;
     
     window.location.href = destination;
 }
@@ -105,6 +109,24 @@ function removeItem(e) {
 
         return true;
     } 
+    
+    
 }
 
+function forratt(rätt) {
+    course = "förrätt";
+    var diver = document.getElementById('forratt');
+    var divstring = diver.parentNode.innerHTML;
+    var newdiv = divstring.replace("kursbox", "kursbox kursmark");
+    console.log(newdiv);
+    diver.parentNode.innerHTML = newdiv;
+}
+function huvudratt() {
+    course = "huvudrätt";
+    console.log(course);
+}
+function efterratt() {
+    course = "efterrätt";
+    console.log(course);
+}
 
