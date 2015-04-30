@@ -131,23 +131,20 @@ function courseselect(ratt) {
     for (i = 0; i < l; i++) {
         x[0].parentNode.innerHTML = x[0].parentNode.innerHTML.replace("kursbox kursmark", "kursbox");
         /*onclick pekarna måste återskapas eftersom även de tas bort*/
-        document.getElementById("förrätt").onclick = forratt;
-        document.getElementById("huvudrätt").onclick = huvudratt;
-        document.getElementById("efterrätt").onclick = efterratt;
+        recreatePointers();
     }
-    /*
+    
     if (ratt == course) {
-        document.getElementById("förrätt").onclick = forratt;
         course = 0;
         return false;
     }
-    */
+    
     course = ratt;
     var diver = document.getElementById(ratt);
 
     var newdiv = diver.parentNode.innerHTML.replace("kursbox", "kursbox kursmark");
     document.getElementById(ratt).parentNode.innerHTML = newdiv;
-    document.getElementById("förrätt").onclick = forratt;
+    recreatePointers();
 }
 
 function forratt() {
@@ -158,4 +155,9 @@ function huvudratt() {
 }
 function efterratt() {
     courseselect("efterrätt");
+}
+function recreatePointers() {
+    document.getElementById("förrätt").onclick = forratt;
+    document.getElementById("huvudrätt").onclick = huvudratt;
+    document.getElementById("efterrätt").onclick = efterratt;
 }
