@@ -28,6 +28,7 @@ function skapalank() {
         alert("Var god välj de ingredienser du vill använda");
         return false;
     }
+    alert(course);
     var courseID;
     switch(course) {
         case "förrätt":
@@ -38,9 +39,10 @@ function skapalank() {
             break;
         case "efterrätt":
             courseID = 3;
+            break;
         default:
             courseID = 0;
-}
+    }
     var ingrdsStr = ingrds.join("+");
     var destination = "search.php?c=" + courseID + "&s=" + ingrdsStr;
     
@@ -50,8 +52,6 @@ function rensa() {
     //Tömmer både ingredienslistans innehåll, samt tar bort dem från att visas som valda på sidan.
     ingrds.length = 0;
     var div = document.getElementById('Ingredienslista');
-    
-    
     var x = document.getElementsByClassName("ItemMarked");
     var i;
     var l = x.length;
@@ -85,7 +85,6 @@ function addItem(e) {
         var parent_Node = target.parentNode.innerHTML;
         parent_Node = parent_Node.replace("Item", "Item ItemMarked");
         target.parentNode.innerHTML = parent_Node;
-
 
         document.getElementById('Ingredienslista').innerHTML += 
         "<span><li>" + target.innerHTML + 
@@ -137,12 +136,13 @@ function courseselect(ratt) {
         document.getElementById("huvudrätt").onclick = huvudratt;
         document.getElementById("efterrätt").onclick = efterratt;
     }
-    console.log(ratt);
-    console.log(course);
+    /*
     if (ratt == course) {
         document.getElementById("förrätt").onclick = forratt;
+        course = 0;
         return false;
     }
+    */
     course = ratt;
     var diver = document.getElementById(ratt);
 
