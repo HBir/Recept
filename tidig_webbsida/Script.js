@@ -9,9 +9,9 @@ function setUp() {
     //Lyssnare för att skapa händelser på tryck
 	document.getElementById("knapp").onclick = skapalank;
     document.getElementById("rensa").onclick = rensa;
-    document.getElementById("forratt").onclick = forratt;
-    document.getElementById("huvudratt").onclick = huvudratt;
-    document.getElementById("efterratt").onclick = efterratt;
+    document.getElementById("förrätt").onclick = forratt;
+    document.getElementById("huvudrätt").onclick = huvudratt;
+    document.getElementById("efterrätt").onclick = efterratt;
     if (document.body.addEventListener) { //För äldre versioner av IE
         document.body.addEventListener('click',addItem,false);
 		document.body.addEventListener('click',removeItem,false);
@@ -28,8 +28,21 @@ function skapalank() {
         alert("Var god välj de ingredienser du vill använda");
         return false;
     }
+    var courseID;
+    switch(course) {
+        case "förrätt":
+            courseID = 1;
+            break;
+        case "huvudrätt":
+            courseID = 2;
+            break;
+        case "efterrätt":
+            courseID = 3;
+        default:
+            courseID = 0;
+}
     var ingrdsStr = ingrds.join("+");
-    var destination = "search.php?c=" + course + "&s=" + ingrdsStr;
+    var destination = "search.php?c=" + courseID + "&s=" + ingrdsStr;
     
     window.location.href = destination;
 }
@@ -106,27 +119,44 @@ function removeItem(e) {
                 i = x.length;
             }
         }
-
         return true;
     } 
-    
-    
 }
 
-function forratt(rätt) {
-    course = "förrätt";
-    var diver = document.getElementById('forratt');
-    var divstring = diver.parentNode.innerHTML;
-    var newdiv = divstring.replace("kursbox", "kursbox kursmark");
-    console.log(newdiv);
-    diver.parentNode.innerHTML = newdiv;
+function courseselect(ratt) {
+    /**/
+    
+    /*Hitta gamla markering och ta bort dem*/
+    var x = document.getElementsByClassName("kursmark");
+    var i;
+    var l = x.length;
+    for (i = 0; i < l; i++) {
+        x[0].parentNode.innerHTML = x[0].parentNode.innerHTML.replace("kursbox kursmark", "kursbox");
+        /*onclick pekarna måste återskapas eftersom även de tas bort*/
+        document.getElementById("förrätt").onclick = forratt;
+        document.getElementById("huvudrätt").onclick = huvudratt;
+        document.getElementById("efterrätt").onclick = efterratt;
+    }
+    console.log(ratt);
+    console.log(course);
+    if (ratt == course) {
+        document.getElementById("förrätt").onclick = forratt;
+        return false;
+    }
+    course = ratt;
+    var diver = document.getElementById(ratt);
+
+    var newdiv = diver.parentNode.innerHTML.replace("kursbox", "kursbox kursmark");
+    document.getElementById(ratt).parentNode.innerHTML = newdiv;
+    document.getElementById("förrätt").onclick = forratt;
+}
+
+function forratt() {
+    courseselect("förrätt")
 }
 function huvudratt() {
-    course = "huvudrätt";
-    console.log(course);
+    courseselect("huvudrätt")
 }
 function efterratt() {
-    course = "efterrätt";
-    console.log(course);
+    courseselect("efterrätt");
 }
-
