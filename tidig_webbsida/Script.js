@@ -57,6 +57,7 @@ function rensa() {
 			"Item ItemMarked", "Item");
 	}
 	div.innerHTML = "";
+	checkTutorial();
 }
 
 function addItem(e) {
@@ -67,7 +68,7 @@ function addItem(e) {
 	target = e.target || e.srcElement;
 	if (target.className.match(/\bItem\b/)) {
 		if (ingrds.indexOf(target.innerHTML) != -1) {
-			//alert("Du har redan lagt till denna ingrediens");
+			//Kollar ifall ingrediensen redan är vald, och ifall den är vald så tas den bort istället
 			var name = target.innerHTML;
 			var fullrow = target.parentNode.innerHTML;
 			var newrow = fullrow.replace("Item ItemMarked", "Item");
@@ -83,9 +84,11 @@ function addItem(e) {
 					i = x.length;
 				}
 			}
+			checkTutorial();
 			return false;
 		}
 		if (ingrds.length >= 10) {
+			//Ser till att det inte kan läggas till fler än 10 ingredienser
 			alert("Du kan inte lägga till fler ingredienser");
 			return false;
 		}
@@ -97,6 +100,7 @@ function addItem(e) {
 		document.getElementById('Ingredienslista').innerHTML +=
 			"<span class='addedItem'><li>" + target.innerHTML +
 			'<span id="cross"><a href="javaScript:void(0);" class="RemoveCross">X</a></span></li></span>';
+		checkTutorial();
 		return true;
 	}
 }
@@ -114,6 +118,7 @@ function removeItem(e) {
 			var index = ingrds.indexOf(part);
 			ingrds.splice(index, 1);
 			target.parentNode.parentNode.parentNode.innerHTML = "";
+			checkTutorial();
 		} else {
 			return false;
 		}
@@ -170,4 +175,16 @@ function recreatePointers() {
 	document.getElementById("förrätt").onclick = forratt;
 	document.getElementById("huvudrätt").onclick = huvudratt;
 	document.getElementById("efterrätt").onclick = efterratt;
+}
+
+function checkTutorial() {
+	var tut = document.getElementById("Tutorial");
+	tutText = tut.innerHTML;
+	if (ingrds.length == 0) {
+		tut.innerHTML = "Välj de ingredienser du vill ha med i din sökning bland de listade till vänster";
+		return true;
+	} else {
+		tut.innerHTML = "";
+		return false;
+	}
 }
