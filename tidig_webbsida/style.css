@@ -62,8 +62,8 @@ footer {
     border-radius:25px;
     background-color:#eee;
     margin:10px;
-    margin-bottom:50px
-  /*margin-top: 100px;*/
+    /*margin-bottom:50px;
+    margin-top: 100px;*/
 }
 
 #ingredienser ul {
@@ -83,7 +83,7 @@ footer {
 .button {
     font-weight:700;
     font-size:20px;
-    margin-top:25px;
+    /*margin-top:25px;*/
     margin-bottom:15px;
     width:130px;
     height:60px;
@@ -152,24 +152,29 @@ footer {
 }
 
 .kursbox {
-    border-right:4px solid;
-    border-left:4px solid;
+    /*border-right:3px solid;
+    border-left:3px solid;*/
+	box-shadow:0 2px 8px #888;
+	font-weight: bold;
     margin:5px;
     float:left;
-    height:80px;
-    width:120px;
+    height:40px;
+    width:50px;
     text-align:center;
-    line-height:80px;
-    border-radius:25px;
-    font-size:20px;
+	padding-top: 5px;
+    border-radius:5px;
+    font-size:15px;
     display:block;
-    background-color:#dab07b
+    background-color:lightgray;
 }
 
 .kursmark {
     background-color: #f59300;
 }
 
+#ext-ingredienser {
+	overflow: hidden;
+}
 
 #pagenav {
     text-align:center;
@@ -243,7 +248,7 @@ footer {
 }
 
 .Item {
-    border: 5px solid lightgray;
+    padding: 5px;
     border-radius: 10px;
     margin-bottom: 5px;
     background-color: lightgray;
@@ -255,7 +260,6 @@ footer {
 
 .ItemMarked {
     background-color: #f59300;
-    border: 5px solid #f59300;
 }
 
 .row ul li a:hover {
@@ -478,7 +482,10 @@ hr.side {
     border-radius:50%
 }
 
-.rating span:hover ~ span label,.rating span:hover label,.rating span.checked label,.rating span.checked ~ span label {
+.rating span:hover ~ span label,
+.rating span:hover label,
+.rating span.checked label,
+.rating span.checked ~ span label {
     background:#f90;
     color:#fff
 }
@@ -626,21 +633,7 @@ figcaption {
 a header {
     color:#000;
 }
-/*
-.resultbox a {
-    color:#000;
-    text-decoration:none;
-    font-weight:700
-}
 
-.resultlank a  {
-    color: #000;
-    text-decoration:none;
-}
-.resultlank a:hover  {
-    opacity: 0.7;
-}
-*/
 a {
     color: black;
     text-decoration:none;
@@ -649,13 +642,17 @@ a {
 /*Responsivitet*/
 @media screen and (max-width:1000px) {
 /*Index*/
-#wrapper, header, #main, footer  {
+#wrapper, 
+header, 
+#main, 
+footer {
     float:none;
     width: 100%;
 	margin:0;
 }
 
-#kursarea, #kategoriarea {
+#kursarea, 
+#kategoriarea {
     float: none;
     height:auto;
     width:100%;
@@ -663,11 +660,12 @@ a {
     text-align: center;
 }
 
-#kurscenter, #kategoricenter {
+#kurscenter, 
+#kategoricenter {
     display: inline-block;
 }
 
-.kursbox, .kategoribox {
+.kategoribox {
     border-right:4px solid;
     border-left:4px solid;
     height:80px;
