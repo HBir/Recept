@@ -62,6 +62,7 @@ footer {
     border-radius:25px;
     background-color:#eee;
     margin:10px;
+	position: relative;
     /*margin-bottom:50px;
     margin-top: 100px;*/
 }
@@ -119,6 +120,9 @@ footer {
 #Ingredienslista li {
     
 }
+#Ingredienslista {
+	min-height: 30px;
+}
 /**********************/
 /*För index.html*/
 .kategoribox {
@@ -173,10 +177,9 @@ footer {
 }
 
 #Tutorial {
-	margin: 10px;
-	margin-top: 20px;
-	margin-bottom: 0px;
-	
+	margin: 0 10px 0 10px;
+	position: absolute;
+	top: 75px;
 }
 #ext-ingredienser {
 	overflow: hidden;
