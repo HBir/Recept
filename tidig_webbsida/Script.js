@@ -181,10 +181,11 @@ function checkTutorial() {
 	var tut = document.getElementById("Tutorial");
 	tutText = tut.innerHTML;
 	if (ingrds.length == 0) {
-		tut.innerHTML = "Välj de ingredienser du vill ha med i din sökning bland de listade till vänster";
+		tut.innerHTML = tutText.replace('class="hidden"','class=""');
 		return true;
 	} else {
-		tut.innerHTML = "";
+		
+		tut.innerHTML = tutText.replace('class=""','class="hidden"');
 		return false;
 	}
 }
