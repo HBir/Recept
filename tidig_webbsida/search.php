@@ -13,7 +13,7 @@
     } else {
         // Om inget sidnummer anges i URLen, sätt $page till 1
         $page = $_GET['p'] ?: 1;
-        $offset = $page*10 - 10;
+        $offset = $page * 10 - 10;
 
         // Bygg sträng i format 'foo','bar','apa' av ingredienserna i URLen.
         $ing_array = explode(' ', $_GET['s']);
@@ -52,9 +52,14 @@ SQL;
 SQL;
         $hits = $db->query($sql)->fetchArray()['Count'];
 
+        // Ta fram navigeringslänkarna längst ner.
         $nextpage = sprintf("search.php?s=%s&p=%d", $_GET['s'], $page + 1);
         $prevpage = sprintf("search.php?s=%s&p=%d", $_GET['s'], $page - 1);
 
+        foreach(range(1, ceil($hits/10)) as $i) {
+            $navlinks[] = sprintf('<a href="search.php?s=%s&p=%d">%d</a>', $_GET['s'], $i, $i);
+        }
+        $resultnav = implode(' - ', $navlinks);
     }
 ?>
 <html lang="en">
@@ -114,25 +119,16 @@ SQL;
                         </a>
                     <?php } ?>
                     <div id="previous">
-                        <?php
-                        if($page > 1) { ?>
-                        <a href="<?= $prevpage ?>" id="nexttext">Föregående sida</a>
-                        <?php } ?>
+                        <a href="<?=$prevpage?>" <?= ($page <= 1 ? 'class="hidden"' : '') ?>>Föregående sida</a>
                     </div>
                     <div id="resultnav">
-                        <a href="#" id="nexttext">1 - 2 - 3 - 4 - 5</a>
+                        <?=$resultnav?>
                     </div>
                     <div id="next">
-                        <?php
-                        if($hits > $page * 10) { ?>
-                        <a href="<?= $nextpage ?>" id="nexttext">Nästa sida</a>
-                        <?php } ?>
+                        <a href="<?=$nextpage?>" <?= ($hits <= $page * 10 ? 'class="hidden"' : '') ?>>Nästa sida</a>
                     </div>
                 </div>
 
-                
-                
-                
                 <div id="ingredienser">
                     <p>Dina valda ingredienser:</p>
                     
