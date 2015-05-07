@@ -16,7 +16,7 @@
         $offset = $page * 10 - 10;
 
         // Bygg sträng i format 'foo','bar','apa' av ingredienserna i URLen.
-        $ing_array = explode(' ', $_GET['s']);
+        $ing_array = explode(',', $_GET['s']);
         $ingredients = "'" . mb_strtolower(implode("','", $ing_array), 'UTF-8') . "'";
 
         // Typ av rätt. 1 = förrätt, 2 = huvudrätt, 3 = efterrätt.

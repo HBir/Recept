@@ -40,7 +40,7 @@ function skapalank() {
 		default:
 			courseID = 0;
 	}
-	var ingrdsStr = ingrds.join("+");
+	var ingrdsStr = ingrds.join(",");
 	var destination = "search.php?c=" + courseID + "&s=" + ingrdsStr;
 	window.location.href = destination;
 }
