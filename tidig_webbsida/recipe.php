@@ -10,13 +10,34 @@
     if ($_GET['id'] == '') {
         echo 'inget id';
     } else {
+        // Hämta recept baserat på id i URL.
         $q = $db->prepare("SELECT rowid,* FROM Recipes WHERE rowid=:id");
         $q->bindValue(':id', $_GET['id'], SQLITE3_INTEGER);
         $ret = $q->execute();
         $recipe = $ret->fetchArray();
+
+        // Hämta ingredienserna.
         $q = $db->prepare("SELECT Ingredient FROM RecipesIngredients WHERE RecipeID=:id");
         $q->bindValue(':id', $_GET['id'], SQLITE3_INTEGER);
         $ingredients = $q->execute();
+
+        // Ta fram 3 liknande recept genom att göra en sökning på nuvarande
+        // recepts ingredienser.
+        while($i = $ingredients->fetchArray()) {
+            $ing_array[] = $i[0];
+        }
+        $ing_string = "'" . implode("','", $ing_array) . "'";
+
+        $sql = <<<SQL
+        SELECT Recipes.rowid, Recipes.*, COUNT(*) AS Count FROM Recipes
+        JOIN RecipesIngredients ON Recipes.rowid = RecipesIngredients.RecipeID
+        WHERE RecipesIngredients.Ingredient IN ({$ing_string})
+        AND Recipes.rowid <> {$recipe['rowid']}
+        GROUP BY Recipes.rowid
+        ORDER BY Count DESC, Recipes.Rating DESC
+        LIMIT 3
+SQL;
+        $ret = $db->query($sql);
     }
 ?>
 <html lang="en">
@@ -91,29 +112,18 @@
 
                 </div><!-- end recipepage-->
 
-                
                     <div id="related_recipe">
                         <h2>Liknande recept</h2>
                         <ul class="teaser">
+                            <?php
+                            while($i = $ret->fetchArray()) { ?>
                             <li>
-                                <a href="#" title="pannkakor">
-                                    <img src="bilder/pancakes.jpg">
-                                    <figcaption>Pannkakor</figcaption>
-                                </a>
-                                
-                            </li>
-                            <li>
-                                <a href="#" title="crepes">
-                                    <img src="bilder/pancakes.jpg">
-                                    <figcaption>Crépes</figcaption>
+                                <a href="recipe.php?id=<?= $i['rowid'] ?>" title="<?= $i['Name'] ?>">
+                                    <img src="bilder/<?= $i['Picture'] ?>">
+                                    <figcaption><?= $i['Name'] ?></figcaption>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" title="crepes">
-                                    <img src="bilder/pancakes.jpg">
-                                    <figcaption>Crépes</figcaption>
-                                </a>
-                            </li>
+                            <?php } ?>
                         </ul>
                     </div><!--end related_recipe-->
             </div>
