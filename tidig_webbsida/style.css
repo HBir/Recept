@@ -575,6 +575,13 @@ figcaption {
     max-height:100%
 }
 
+.relatedImage {
+	height: 100px;
+	width: 100px;
+	border: 2px solid lightgray;
+	background-size: cover;
+}
+
 #recipepage {
     width:720px;
     min-height:500px;
