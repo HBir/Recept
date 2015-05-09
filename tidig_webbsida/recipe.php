@@ -119,8 +119,9 @@ SQL;
                             while($i = $ret->fetchArray()) { ?>
                             <li>
                                 <a href="recipe.php?id=<?= $i['rowid'] ?>" title="<?= $i['Name'] ?>">
-									<div class="relatedImage" style="background-image: url('bilder/<?= $i['Picture'] ?>'), url('bilder/no_image.jpg')"></div>
+									<div class="relatedImage"  style="background-image: url('bilder/<?php echo $i['Picture']; ?>'), url('bilder/no_image.jpg')"></div>
                                     <figcaption><?= $i['Name'] ?></figcaption>
+									
                                 </a>
                             </li>
                             <?php } ?>
