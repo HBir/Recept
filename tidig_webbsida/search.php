@@ -101,6 +101,7 @@ SQL;
         <meta charset="utf-8" />
         <title>Välj recept</title>
         <link rel="stylesheet" href="style.css">
+		<script type="text/javascript" src="Script.js" ></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
@@ -112,7 +113,7 @@ SQL;
                 
                 
                 <div id="sok">
-                    <input type="text" id="sokruta" name="sok" placeholder="Sök">
+                    <input type="text" id="sokruta" name="sok" placeholder="Sök recept">
                     <button type="button" id="sokknapp">Hitta</button>
                 </div>
                 <div id="resultatarea">

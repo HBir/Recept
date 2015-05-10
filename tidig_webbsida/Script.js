@@ -11,6 +11,7 @@ function setUp() {
 	document.getElementById("förrätt").onclick = forratt;
 	document.getElementById("huvudrätt").onclick = huvudratt;
 	document.getElementById("efterrätt").onclick = efterratt;
+	document.getElementById("sokknapp").onclick = textSearch;
 	if (document.body.addEventListener) { //För äldre versioner av IE
 		document.body.addEventListener('click', addItem, false);
 		document.body.addEventListener('click', removeItem, false);
@@ -187,5 +188,15 @@ function checkTutorial() {
 		
 		tut.innerHTML = tutText.replace('class=""','class="hidden"');
 		return false;
+	}
+}
+
+function textSearch(){
+	var searchVal = document.getElementById('sokruta').value;
+	if (searchVal!=""){
+		
+		var destination = "search.php?r=" + searchVal;
+		
+		window.location.href = destination;
 	}
 }

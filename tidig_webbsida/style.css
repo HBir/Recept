@@ -281,7 +281,7 @@ footer {
 }
 
 /**********************/
-/*För searchresult.php*/
+/*För search.php*/
 .resultbox {
     border:3px solid lightgray;
     width:100%;
@@ -306,6 +306,11 @@ footer {
     background-position: center; 
     background-repeat: no-repeat;
     
+}
+
+#currentpage {
+	font-size: 19px;
+	text-decoration: underline;
 }
 
 .bildbox img {
