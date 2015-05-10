@@ -114,7 +114,7 @@ SQL;
                 
                 <div id="sok">
                     <input type="text" id="sokruta" name="sok" placeholder="Sök recept">
-                    <button type="button" id="sokknapp">Hitta</button>
+                    <button type="button" id="sokknapp" onclick="textSearch()">Hitta</button>
                 </div>
                 <div id="resultatarea">
                     <div id="sort">
