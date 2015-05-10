@@ -200,3 +200,21 @@ function textSearch(){
 		window.location.href = destination;
 	}
 }
+
+function showIngrds(str) {
+    if (str == "") {
+        document.getElementById("contentbox").innerHTML = "";
+        return;
+    } else { 
+
+        xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("contentbox").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","getIngrds.php?q="+str,true);
+        xmlhttp.send();
+    }
+}
