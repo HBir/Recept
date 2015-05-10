@@ -202,19 +202,30 @@ function textSearch(){
 }
 
 function showIngrds(str) {
-    if (str == "") {
-        document.getElementById("contentbox").innerHTML = "";
-        return;
-    } else { 
+	
+	console.log(str);
+	if (str == "Default") {
+		console.log("hyes");
+		document.getElementById("defaultingrds").style.display = "block";
+		document.getElementById("refreshingrds").style.display = "none";
+	} else {
 
-        xmlhttp = new XMLHttpRequest();
+		document.getElementById("defaultingrds").style.display = "none";
+		document.getElementById("refreshingrds").style.display = "block";
+		if (str == "") {
+			document.getElementById("refreshingrds").innerHTML = "";
+			return;
+		} else {
 
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("contentbox").innerHTML = xmlhttp.responseText;
-            }
-        }
-        xmlhttp.open("GET","getIngrds.php?q="+str,true);
-        xmlhttp.send();
-    }
+			xmlhttp = new XMLHttpRequest();
+
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					document.getElementById("refreshingrds").innerHTML = xmlhttp.responseText;
+				}
+			}
+			xmlhttp.open("GET", "getIngrds.php?q=" + str, true);
+			xmlhttp.send();
+		}
+	}
 }

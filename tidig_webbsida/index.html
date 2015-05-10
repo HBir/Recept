@@ -1,116 +1,121 @@
 <!--Projekt: Receptsökare-->
 <!--Ansvarig: Martin Gustavsson-->
 <!DOCTYPE html>
-
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Receptsökare!</title>
-        <link rel="stylesheet" href="style.css">
-        <script type="text/javascript" src="Script.js" ></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    </head>
-    <body>
-        <div id="wrapper">
-            <a href="index.html"><header>
-                <h1>Receptsökare!</h1>
-            </header></a>
-            <div id="main">
+	<head>
+		<meta charset="utf-8" />
+		<title>Receptsökare!</title>
+		<link rel="stylesheet" href="style.css">
+		<script type="text/javascript" src="Script.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body>
+		<div id="wrapper">
+			<a href="index.html"><header>
+					<h1>Receptsökare!</h1>
+				</header></a>
+			<div id="main">
 
-                <div id="kategoriarea">
-                    <div id="kategoricenter">
-                        <a href="javascript:showIngrds('Kött');"><div class="kategoribox" id="kott">
-                        </div></a>
-                        <a href="javascript:showIngrds('Mejeri');"><div class="kategoribox" id="Mejeri">
-                        </div></a>
-                        <a href="javascript:showIngrds('Pasta');"><div class="kategoribox" id="Pasta">
-                        </div></a>
-                        <a href="javascript:showIngrds('Vegetables');"><div class="kategoribox" id="Veggies">
-                        </div></a>
-						
-                    </div>
-                </div>
-                
-                <div id="sok">
-                    <input type="text" id="sokruta" name="sok" placeholder="Sök recept">
-                    <button type="submit" id="sokknapp">Hitta</button>
-                </div>
-                <div id="pagenav">
-                   <a href="javaScript:void(0);">ABC - DEF - EFG - GHI - JKL - MNO - PQR - STU - VWX - YZÅ - ÄÖ</a>
-                </div>
-                <div id="contentbox">
-                    <div class="row">
-						
-                        <h2>Mejeri</h2>
-                        <ul>
-                            <li><a href="javaScript:void(0);" class="Item">Mjölk</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Ägg</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Filmjölk</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Crème fraîche</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Ost</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Gräddfil</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Yoghurt</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Smör</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Glass</a></li>
-                        </ul>
-                    </div>
-                    <div class="row">
-                        <h2>Spannmål</h2>
-                        <ul>
-                            <li><a href="javaScript:void(0);" class="Item">Vetemjöl</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Havre</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Pasta</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Socker</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Ris</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Råg</a></li>
+				<div id="kategoriarea">
+					<div id="kategoricenter">
+						<a href="javascript:showIngrds('Default');"><div class="kategoribox" id="defaultcat">
+ Default
+							</div></a>
+						<a href="javascript:showIngrds('Kött');"><div class="kategoribox" id="kott">
+							</div></a>
+						<a href="javascript:showIngrds('Mejeri');"><div class="kategoribox" id="Mejeri">
+							</div></a>
+						<a href="javascript:showIngrds('Pasta');"><div class="kategoribox" id="Pasta">
+							</div></a>
+						<a href="javascript:showIngrds('Grönsak');"><div class="kategoribox" id="Veggies">
+							</div></a>
 
-                        </ul>
-                    </div>
-                    <div class="row row3">
-                        <h2>Kött</h2>
-                        <ul>
-                            <li><a href="javaScript:void(0);" class="Item">Fläskfärs</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Nötfärs</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Entrecôte</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Oxfilé</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Ryggbiff</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Kotletter</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Bacon</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="row">
-                        <h2>Grönsaker och rotfrukter</h2>
-                        <ul>
-                            <li><a href="javaScript:void(0);" class="Item">Tomat</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Gurka</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Potatis</a></li>
-                            <li><a href="javaScript:void(0);" class="Item">Morötter</a></li>
-                        </ul>
-                    </div>
+					</div>
+				</div>
 
-                </div>
-                
-					<div id="ingredienser">
-						<p id="ingrrubrik"><span class="bold">Dina valda ingredienser:</span></p>
-						<a href="javaScript:void(0);"></a><button type="button" id="rensa">Rensa lista</button>
-						<div id="Tutorial"><span class="">Välj de ingredienser du vill ha med i din sökning bland de listade till vänster</span></div>
-						<ul id="Ingredienslista">    
-						</ul>
-						<div id="kurscenter">
+				<div id="sok">
+					<input type="text" id="sokruta" name="sok" placeholder="Sök recept">
+					<button type="submit" id="sokknapp">Hitta</button>
+				</div>
+				<div id="pagenav">
+					<a href="javaScript:void(0);">ABC - DEF - EFG - GHI - JKL - MNO - PQR - STU - VWX - YZÅ - ÄÖ</a>
+				</div>
+				<div id="contentbox">
+					<div id="defaultingrds">
+						<div class="row">
+
+							<h2>Mejeri</h2>
+							<ul>
+								<li><a href="javaScript:void(0);" class="Item">Mjölk</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Ägg</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Filmjölk</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Crème fraîche</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Ost</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Gräddfil</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Yoghurt</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Smör</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Glass</a></li>
+							</ul>
+						</div>
+						<div class="row">
+							<h2>Spannmål</h2>
+							<ul>
+								<li><a href="javaScript:void(0);" class="Item">Vetemjöl</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Havre</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Pasta</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Socker</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Ris</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Råg</a></li>
+
+							</ul>
+						</div>
+						<div class="row row3">
+							<h2>Kött</h2>
+							<ul>
+								<li><a href="javaScript:void(0);" class="Item">Fläskfärs</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Nötfärs</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Entrecôte</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Oxfilé</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Ryggbiff</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Kotletter</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Bacon</a></li>
+							</ul>
+						</div>
+
+						<div class="row">
+							<h2>Grönsaker och rotfrukter</h2>
+							<ul>
+								<li><a href="javaScript:void(0);" class="Item">Tomat</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Gurka</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Potatis</a></li>
+								<li><a href="javaScript:void(0);" class="Item">Morötter</a></li>
+							</ul>
+						</div>
+					</div>
+					<div id="refreshingrds">
+					</div>
+				</div>
+
+				<div id="ingredienser">
+					<p id="ingrrubrik"><span class="bold">Dina valda ingredienser:</span></p>
+					<a href="javaScript:void(0);"></a><button type="button" id="rensa">Rensa lista</button>
+					<div id="Tutorial"><span class="">Välj de ingredienser du vill ha med i din sökning bland de listade till vänster</span></div>
+					<ul id="Ingredienslista">
+					</ul>
+					<div id="kurscenter">
 						<a href="javaScript:void(0);"><div class="kursbox" id="förrätt">För- rätt</div></a>
 						<a href="javaScript:void(0);"><div class="kursbox" id="huvudrätt">Huvud- rätt</div></a>
 						<a href="javaScript:void(0);"><div class="kursbox" id="efterrätt">Efter- rätt</div></a>
-					</div>	
-						<button class="button" id="knapp">Hitta Recept</button>
 					</div>
-					
-				
-            </div>
-            <footer>
-                <p>Hannes Birgersson, Martin Gustavsson, Johan Stubbengaard, Maria Nguyen, Jenny Vuong</p>
-            </footer>
-        
-        </div>
-    </body>
+					<button class="button" id="knapp">Hitta Recept</button>
+				</div>
+
+
+			</div>
+			<footer>
+				<p>Hannes Birgersson, Martin Gustavsson, Johan Stubbengaard, Maria Nguyen, Jenny Vuong</p>
+			</footer>
+
+		</div>
+	</body>
 </html>
