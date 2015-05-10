@@ -84,7 +84,12 @@ SQL;
         $prevpage = sprintf("search.php?s=%s&p=%d", $_GET['s'], $page - 1);
 
         foreach(range(1, ceil($hits/10)) as $i) {
-            $navlinks[] = sprintf('<a href="search.php?s=%s&p=%d">%d</a>', $_GET['s'], $i, $i);
+            if ($i == $page) {
+                $navlinks[] = sprintf('<span id="currentpage">%d</span>', $i);
+            } else {
+                echo $page;
+                $navlinks[] = sprintf('<a href="search.php?s=%s&p=%d">%d</a>', $_GET['s'], $i, $i);
+            }
         }
         $resultnav = implode(' - ', $navlinks);
     } else {
