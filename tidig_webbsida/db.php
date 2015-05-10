@@ -42,7 +42,8 @@ SQL;
 
 			CREATE TABLE RecipesIngredients
 			(RecipeID  INT NOT NULL,
-			Ingredient TEXT NOT NULL);
+			Ingredient TEXT NOT NULL,
+			Amount     TEXT NOT NULL);
 SQL;
 		$ret = $this->exec($sql);
 		if(!$ret){

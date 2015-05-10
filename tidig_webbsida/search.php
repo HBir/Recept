@@ -8,13 +8,40 @@
         exit();
     }
 
-    if ($_GET['s'] == '') {
-        echo 'ingen söksträng';
-    } else {
-        // Om inget sidnummer anges i URLen, sätt $page till 1
-        $page = $_GET['p'] ?: 1;
-        $offset = $page * 10 - 10;
+    // Om inget sidnummer anges i URLen, sätt $page till 1
+    $page = $_GET['p'] ?: 1;
+    $offset = $page * 10 - 10;
 
+    // Om 'r' har ett värde, gör en namnsökning på det, annars sök på ingredienser i 's'.
+    if ($_GET['r']) {
+        $ing_array[] = "Nada";
+
+        // Sökning
+        $sql = <<<SQL
+        Select rowid, * FROM Recipes
+        WHERE UPPER(Name) LIKE UPPER(:search)
+        ORDER BY Rating DESC
+        LIMIT 10 OFFSET :offset
+SQL;
+        $q = $db->prepare($sql);
+        $q->bindValue(':search', '%'.$_GET['r'].'%', SQLITE3_TEXT);
+        $q->bindValue(':offset', $offset, SQLITE3_INTEGER);
+        $ret = $q->execute();
+        
+        // Antal träffar
+        $q = $db->prepare("SELECT COUNT(*) FROM Recipes WHERE UPPER(Name) LIKE UPPER(:search)");
+        $q->bindValue(':search', "%" . $_GET['r'] . "%", SQLITE3_TEXT);
+        $hits = $q->execute()->fetchArray()[0];
+
+        // Ta fram navigeringslänkarna längst ner.
+        $nextpage = sprintf("search.php?r=%s&p=%d", $_GET['r'], $page + 1);
+        $prevpage = sprintf("search.php?r=%s&p=%d", $_GET['r'], $page - 1);
+
+        foreach(range(1, ceil($hits/10)) as $i) {
+            $navlinks[] = sprintf('<a href="search.php?r=%s&p=%d">%d</a>', $_GET['r'], $i, $i);
+        }
+        $resultnav = implode(' - ', $navlinks);
+    } else if ($_GET['s']) {
         // Bygg sträng i format 'foo','bar','apa' av ingredienserna i URLen.
         $ing_array = explode(',', $_GET['s']);
         $ingredients = "'" . mb_strtolower(implode("','", $ing_array), 'UTF-8') . "'";
@@ -60,6 +87,8 @@ SQL;
             $navlinks[] = sprintf('<a href="search.php?s=%s&p=%d">%d</a>', $_GET['s'], $i, $i);
         }
         $resultnav = implode(' - ', $navlinks);
+    } else {
+        // Hantera tom söksträng.
     }
 ?>
 <html lang="en">
