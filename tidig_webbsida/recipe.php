@@ -97,7 +97,7 @@ SQL;
 
                     <div class="recipecontent">
                         <div class="ingridients">
-                            <h2 class"">Ingredienser</h2>
+                            <h2 class="">Ingredienser</h2>
                                 <ul class="ingridient-list">
                                     <?php // Ingredienslistan
                                     while($i = $ingredients->fetchArray()) { ?>
