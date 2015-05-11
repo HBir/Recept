@@ -36,8 +36,8 @@ function letterSearch($char, $Category, $stmt) {
 		<?php
 			$q = $_GET['q'];
 			$s = $_GET['s'];
-			$s = utf8_decode($s);
-
+			
+			
 			$db = new PDO('sqlite:test2.db');
 			
 			if ($s!='0'){
@@ -46,8 +46,8 @@ function letterSearch($char, $Category, $stmt) {
 										AND Ingredient LIKE :Letter 
 										ORDER BY Ingredient");
 				/*Kör en bokstavssökning för varje bokstav i $s*/
-				for ($x = 0; $x < (strlen($s)); $x++) {
-					letterSearch(substr($s, $x, 1), $q, $stmt);
+				for ($x = 0; $x < (strlen(utf8_decode($s))); $x++) {
+					letterSearch(mb_substr($s, $x, 1, 'UTF-8'), $q, $stmt);
 				}
 			} else {
 				/*$s som 0 resulterar i en lista med alla ingredienser ur en kategori*/
@@ -69,6 +69,7 @@ function letterSearch($char, $Category, $stmt) {
 					}
 				}
 				echo "</div></ul></div>";
+				
 			}
 		?>
 	</body>
