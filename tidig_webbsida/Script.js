@@ -8,9 +8,6 @@ function setUp() {
 	//Lyssnare för att skapa händelser på tryck
 	document.getElementById("knapp").onclick = skapalank;
 	document.getElementById("rensa").onclick = rensa;
-	document.getElementById("förrätt").onclick = forratt;
-	document.getElementById("huvudrätt").onclick = huvudratt;
-	document.getElementById("efterrätt").onclick = efterratt;
 	document.getElementById("sokknapp").onclick = textSearch;
 	if (document.body.addEventListener) { //För äldre versioner av IE
 		document.body.addEventListener('click', addItem, false);
@@ -94,7 +91,7 @@ function addItem(e) {
 			return false;
 		}
 		ingrds.push(target.innerHTML);
-		/*Hitta det tryckta elementet och lägg*/
+		/*Hitta det tryckta elementet och lägg till i lista och markeera*/
 		var parent_Node = target.parentNode.innerHTML;
 		parent_Node = parent_Node.replace("Item", "Item ItemMarked");
 		target.parentNode.innerHTML = parent_Node;
@@ -138,7 +135,6 @@ function removeItem(e) {
 }
 
 function courseselect(ratt) {
-	/**/
 	/*Hitta gamla markering och ta bort dem*/
 	var x = document.getElementsByClassName("kursmark");
 	var i;
@@ -160,72 +156,74 @@ function courseselect(ratt) {
 	recreatePointers();
 }
 
-function forratt() {
-	courseselect("förrätt");
-}
-
-function huvudratt() {
-	courseselect("huvudrätt");
-}
-
-function efterratt() {
-	courseselect("efterrätt");
-}
 
 function recreatePointers() {
+	/*Återskapar onclick-pekarna på maträttsvalen*/
 	document.getElementById("förrätt").onclick = forratt;
 	document.getElementById("huvudrätt").onclick = huvudratt;
 	document.getElementById("efterrätt").onclick = efterratt;
 }
 
 function checkTutorial() {
+	/*Döljer tutorialen ifall några ingredienser är valda, och visar dem ifall inga är.*/
 	var tut = document.getElementById("Tutorial");
 	tutText = tut.innerHTML;
 	if (ingrds.length == 0) {
-		tut.innerHTML = tutText.replace('class="hidden"','class=""');
+		document.getElementById("Tutorial").style.display = "block";
 		return true;
 	} else {
-		
-		tut.innerHTML = tutText.replace('class=""','class="hidden"');
+		document.getElementById("Tutorial").style.display = "none";
+
 		return false;
 	}
 }
 
-function textSearch(){
+function textSearch() {
+	/*Skapar länken till php sidan för fritextssökning*/
 	var searchVal = document.getElementById('sokruta').value;
-	if (searchVal!=""){
-		
+	if (searchVal != "") {
 		var destination = "search.php?r=" + searchVal;
-		
 		window.location.href = destination;
 	}
 }
 
-function showIngrds(str) {
-	
-	console.log(str);
+function showIngrds(str, sort) {
+	/*AJAX för att hämta ingredienser med motsvarande kategori (str)*/
 	if (str == "Default") {
-		console.log("hyes");
 		document.getElementById("defaultingrds").style.display = "block";
 		document.getElementById("refreshingrds").style.display = "none";
+		document.getElementById("pagenav").style.visibility = "hidden";
 	} else {
-
 		document.getElementById("defaultingrds").style.display = "none";
 		document.getElementById("refreshingrds").style.display = "block";
-		if (str == "") {
-			document.getElementById("refreshingrds").innerHTML = "";
-			return;
+		document.getElementById("pagenav").style.visibility = "visible";
+		if (str!='get') {
+			document.getElementById("CurrentCat").innerHTML = str;
 		} else {
+			str = document.getElementById("CurrentCat").innerHTML;
+		}
+		
+		xmlhttp = new XMLHttpRequest();
 
-			xmlhttp = new XMLHttpRequest();
-
-			xmlhttp.onreadystatechange = function () {
-				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					document.getElementById("refreshingrds").innerHTML = xmlhttp.responseText;
-				}
+		xmlhttp.onreadystatechange = function () {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				document.getElementById("refreshingrds").innerHTML = xmlhttp.responseText;
 			}
-			xmlhttp.open("GET", "getIngrds.php?q=" + str, true);
-			xmlhttp.send();
+		}
+		xmlhttp.open("GET", "getIngrds.php?q=" + str + "&s=" + sort, true);
+		xmlhttp.send();
+		
+	}
+}
+
+function recreateMarkedItem() {
+	var x = document.getElementsByClassName("Item");
+	var i;
+	var l = x.length;
+	for (i = 0; i < l; i++) {
+		if (ingrds.indexOf(x[i].innerHTML) != -1) {
+			console.log(x[i].innerHTML);
+			x[i].parentNode.innerHTML = x[i].parentNode.innerHTML.replace("Item", "Item ItemMarked");
 		}
 	}
 }

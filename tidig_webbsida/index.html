@@ -15,21 +15,20 @@
 					<h1>Receptsökare!</h1>
 				</header></a>
 			<div id="main">
-
+				
 				<div id="kategoriarea">
 					<div id="kategoricenter">
-						<a href="javascript:showIngrds('Default');"><div class="kategoribox" id="defaultcat">
- Default
-							</div></a>
-						<a href="javascript:showIngrds('Kött');"><div class="kategoribox" id="kott">
-							</div></a>
-						<a href="javascript:showIngrds('Mejeri');"><div class="kategoribox" id="Mejeri">
-							</div></a>
-						<a href="javascript:showIngrds('Pasta');"><div class="kategoribox" id="Pasta">
-							</div></a>
-						<a href="javascript:showIngrds('Grönsak');"><div class="kategoribox" id="Veggies">
-							</div></a>
-
+						<a href="javascript:showIngrds('Default','0');"><div class="kategoribox" id="defaultcat">
+						Default
+						</div></a>
+						<a href="javascript:showIngrds('Kött','0');"><div class="kategoribox" id="kott">
+						</div></a>
+						<a href="javascript:showIngrds('Mejeri','0');"><div class="kategoribox" id="Mejeri">
+						</div></a>
+						<a href="javascript:showIngrds('Pasta','0');"><div class="kategoribox" id="Pasta">
+						</div></a>
+						<a href="javascript:showIngrds('Grönsak','0');"><div class="kategoribox" id="Veggies">
+						</div></a>
 					</div>
 				</div>
 
@@ -38,7 +37,18 @@
 					<button type="submit" id="sokknapp">Hitta</button>
 				</div>
 				<div id="pagenav">
-					<a href="javaScript:void(0);">ABC - DEF - EFG - GHI - JKL - MNO - PQR - STU - VWX - YZÅ - ÄÖ</a>
+					<div id="CurrentCat" style="display: none;"></div>
+					<a href="javascript:showIngrds('get','ABC');">ABC</a> - 
+					<a href="javascript:showIngrds('get','DEF');">DEF</a> - 
+					<a href="javascript:showIngrds('get','EFG');">EFG</a> - 
+					<a href="javascript:showIngrds('get','GHI');">GHI</a> - 
+					<a href="javascript:showIngrds('get','JKL');">JKL</a> - 
+					<a href="javascript:showIngrds('get','MNO');">MNO</a> - 
+					<a href="javascript:showIngrds('get','PQR');">PQR</a> - 
+					<a href="javascript:showIngrds('get','STU');">STU</a> -
+					<a href="javascript:showIngrds('get','VWX');">VWX</a> - 
+					<a href="javascript:showIngrds('get','YZÅ');">YZÅ</a> - 
+					<a href="javascript:showIngrds('get','ÄÖ');">ÄÖ</a>
 				</div>
 				<div id="contentbox">
 					<div id="defaultingrds">
@@ -93,6 +103,7 @@
 						</div>
 					</div>
 					<div id="refreshingrds">
+						<!--AJAX för dynamiska ingredienser-->
 					</div>
 				</div>
 
@@ -103,9 +114,9 @@
 					<ul id="Ingredienslista">
 					</ul>
 					<div id="kurscenter">
-						<a href="javaScript:void(0);"><div class="kursbox" id="förrätt">För- rätt</div></a>
-						<a href="javaScript:void(0);"><div class="kursbox" id="huvudrätt">Huvud- rätt</div></a>
-						<a href="javaScript:void(0);"><div class="kursbox" id="efterrätt">Efter- rätt</div></a>
+						<a href="javascript:courseselect('förrätt');"><div class="kursbox" id="förrätt">För- rätt</div></a>
+						<a href="javascript:courseselect('huvudrätt');"><div class="kursbox" id="huvudrätt">Huvud- rätt</div></a>
+						<a href="javascript:courseselect('efterrätt');"><div class="kursbox" id="efterrätt">Efter- rätt</div></a>
 					</div>
 					<button class="button" id="knapp">Hitta Recept</button>
 				</div>
