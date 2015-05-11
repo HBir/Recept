@@ -37,8 +37,12 @@ SQL;
         $nextpage = sprintf("search.php?r=%s&p=%d", $_GET['r'], $page + 1);
         $prevpage = sprintf("search.php?r=%s&p=%d", $_GET['r'], $page - 1);
 
-        foreach(range(1, ceil($hits/10)) as $i) {
-            $navlinks[] = sprintf('<a href="search.php?r=%s&p=%d">%d</a>', $_GET['r'], $i, $i);
+        foreach(range(1, ceil($hits/10) ?: 1) as $i) {
+            if ($i == $page) {
+                $navlinks[] = sprintf('<span id="currentpage">%d</span>', $i);
+            } else {
+                $navlinks[] = sprintf('<a href="search.php?r=%s&p=%d">%d</a>', $_GET['r'], $i, $i);
+            }
         }
         $resultnav = implode(' - ', $navlinks);
     } else if ($_GET['s']) {
@@ -83,11 +87,10 @@ SQL;
         $nextpage = sprintf("search.php?s=%s&p=%d", $_GET['s'], $page + 1);
         $prevpage = sprintf("search.php?s=%s&p=%d", $_GET['s'], $page - 1);
 
-        foreach(range(1, ceil($hits/10)) as $i) {
+        foreach(range(1, ceil($hits/10) ?: 1) as $i) {
             if ($i == $page) {
                 $navlinks[] = sprintf('<span id="currentpage">%d</span>', $i);
             } else {
-                echo $page;
                 $navlinks[] = sprintf('<a href="search.php?s=%s&p=%d">%d</a>', $_GET['s'], $i, $i);
             }
         }
