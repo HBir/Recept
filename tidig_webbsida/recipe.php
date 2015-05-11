@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <?php
+    /* Ansvarig:
+     * Johan Stubbergaard
+     */
     include("db.php");
 
     $db = new DB();
@@ -37,7 +40,7 @@
         ORDER BY Count DESC, Recipes.Rating DESC
         LIMIT 3
 SQL;
-        $ret = $db->query($sql);
+        $similar = $db->query($sql);
     }
 ?>
 <html lang="en">
@@ -57,7 +60,7 @@ SQL;
                 
                 
                 <div id="sok">
-                    <input type="text" id="sokruta" name="sok" placeholder="Sök">
+                    <input type="text" id="sokruta" name="sok" placeholder="Sök recept">
                     <button type="button" id="sokknapp" onclick="textSearch()">Hitta</button>
                 </div>
                 <div id="pagenav">
@@ -100,8 +103,8 @@ SQL;
                             <h2 class"">Ingredienser</h2>
                                 <ul class="ingridient-list">
                                     <?php // Ingredienslistan
-                                    while($i = $ingredients->fetchArray()) { ?>
-                                    <li><?= $i[0] ?></li>
+                                    foreach($ing_array as $i) { ?>
+                                    <li><?= $i ?></li>
                                     <?php } ?>
                                 </ul>
                         </div>
@@ -117,7 +120,7 @@ SQL;
                         <h2>Liknande recept</h2>
                         <ul class="teaser">
                             <?php
-                            while($i = $ret->fetchArray()) { ?>
+                            while($i = $similar->fetchArray()) { ?>
                             <li>
                                 <a href="recipe.php?id=<?= $i['rowid'] ?>" title="<?= $i['Name'] ?>">
 									<div class="relatedImage"  style="background-image: url('bilder/<?php echo $i['Picture']; ?>'), url('bilder/no_image.jpg')"></div>

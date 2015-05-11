@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <?php
+    /* Ansvarig:
+     * Johan Stubbergaard
+     */
     include("db.php");
 
     $db = new DB();
@@ -14,7 +17,7 @@
 
     // Om 'r' har ett värde, gör en namnsökning på det, annars sök på ingredienser i 's'.
     if ($_GET['r']) {
-        $ing_array[] = "Nada";
+        $search_mode = 'r';
 
         // Sökning
         $sql = <<<SQL
@@ -26,26 +29,14 @@ SQL;
         $q = $db->prepare($sql);
         $q->bindValue(':search', '%'.$_GET['r'].'%', SQLITE3_TEXT);
         $q->bindValue(':offset', $offset, SQLITE3_INTEGER);
-        $ret = $q->execute();
+        $results = $q->execute();
         
         // Antal träffar
         $q = $db->prepare("SELECT COUNT(*) FROM Recipes WHERE UPPER(Name) LIKE UPPER(:search)");
         $q->bindValue(':search', "%" . $_GET['r'] . "%", SQLITE3_TEXT);
         $hits = $q->execute()->fetchArray()[0];
-
-        // Ta fram navigeringslänkarna längst ner.
-        $nextpage = sprintf("search.php?r=%s&p=%d", $_GET['r'], $page + 1);
-        $prevpage = sprintf("search.php?r=%s&p=%d", $_GET['r'], $page - 1);
-
-        foreach(range(1, ceil($hits/10) ?: 1) as $i) {
-            if ($i == $page) {
-                $navlinks[] = sprintf('<span id="currentpage">%d</span>', $i);
-            } else {
-                $navlinks[] = sprintf('<a href="search.php?r=%s&p=%d">%d</a>', $_GET['r'], $i, $i);
-            }
-        }
-        $resultnav = implode(' - ', $navlinks);
     } else if ($_GET['s']) {
+        $search_mode = 's';
         // Bygg sträng i format 'foo','bar','apa' av ingredienserna i URLen.
         $ing_array = explode(',', $_GET['s']);
         $ingredients = "'" . mb_strtolower(implode("','", $ing_array), 'UTF-8') . "'";
@@ -70,7 +61,7 @@ SQL;
         // Här vill man nog ha prepared statements för att undvika injektion,
         // men det är knepigt med ett godtyckligt antal ingredienser.
         // http://stackoverflow.com/questions/327274/mysql-prepared-statements-with-a-variable-size-variable-list
-        $ret = $db->query($sql);
+        $results = $db->query($sql);
 
         // Hämta totalt antal träffar.
         $sql = <<<SQL
@@ -82,21 +73,26 @@ SQL;
         GROUP BY Recipes.rowid)
 SQL;
         $hits = $db->query($sql)->fetchArray()['Count'];
+    } else {
+        // Tom eller felaktig söksträng i URL.
+        $search_mode = 'n';
+    }
 
-        // Ta fram navigeringslänkarna längst ner.
-        $nextpage = sprintf("search.php?s=%s&p=%d", $_GET['s'], $page + 1);
-        $prevpage = sprintf("search.php?s=%s&p=%d", $_GET['s'], $page - 1);
+    // Ta fram navigeringslänkarna längst ner.
+    $nextpage = sprintf("search.php?%s=%s&p=%d", $search_mode, $_GET[$search_mode], $page + 1);
+    $prevpage = sprintf("search.php?%s=%s&p=%d", $search_mode, $_GET[$search_mode], $page - 1);
 
-        foreach(range(1, ceil($hits/10) ?: 1) as $i) {
-            if ($i == $page) {
-                $navlinks[] = sprintf('<span id="currentpage">%d</span>', $i);
-            } else {
-                $navlinks[] = sprintf('<a href="search.php?s=%s&p=%d">%d</a>', $_GET['s'], $i, $i);
-            }
+    foreach(range(1, ceil($hits/10) ?: 1) as $i) {
+        if ($i == $page) {
+            $navlinks[] = sprintf('<span id="currentpage">%d</span>', $i);
+        } else {
+            $navlinks[] = sprintf('<a href="search.php?%s=%s&p=%d">%d</a>', $search_mode, $_GET[$search_mode], $i, $i);
         }
+    }
+    if ($hits > 0) {
         $resultnav = implode(' - ', $navlinks);
     } else {
-        // Hantera tom söksträng.
+        $resultnav = '';
     }
 ?>
 <html lang="en">
@@ -116,31 +112,29 @@ SQL;
                 
                 
                 <div id="sok">
-                    <input type="text" id="sokruta" name="sok" placeholder="Sök recept">
+                    <input type="text" id="sokruta" name="sok" placeholder="Sök recept" <?= ($search_mode == 'r' ? 'value=' . $_GET['r'] : '') ?>>
                     <button type="button" id="sokknapp" onclick="textSearch()">Hitta</button>
                 </div>
                 <div id="resultatarea">
-                    <div id="sort">
-                        Sortera efter:
-                        <select>
-                            <option value="volvo">Mest populär</option>
-                            <option value="saab">Relevans</option>
-                            <option value="mercedes">Högst betyg</option>
-                            <option value="audi">Flest ägda bilar</option>
-                        </select>
+                    <div id="hits">
+                        <?php
+                        if ($search_mode != 'n') {
+                            echo $hits . ' träffar.';
+                        } else {
+                            echo 'Ingen söksträng. Hur tänkte du där?';
+                        } ?>
                     </div>
                     <?php
-                    while ($row = $ret->fetchArray()) {
-                        extract($row); // Alla element i $row blir egna variabler.
-                        $q = "SELECT Ingredient FROM RecipesIngredients WHERE RecipeID = " . $rowid;
-                        $ing = $db->query($q);
+                    while ($row = $results->fetchArray()) {
+                        extract($row); // Alla element i $row blir egna variabler; motsvarar kolumnnamnen i db:n.
+                        $q = $db->prepare("SELECT Ingredient FROM RecipesIngredients WHERE RecipeID = :id");
+                        $q->bindValue(':id', $rowid);
+                        $ing = $q->execute();
                         ?>
                         <a href="recipe.php?id=<?=$rowid?>">
                         <div class="resultbox">
-                            <div class="bildbox" style="background-image: url('bilder/<?=$Picture?>'), url('bilder/no_image.jpg')">
-                                <!--<img src="bilder/<?=$Picture?>" alt="bilder/<?=$Picture?>">-->
-                            </div>
-                            <div class="receptrubrik"><?=$Name?></div>
+                            <div class="bildbox" style="background-image: url('bilder/<?=$Picture?>'), url('bilder/no_image.jpg')"></div>
+                            <div class="receptrubrik"><?= $Name ?></div>
                             <div class="recepttext"><?= $Description ?></div>
                             <div class="ingrlabel">Ingredienser:</div>
                             <div class="ratinglbl"> Betyg: <?= $Rating ?></div>
@@ -167,7 +161,7 @@ SQL;
                     </div>
                 </div>
 
-                <div id="ingredienser">
+                <div id="ingredienser" <?= ($search_mode != 's' ? 'class="hidden"' : '') ?>>
                     <p>Dina valda ingredienser:</p>
                     
                     <ul>
@@ -179,7 +173,7 @@ SQL;
                     </ul>
                     
                     <FORM ACTION="index.html">
-                    <INPUT TYPE="submit" class="button" id="redobutton" VALUE="Gör om sökning">
+                    <INPUT TYPE="submit" class="button" id="redobutton" value="Ny sökning">
                     </FORM>
                     
                 </div>
