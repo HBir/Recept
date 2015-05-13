@@ -173,7 +173,6 @@ function checkTutorial() {
 		return true;
 	} else {
 		document.getElementById("Tutorial").style.display = "none";
-
 		return false;
 	}
 }
@@ -188,12 +187,15 @@ function textSearch() {
 }
 
 function showIngrds(str, sort) {
-	/*AJAX för att hämta ingredienser med motsvarande kategori (str)*/
+	/*AJAX för att hämta ingredienser med motsvarande kategori (str). 
+	 *str=get ger nuvarande vald kategori. sort=0 ger alla ingredienser*/
 	if (str == "Default") {
+		/*Tar tillbaka den sammanfattade ingredienslistan, och döljer den dynamiska*/
 		document.getElementById("defaultingrds").style.display = "block";
 		document.getElementById("refreshingrds").style.display = "none";
 		document.getElementById("pagenav").style.visibility = "hidden";
 	} else {
+		/*Döljer den sammanfattade ingredienslistan, och tar fram den dynamiska*/
 		document.getElementById("defaultingrds").style.display = "none";
 		document.getElementById("refreshingrds").style.display = "block";
 		document.getElementById("pagenav").style.visibility = "visible";
@@ -203,7 +205,13 @@ function showIngrds(str, sort) {
 			str = document.getElementById("CurrentCat").innerHTML;
 		}
 		
-		xmlhttp = new XMLHttpRequest();
+		if (window.XMLHttpRequest) {
+            //IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            //IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
 
 		xmlhttp.onreadystatechange = function () {
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -217,6 +225,8 @@ function showIngrds(str, sort) {
 }
 
 function recreateMarkedItem() {
+	/*När ingredienssidan updaterar de dynamiska ingredienserna försvinner markeringarna
+	 *för valda ingredienser. Denna funktion återskapar dem*/
 	var x = document.getElementsByClassName("Item");
 	var i;
 	var l = x.length;
