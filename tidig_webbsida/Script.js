@@ -137,13 +137,10 @@ function removeItem(e) {
 function courseselect(ratt) {
 	/*Hitta gamla markering och ta bort dem*/
 	var x = document.getElementsByClassName("kursmark");
-	var i;
 	var l = x.length;
-	for (i = 0; i < l; i++) {
-		x[0].parentNode.innerHTML = x[0].parentNode.innerHTML.replace(
-			"kursbox kursmark", "kursbox");
-		/*onclick pekarna måste återskapas eftersom även de tas bort*/
-		recreatePointers();
+	
+	for (var i = 0; i < l; i++) {
+		x[i].className = "kursbox";
 	}
 	if (ratt == course) {
 		course = 0;
