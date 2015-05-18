@@ -144,13 +144,13 @@ function courseselect(ratt) {
 	}
 	if (ratt == course) {
 		course = 0;
-		return false;
+	} else {
+		course = ratt;
+		var diver = document.getElementById(ratt);
+		var newdiv = diver.parentNode.innerHTML.replace("kursbox", "kursbox kursmark");
+		document.getElementById(ratt).parentNode.innerHTML = newdiv;
+		recreatePointers();
 	}
-	course = ratt;
-	var diver = document.getElementById(ratt);
-	var newdiv = diver.parentNode.innerHTML.replace("kursbox", "kursbox kursmark");
-	document.getElementById(ratt).parentNode.innerHTML = newdiv;
-	recreatePointers();
 }
 
 
