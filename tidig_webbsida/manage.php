@@ -46,6 +46,9 @@
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			// Lägga till recept
 			if ($_POST["addtype"] == 1) {
+				$ingredients = $_POST['ingrdfield1'];
+				$amounts = $_POST['ingrdfield2'];
+				
 				$q = $db->prepare("INSERT INTO Recipes VALUES(:name,:image,:instructions,:description,:course,:views,:rating)");
 				$q->bindValue(':name', $_POST["name"], SQLITE3_TEXT);
 				$q->bindValue(':image', $_POST["pic"], SQLITE3_TEXT);
@@ -54,46 +57,52 @@
 				$q->bindValue(':course', mb_strtolower($_POST["course"]), SQLITE3_TEXT);
 				$q->bindValue(':views', 0, SQLITE3_INTEGER);
 				$q->bindValue(':rating', $_POST["rating"], SQLITE3_INTEGER);
+				
 				$ret = $q->execute();
 				if(!$ret){
 					echo $db->lastErrorMsg();
 				}
 		
 				$id = $db->lastInsertRowID();
-				$ingredients = explode(PHP_EOL, mb_strtolower($_POST["ingredients"], 'UTF-8'));
-		
-				// Gå genom alla ingredienser och lägg till i Ingredients, + en koppling till recept-id
-				// i RecipesIngredients.
-				foreach ($ingredients as $i) {
-					if ($i !== '') {
-						// Lägg till ingrediensen:
-						$q = $db->prepare("INSERT OR IGNORE INTO Ingredients VALUES(:ingredient,'')");
-						$q->bindValue(':ingredient', $i, SQLITE3_TEXT);
+				
+				// Gå genom alla ingredienser och lägg till koppling i RecipesIngredients.
+				foreach ($ingredients as $key => $ingredient) {
+					if ($ingredient !== '') {
+						$q = $db->prepare("INSERT INTO RecipesIngredients VALUES(:id,:ingredient,:amount)");
+						$q->bindValue(':id', $id, SQLITE3_INTEGER);
+						$q->bindValue(':ingredient', $ingredient, SQLITE3_TEXT);
+						$q->bindValue(':amount', $amounts[$key], SQLITE3_TEXT);
 						$ret = $q->execute();
 		
 						if(!$ret){
 							echo $db->lastErrorMsg();
 						}
-						// Lägg till kopplingen recept<->ingrediens:
-						$q = $db->prepare("INSERT INTO RecipesIngredients VALUES(:id,:ingredient)");
-						$q->bindValue(':id', $id, SQLITE3_INTEGER);
-						$q->bindValue(':ingredient', $i, SQLITE3_TEXT);
-						$ret = $q->execute();
-		
-						if(!$ret){
-							echo $db->lastErrorMsg();
+
+						// Samla ihop de ingredienser som inte finns i Ingredients-tabellen.
+						$q = $db->prepare("SELECT Count(*) FROM Ingredients WHERE UPPER(Ingredient) = UPPER(:ingredient)");
+						$q->bindValue(':ingredient', $ingredient, SQLITE3_TEXT);
+						$ret = $q->execute()->fetchArray()[0];
+						if ($ret === 0) {
+							$missing[] = $ingredient;
 						}
 					}
+				}
+				$message = sprintf('Lade till recept med id <a href=recipe.php?id=%d>%d</a>.', $id, $id);
+				if (count($missing) > 0) {
+					$message .= '<br>Ingredienser saknas i databasen: ' . implode(', ', $missing) . '.';
 				}
 			}
 		
-			// Lägga till endast ingredienser
+			// Lägga till ingredienser
 			if ($_POST["addtype"] == 2) {
-				$ingredients = explode(PHP_EOL, mb_strtolower($_POST["ingredients"], 'UTF-8'));
-				foreach ($ingredients as $i) {
-					if ($i !== '') {
-						$q = $db->prepare("INSERT OR IGNORE INTO Ingredients VALUES(:ingredient,'')");
-						$q->bindValue(':ingredient', $i, SQLITE3_TEXT);
+				$ingredients = $_POST['ingrdfield1'];
+				$categories = $_POST['ingrdfield2'];
+
+				foreach ($ingredients as $key => $ingredient) {
+					if ($ingredient !== '') {
+						$q = $db->prepare("INSERT OR IGNORE INTO Ingredients VALUES(:ingredient,:category)");
+						$q->bindValue(':ingredient', mb_strtolower($ingredient), SQLITE3_TEXT);
+						$q->bindValue(':category', $categories[$key], SQLITE3_TEXT);
 						$ret = $q->execute();
 		
 						if(!$ret){
@@ -101,13 +110,15 @@
 						}
 					}
 				}
-				echo "Lade till ingrediens(er).";
+				$message = 'Lade till ingrediens' . (count($ingredients) > 1 ? 'er' : '') . ': ';
+				$message .= implode(', ', $ingredients) . '.';
 			}
 		
 			// Nuka databasen och lägg till tables igen (om schemat ändras t ex)
 			if ($_POST["addtype"] == 3) {
 				$db->drop_tables();
 				$db->init_tables();
+				$message = 'Rensat databasen :(';
 			}
 		}
 		
@@ -118,6 +129,7 @@
 				<a href="index.html"><header>
 						<h1>Receptsökare!</h1>
 					</header></a>
+				<?= $message ?>
 				<div class="table">
 					<div class="left">
 						<h2>Lägg till recept</h2>
@@ -163,7 +175,7 @@
 				</div>
 			</div>
 			<footer>
-				<p>Hannes Birgersson, Martin Gustavsson, Johan Stubbengaard, Maria Nguyen, Jenny Vuong</p>
+				<p>Hannes Birgersson, Martin Gustavsson, Johan Stubbergaard, Maria Nguyen, Jenny Vuong</p>
 			</footer>
 		</div>
 
