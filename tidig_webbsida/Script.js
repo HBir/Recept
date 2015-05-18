@@ -56,6 +56,7 @@ function rensa() {
 	}
 	div.innerHTML = "";
 	checkTutorial();
+	courseselect(course);
 }
 
 function addItem(e) {
@@ -67,10 +68,9 @@ function addItem(e) {
 	if (target.className.match(/\bItem\b/)) {
 		if (ingrds.indexOf(target.innerHTML) != -1) {
 			//Kollar ifall ingrediensen redan är vald, och ifall den är vald så tas den bort istället
+			target.className = "Item";
 			var name = target.innerHTML;
-			var fullrow = target.parentNode.innerHTML;
-			var newrow = fullrow.replace("Item ItemMarked", "Item");
-			target.parentNode.innerHTML = newrow;
+
 			var index = ingrds.indexOf(name);
 			ingrds.splice(index, 1);
 			var x = document.getElementsByClassName("addedItem");
@@ -101,6 +101,7 @@ function addItem(e) {
 		checkTutorial();
 		return true;
 	}
+	recreateMarkedItem();
 }
 
 function removeItem(e) {
@@ -210,14 +211,15 @@ function showIngrds(str, sort) {
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
 
-		xmlhttp.onreadystatechange = function () {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				document.getElementById("refreshingrds").innerHTML = xmlhttp.responseText;
-			}
-		}
+        xmlhttp.onreadystatechange = function () {
+        	if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        		document.getElementById("refreshingrds").innerHTML = xmlhttp.responseText;
+
+        		recreateMarkedItem();
+        	}
+        }
 		xmlhttp.open("GET", "getIngrds.php?q=" + str + "&s=" + sort, true);
 		xmlhttp.send();
-		
 	}
 }
 
@@ -226,11 +228,13 @@ function recreateMarkedItem() {
 	 *för valda ingredienser. Denna funktion återskapar dem*/
 	var x = document.getElementsByClassName("Item");
 	var i;
+	var re = 1;
+
 	var l = x.length;
 	for (i = 0; i < l; i++) {
 		if (ingrds.indexOf(x[i].innerHTML) != -1) {
-			console.log(x[i].innerHTML);
-			x[i].parentNode.innerHTML = x[i].parentNode.innerHTML.replace("Item", "Item ItemMarked");
+
+			x[i].className = "Item ItemMarked";
 		}
 	}
 }

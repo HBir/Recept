@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<link rel="stylesheet" href="style.css">
 		<style>
 		 .table { padding:10px; width:900px; }
 		 .left { float:left; width:450px; }
@@ -12,23 +13,23 @@
 		</style>
 		<script>
 	  var i = 1;
-	  function addrow() {
+	  function addrow(box, text1, text2) {
 		  i++;
 		  var input = document.createElement("INPUT");
 	  
 		  input.setAttribute("type", "text");
-		  input.setAttribute("name", "ingredients"+i);
-		  input.setAttribute("placeholder", "Ny ingrediens");
+		  input.setAttribute("name", "ingrdfield1[]");
+		  input.setAttribute("placeholder", text1);
 		  input.className = "nyingrd";
-		  document.getElementById('nyingrdbox').appendChild(input);
+		  document.getElementById(box).appendChild(input);
 	  
 	  
 		  var t = document.createElement("INPUT");
 		  t.setAttribute("type", "text");
-		  t.setAttribute("name", "category"+i);
-		  t.setAttribute("placeholder", "Kategori");
+		  t.setAttribute("name", "ingrdfield2[]");
+		  t.setAttribute("placeholder", text2);
 		  t.className = "nyingrd";
-		  document.getElementById('nyingrdbox').appendChild(t);
+		  document.getElementById(box).appendChild(t);
 	  
 	  }
 		</script>
@@ -125,7 +126,14 @@
 						<form method="post">
 							<input type="text" name="name" id="name" placeholder="Namn"><br>
 							<input type="text" name="pic" id="pic" placeholder="Bild (filnamn)"><br>
-							<textarea name="ingredients" id="ingredients" placeholder="Ingredienser"></textarea><br>
+								<div id="ingrdbox">
+									<input type="text" name="ingrdfield1[]" placeholder="Ingrediens" class="nyingrd">
+									<input type="text" name="ingrdfield2[]" placeholder="Mängd" class="nyingrd">
+								</div>
+							<p><button type="button" onclick="addrow('ingrdbox','Ingrediens','Mängd')">+</button></p>
+
+
+							<br>
 							<input type="text" name="instructions" id="instructions" placeholder="Instruktioner"><br>
 							<input type="text" name="description" id="description" placeholder="Kort beskrivning"><br>
 							<select name="course">
@@ -142,14 +150,14 @@
 						<h2>Lägg till ingredienser</h2>
 						<form method="post">
 							<div id="nyingrdbox">
-								<input type="text" name="ingredients" placeholder="Ny ingrediens" class="nyingrd">
-								<input type="text" name="category" placeholder="Kategori" class="nyingrd">
+								<input type="text" name="ingrdfield1[]" placeholder="Ny ingrediens" class="nyingrd">
+								<input type="text" name="ingrdfield2[]" placeholder="Kategori" class="nyingrd">
 							</div>
-
+							<p><button type="button" onclick="addrow('nyingrdbox','Ny ingrediens','Kategori')">+</button></p>
 							<input type="hidden" name="addtype" value="2">
 							<input type="submit" value="Klar" style="width:100px;">
 						</form>
-						<p><button onclick="addrow()">+</button></p>
+						
 						<h2>Rensa databasen</h2>
 						<form method="post">
 							<input type="hidden" name="addtype" value="3">

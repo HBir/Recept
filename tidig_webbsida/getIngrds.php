@@ -1,5 +1,7 @@
 <!--Ansvarig: Hannes Birgersson-->
 <?php
+	
+
 function letterSearch($char, $Category, $stmt) {
 	/*Ritar ut alla ingredienser som börjar på bokstaven $char, under kategorin $Category
 	 *$stmt är en SQL query*/
@@ -15,6 +17,7 @@ function letterSearch($char, $Category, $stmt) {
 	$i = 0;
 
 	foreach($result as $row) {
+		$row['Ingredient'] = mb_ucfirst($row['Ingredient']);
 		echo '<li><a href="javaScript:void(0);" class="Item">' . $row['Ingredient'] . '</a></li>';
 		$i++;
 		if($i %10 == 0) {
@@ -24,6 +27,12 @@ function letterSearch($char, $Category, $stmt) {
 	}
 	echo "</div></ul></div>";
 }
+
+function mb_ucfirst($str) {
+    $fc = mb_strtoupper(mb_substr($str, 0, 1));
+    return $fc.mb_substr($str, 1);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -61,6 +70,7 @@ function letterSearch($char, $Category, $stmt) {
 				echo "<div class='row'><ul>";
 				$i = 0;
 				foreach($result as $row) {
+					$row['Ingredient'] = mb_ucfirst($row['Ingredient']);
 					echo '<li><a href="javaScript:void(0);" class="Item">' . $row['Ingredient'] . '</a></li>';
 					$i++;
 					if($i %10 == 0) {
