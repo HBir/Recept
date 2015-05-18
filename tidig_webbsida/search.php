@@ -37,15 +37,15 @@ SQL;
         $hits = $q->execute()->fetchArray()[0];
     } else if ($_GET['s']) {
         $search_mode = 's';
-        // Bygg sträng i format 'foo','bar','apa' av ingredienserna i URLen.
-        $ing_array = explode(',', $_GET['s']);
+        // Bygg sträng i format 'foo','bar','apa' av ingredienserna i URLen (escapad).
+        $ing_array = explode(',', $db->escapeString($_GET['s']));
         $ingredients = "'" . mb_strtolower(implode("','", $ing_array), 'UTF-8') . "'";
 
         // Typ av rätt. 1 = förrätt, 2 = huvudrätt, 3 = efterrätt.
         if (($_GET['c'] == '') || ($_GET['c'] == 0)) {
             $course = "> 0";
         } else {
-            $course = "= " . $_GET['c'];
+            $course = "= " . $db->escapeString($_GET['c']);
         }
 
         // Själva sökningen.
@@ -58,9 +58,6 @@ SQL;
         ORDER BY Count DESC, Recipes.Rating DESC
         LIMIT 10 OFFSET {$offset}
 SQL;
-        // Här vill man nog ha prepared statements för att undvika injektion,
-        // men det är knepigt med ett godtyckligt antal ingredienser.
-        // http://stackoverflow.com/questions/327274/mysql-prepared-statements-with-a-variable-size-variable-list
         $results = $db->query($sql);
 
         // Hämta totalt antal träffar.
