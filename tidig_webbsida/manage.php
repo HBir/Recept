@@ -8,7 +8,7 @@
 		 .left { float:left; width:450px; }
 		 .right { float:right; width:450px; }
 		 input { width:80%; margin: 3px; }
-		 textarea { width:80%; height:400px; }
+		 textarea { width:80%; height:100px; }
 		.nyingrd { width: 175px;}
 		</style>
 		<script>
@@ -48,11 +48,13 @@
 			if ($_POST["addtype"] == 1) {
 				$ingredients = $_POST['ingrdfield1'];
 				$amounts = $_POST['ingrdfield2'];
+
+				$instructions = str_replace(PHP_EOL, '<br>', $_POST['instructions']);
 				
 				$q = $db->prepare("INSERT INTO Recipes VALUES(:name,:image,:instructions,:description,:course,:views,:rating)");
 				$q->bindValue(':name', $_POST["name"], SQLITE3_TEXT);
 				$q->bindValue(':image', $_POST["pic"], SQLITE3_TEXT);
-				$q->bindValue(':instructions', $_POST["instructions"], SQLITE3_TEXT);
+				$q->bindValue(':instructions', $instructions, SQLITE3_TEXT);
 				$q->bindValue(':description', $_POST["description"], SQLITE3_TEXT);
 				$q->bindValue(':course', mb_strtolower($_POST["course"]), SQLITE3_TEXT);
 				$q->bindValue(':views', 0, SQLITE3_INTEGER);
@@ -143,7 +145,7 @@
 
 
 							<br>
-							<input type="text" name="instructions" id="instructions" placeholder="Instruktioner"><br>
+							<textarea name="instructions" id="instructions" placeholder="Instruktioner"></textarea><br>
 							<input type="text" name="description" id="description" placeholder="Kort beskrivning"><br>
 							<select name="course">
 								<option value="1">Förrätt</option>
