@@ -9,7 +9,7 @@
 		 .right { float:right; width:450px; }
 		 input { width:80%; margin: 3px; }
 		 textarea { width:80%; height:400px; }
-	  .nyingrd { width: 200px;}
+		.nyingrd { width: 175px;}
 		</style>
 		<script>
 	  var i = 1;
@@ -110,9 +110,7 @@
 				$db->init_tables();
 			}
 		}
-		echo "<br>Antal recept: " . $db->query("SELECT COUNT(*) FROM Recipes")->fetchArray()[0];
-		echo "<br>Antal ingredienser: " . $db->query("SELECT COUNT(*) FROM Ingredients")->fetchArray()[0];
-		$db->close();
+		
 	?>
 	<body>
 		<div id="wrapper">
@@ -127,8 +125,7 @@
 							<input type="text" name="name" id="name" placeholder="Namn"><br>
 							<input type="text" name="pic" id="pic" placeholder="Bild (filnamn)"><br>
 								<div id="ingrdbox">
-									<input type="text" name="ingrdfield1[]" placeholder="Ingrediens" class="nyingrd">
-									<input type="text" name="ingrdfield2[]" placeholder="Mängd" class="nyingrd">
+									<input type="text" name="ingrdfield1[]" placeholder="Ingrediens" class="nyingrd"><input type="text" name="ingrdfield2[]" placeholder="Mängd" class="nyingrd">
 								</div>
 							<p><button type="button" onclick="addrow('ingrdbox','Ingrediens','Mängd')">+</button></p>
 
@@ -150,8 +147,7 @@
 						<h2>Lägg till ingredienser</h2>
 						<form method="post">
 							<div id="nyingrdbox">
-								<input type="text" name="ingrdfield1[]" placeholder="Ny ingrediens" class="nyingrd">
-								<input type="text" name="ingrdfield2[]" placeholder="Kategori" class="nyingrd">
+								<input type="text" name="ingrdfield1[]" placeholder="Ny ingrediens" class="nyingrd"><input type="text" name="ingrdfield2[]" placeholder="Kategori" class="nyingrd">
 							</div>
 							<p><button type="button" onclick="addrow('nyingrdbox','Ny ingrediens','Kategori')">+</button></p>
 							<input type="hidden" name="addtype" value="2">
