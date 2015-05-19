@@ -86,7 +86,12 @@ SQL;
                             <span><a href="#" title="1 stjärna"><input type="radio" name="rating" id="star1" value="1"><label for="star1">
                             </label></a></span>
                         </div>
-
+						<div>
+							<?php?>
+						<a href="betyg.php?a=<?php echo $_GET['id'];?>&b=1">Upp</a>
+						<a href="betyg.php?a=<?php echo $_GET['id'];?>&b=-1">Ner</a>
+						
+						</div>
                            
                         <div class="recipedescription">
                             <p class="r_description"><?= $recipe['Description'] ?></p>

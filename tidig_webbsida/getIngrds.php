@@ -1,38 +1,48 @@
 <!--Ansvarig: Hannes Birgersson-->
 <?php
 	
-
-function letterSearch($char, $Category, $stmt) {
-	/*Ritar ut alla ingredienser som börjar på bokstaven $char, under kategorin $Category
-	 *$stmt är en SQL query*/
-	$a= $char."%";
-
-	$stmt->bindParam(':Category', $Category);
-	$stmt->bindParam(':Letter', $a);
-	$stmt->execute();
-	$result = $stmt->fetchAll();
-
-	echo "<div class='row'><ul>";
-	echo "<h2>".$char."</h2>";
-	$i = 0;
-
-	foreach($result as $row) {
-		$row['Ingredient'] = mb_ucfirst($row['Ingredient']);
-		echo '<li><a href="javaScript:void(0);" class="Item">' . $row['Ingredient'] . '</a></li>';
-		$i++;
-		if($i %10 == 0) {
-			echo "</div></ul></div>";
-			echo "<div class='row'><ul>";
+	function letterSearch($char, $Category, $stmt) {
+		/*Ritar ut alla ingredienser som börjar på bokstaven $char, under kategorin $Category
+		 *$stmt är en SQL query*/
+		$a= $char."%";
+	
+		$stmt->bindParam(':Category', $Category);
+		$stmt->bindParam(':Letter', $a);
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+	
+		echo "<div class='row'><ul>";
+		echo "<h2>".$char."</h2>";
+		$i = 0;
+	
+		foreach($result as $row) {
+			$row['Ingredient'] = mb_ucfirst($row['Ingredient']);
+			echo '<li><a href="javaScript:void(0);" class="Item">' . $row['Ingredient'] . '</a></li>';
+			$i++;
+			if($i %10 == 0) {
+				echo "</div></ul></div>";
+				echo "<div class='row'><ul>";
+			}
+		}
+		echo "</div></ul></div>";
+	}
+	
+	if (!function_exists('mb_ucfirst')) {
+		function mb_ucfirst($str, $encoding = "UTF-8", $lower_str_end = false) {
+			$first_letter = mb_strtoupper(mb_substr($str, 0, 1, $encoding), $encoding);
+			$str_end = "";
+			if ($lower_str_end) {
+		$str_end = mb_strtolower(mb_substr($str, 1, mb_strlen($str, $encoding), $encoding), $encoding);
+			}
+			else {
+		$str_end = mb_substr($str, 1, mb_strlen($str, $encoding), $encoding);
+			}
+			$str = $first_letter . $str_end;
+			return $str;
 		}
 	}
-	echo "</div></ul></div>";
-}
-
-function mb_ucfirst($str) {
-    $fc = mb_strtoupper(mb_substr($str, 0, 1));
-    return $fc.mb_substr($str, 1);
-}
-
+	
+	
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +89,7 @@ function mb_ucfirst($str) {
 					}
 				}
 				echo "</div></ul></div>";
-				
+			
 			}
 		?>
 	</body>

@@ -136,17 +136,17 @@
 					<div class="left">
 						<h2>Lägg till recept</h2>
 						<form method="post">
-							<input type="text" name="name" id="name" placeholder="Namn"><br>
-							<input type="text" name="pic" id="pic" placeholder="Bild (filnamn)"><br>
+							<input type="text" name="name" id="name" placeholder="Namn" required><br>
+							<input type="text" name="pic" id="pic" placeholder="Bild (filnamn)" required><br>
 								<div id="ingrdbox">
-									<input type="text" name="ingrdfield1[]" placeholder="Ingrediens" class="nyingrd"><input type="text" name="ingrdfield2[]" placeholder="Mängd" class="nyingrd">
+									<input type="text" name="ingrdfield1[]" placeholder="Ingrediens" class="nyingrd"><input type="text" name="ingrdfield2[]" placeholder="Mängd" class="nyingrd" required>
 								</div>
 							<p><button type="button" onclick="addrow('ingrdbox','Ingrediens','Mängd')">+</button></p>
 
 
 							<br>
-							<textarea name="instructions" id="instructions" placeholder="Instruktioner"></textarea><br>
-							<input type="text" name="description" id="description" placeholder="Kort beskrivning"><br>
+							<textarea name="instructions" id="instructions" placeholder="Instruktioner" required></textarea><br>
+							<input type="text" name="description" id="description" placeholder="Kort beskrivning" required><br>
 							<select name="course">
 								<option value="1">Förrätt</option>
 								<option value="2">Huvudrätt</option>
@@ -161,7 +161,7 @@
 						<h2>Lägg till ingredienser</h2>
 						<form method="post">
 							<div id="nyingrdbox">
-								<input type="text" name="ingrdfield1[]" placeholder="Ny ingrediens" class="nyingrd"><input type="text" name="ingrdfield2[]" placeholder="Kategori" class="nyingrd">
+								<input type="text" name="ingrdfield1[]" placeholder="Ny ingrediens" class="nyingrd"><input type="text" name="ingrdfield2[]" placeholder="Kategori" class="nyingrd" required>
 							</div>
 							<p><button type="button" onclick="addrow('nyingrdbox','Ny ingrediens','Kategori')">+</button></p>
 							<input type="hidden" name="addtype" value="2">
