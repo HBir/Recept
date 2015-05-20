@@ -61,17 +61,17 @@
 			
 			if ($s!='0'){
 				$stmt = $db->prepare("SELECT Ingredient FROM Ingredients 
-										WHERE Category=:Category
+										WHERE Category LIKE :Category
 										AND Ingredient LIKE :Letter 
 										ORDER BY Ingredient");
 				/*Kör en bokstavssökning för varje bokstav i $s*/
 				for ($x = 0; $x < (strlen(utf8_decode($s))); $x++) {
 					letterSearch(mb_substr($s, $x, 1, 'UTF-8'), $q, $stmt);
 				}
-			} else {
+			} else if ($s=='0'){
 				/*$s som 0 resulterar i en lista med alla ingredienser ur en kategori*/
 				$stmt = $db->prepare("SELECT Ingredient FROM Ingredients 
-										WHERE Category=:Category 
+										WHERE Category LIKE :Category 
 										ORDER BY Ingredient");
 				$stmt->bindParam(':Category', $q);
 				$stmt->execute();

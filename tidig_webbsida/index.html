@@ -18,7 +18,10 @@
 				<div id="kategoriarea">
 					<div id="kategoricenter">
 						<a href="javascript:showIngrds('Default','0');"><div class="kategoribox" id="defaultcat">
-						Default
+						Vanligaste
+						</div></a>
+						<a href="javascript:showIngrds('%','0');"><div class="kategoribox" id="defaultcat">
+						Alla
 						</div></a>
 						<a href="javascript:showIngrds('Kött','0');"><div class="kategoribox" id="kott">
 						</div></a>
@@ -28,11 +31,14 @@
 						</div></a>
 						<a href="javascript:showIngrds('Grönsak','0');"><div class="kategoribox" id="Veggies">
 						</div></a>
+						<a href="javascript:showIngrds('Övrigt','0');"><div class="kategoribox" id="defaultcat">
+						Övrigt
+						</div></a>
 					</div>
 				</div>
 
 				<div id="sok">
-					<input type="text" id="sokruta" name="sok" placeholder="Sök recept">
+					<input type="text" id="sokruta" name="sok" placeholder="Sök recept" onkeydown="if (event.keyCode == 13) document.getElementById('sokknapp').click()"/>
 					<button type="submit" id="sokknapp">Hitta</button>
 				</div>
 				<div id="pagenav">
@@ -107,16 +113,16 @@
 
 				<div id="ingredienser">
 					<p id="ingrrubrik"><span class="bold">Dina valda ingredienser:</span></p>
-					<a href="javaScript:void(0);"></a><button type="button" id="rensa">Rensa lista</button>
+					<button type="button" id="rensa">Rensa lista</button>
 					<div id="Tutorial"><span class="">Välj de ingredienser du vill ha med i din sökning bland de listade till vänster</span></div>
 					<ul id="Ingredienslista">
 					</ul>
 					<div id="kurscenter">
-						<a href="javascript:courseselect('förrätt');"><div class="kursbox" id="förrätt">För- rätt</div></a>
-						<a href="javascript:courseselect('huvudrätt');"><div class="kursbox" id="huvudrätt">Huvud- rätt</div></a>
-						<a href="javascript:courseselect('efterrätt');"><div class="kursbox" id="efterrätt">Efter- rätt</div></a>
+						<a href="javascript:courseselect('förrätt');"><div class="kursbox kursmark" id="förrätt">För- rätt</div></a>
+						<a href="javascript:courseselect('huvudrätt');"><div class="kursbox kursmark" id="huvudrätt">Huvud- rätt</div></a>
+						<a href="javascript:courseselect('efterrätt');"><div class="kursbox kursmark" id="efterrätt">Efter- rätt</div></a>
 					</div>
-					<button class="button" id="knapp">Hitta Recept</button>
+					<button class="button bigbutton" id="knapp">Hitta Recept</button>
 				</div>
 			</div>
 			<footer>
