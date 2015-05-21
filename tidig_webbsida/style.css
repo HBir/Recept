@@ -64,11 +64,11 @@ footer {
 .green {
 				color: #51a900;
 }
-
+/*
 #refreshingrds > div:nth-child(4n+2) {
 
 	clear: both;
-}
+}*/
 /**********************/
 /*Allmäna ID*/
 #ingredienser {
@@ -208,6 +208,13 @@ footer {
 				background-image: url(bilder/ovrigtb.png);
 }
 
+.catmark {
+	box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.45);
+	border-right: 4px solid red;
+	border-left: 4px solid red;
+}
+
+
 .kursbox {
 
 				box-shadow: 0 2px 8px #aaa;
@@ -279,6 +286,7 @@ footer {
 				border-left: 4px solid #444444;
 				height: 150px;
 				width: 1000px;
+				background: rgba(135, 135, 135, 0.05);
 }
 
 
@@ -904,5 +912,23 @@ a {
 
 				.instructions h2 {
 								margin-left: 5px;
+				}
+}
+
+@media screen and (min-width:700px) {
+	#refreshingrds > div:nth-child(4n+2) {
+								clear: both;
+				}
+	
+}
+@media screen and (max-width:700px) and (min-width:530px) {
+				#refreshingrds > div:nth-child(3n+2) {
+								clear: both;
+				}
+}
+
+@media screen and (max-width:530px) {
+				#refreshingrds > div:nth-child(2n+2) {
+								clear: both;
 				}
 }

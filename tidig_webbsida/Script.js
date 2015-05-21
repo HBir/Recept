@@ -193,6 +193,8 @@ function textSearch() {
 function showIngrds(str, sort) {
 	/*AJAX för att hämta ingredienser med motsvarande kategori (str). 
 	 *str=get ger nuvarande vald kategori. sort=0 ger alla ingredienser*/
+
+
 	if (str == "Default") {
 		/*Tar tillbaka den sammanfattade ingredienslistan, och döljer den dynamiska*/
 		document.getElementById("defaultingrds").style.display = "block";
@@ -227,6 +229,16 @@ function showIngrds(str, sort) {
 		xmlhttp.open("GET", "getIngrds.php?q=" + str + "&s=" + sort, true);
 		xmlhttp.send();
 	}
+}
+
+function markCat(e) {
+    var x = document.getElementsByClassName("catmark");
+    
+   
+    if (e.target.parentNode.innerHTML.indexOf("kategoricenter") < 0) {
+		x[0].className = "kategoribox";
+    	e.target.className = "kategoribox catmark";
+    }
 }
 
 function recreateMarkedItem() {
