@@ -109,7 +109,7 @@ SQL;
                 
                 
                 <div id="sok">
-                    <input type="text" id="sokruta" name="sok" placeholder="Sök recept" onkeydown="if (event.keyCode == 13) document.getElementById('sokknapp').click()"/ <?= ($search_mode == 'r' ? 'value=' . $_GET['r'] : '') ?>>
+                    <input type="text" id="sokruta" name="sok" placeholder="Sök recept" onkeydown="if (event.keyCode == 13) document.getElementById('sokknapp').click()" <?= ($search_mode == 'r' ? 'value=' . $_GET['r'] : '') ?> />
                     <button type="button" id="sokknapp" onclick="textSearch()">Hitta</button>
                 </div>
                 <div id="resultatarea">

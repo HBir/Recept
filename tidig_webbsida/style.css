@@ -10,6 +10,8 @@ body {
 				color: #000;
 				width: 99%;
 				text-align: center;
+				font-weight: normal;
+				font-style: normal;
 }
 
 #wrapper {
@@ -45,7 +47,7 @@ footer {
 
 #main {
 				width: 1010px;
-				min-height: 590px;
+				min-height: 650px;
 				overflow: hidden;
 }
 
@@ -83,16 +85,6 @@ footer {
 				list-style: none;
 				padding-left: 10px;
 }
-/*
-.button {
-    font-weight:700;
-    font-size:20px;
-    margin-bottom:15px;
-    width:130px;
-    height:60px;
-    border-radius:10px
-}
-*/
 
 .button {
 				padding: 5px;
@@ -110,12 +102,18 @@ footer {
 				cursor: pointer;
 }
 
+
+
 .bigbutton {
 				margin: 20px;
 				padding: 15px;
 				font-size: 20px;
 				box-shadow: 0 2px 8px #888;
 				border: none;
+}
+.button:active {
+		box-shadow: 0 -2px -8px #888;
+		border: none;
 }
 
 #knapp {
@@ -163,9 +161,10 @@ footer {
 				height: 120px;
 				width: 120px;
 				text-align: center;
-				line-height: 120px;
+				line-height: 50px;
 				border-radius: 25px;
 				display: block;
+				overflow: hidden;
 }
 
 .kategoribox#kott {
@@ -187,7 +186,7 @@ footer {
 .kursbox {
 				/*border-right:3px solid;
     border-left:3px solid;*/
-				box-shadow: 0 2px 8px #888;
+				box-shadow: 0 2px 8px #aaa; 
 				font-weight: bold;
 				margin: 5px;
 				float: left;
@@ -199,12 +198,13 @@ footer {
 				font-size: 15px;
 				display: block;
 				background-color: #7d7d7d;
-				opacity: 0.7;
+				opacity: 0.4;
 }
 
 .kursmark {
 				background-color: lightgray;
 				opacity: 1;
+				box-shadow: 0 2px 8px #888;
 }
 
 #Tutorial {
@@ -268,6 +268,7 @@ footer {
 
 #kurscenter, #kategoricenter {
 				display: inline-block;
+				margin-bottom: 10px;
 }
 
 .row {
@@ -312,6 +313,11 @@ footer {
 .row ul li a:active {
 				background-color: #f59300;
 				border-color: #f59300;
+}
+#filter {
+	font-size: 17px;
+	color: gray;
+
 }
 
 /**********************/
@@ -497,46 +503,22 @@ hr.side {
 				float: left;
 }
 
-/*orangea cirklar som rating för tillfället*/
-.rating {
-				float: left;
-				position: relative;
-				width: 180px;
-				padding-left: 5px;
+#betygbox {
+	display: inline-block;
+	border: 3px solid lightgray;
+	border-radius: 10px;
+	position: relative;
+	width: 130px;
+	display: table;
 }
-
-.rating span {
-				float: right;
-				position: relative;
-}
-
-.rating span input {
-				position: absolute;
-				top: 0;
-				left: 0;
-				opacity: 0;
-}
-
-.rating span label {
-				display: inline-block;
-				width: 20px;
-				height: 20px;
-				margin-left: 4px;
-				text-align: center;
-				color: #fff;
-				background: #ccc;
-				margin-right: 2px;
-				line-height: 30px;
-				border-radius: 50%;
-}
-
-.rating span:hover ~ span label, .rating span:hover label, .rating span.checked label, .rating span.checked ~ span label {
-				background: #f90;
-				color: #fff;
+#betygval {
+	color: #51a900;
+	padding: 10px;
+	vertical-align: middle;
+	display: table-cell;
 }
 
 .recipepic {
-
 				width: 250px;
 				height: 250px;
 				position: relative;
@@ -544,6 +526,7 @@ hr.side {
 				clear: none;
 
 				margin-top: 10px;
+				margin-bottom: 17px;
 				padding: 0;
 				box-shadow: 0 2px 8px #888;
 				background-size: cover;
@@ -619,12 +602,7 @@ hr.side {
 figcaption {
 				padding-top: 5px;
 }
-/*
-.teaser a:hover,a:focus {
-    text-decoration:none;
-    color:#f59300
-}
-*/
+
 .teaser img {
 				max-width: 100%;
 				max-height: 100%;
@@ -649,9 +627,10 @@ figcaption {
 				float: right;
 				margin-top: 10px;
 				color: #666;
-				padding: 20px 30px 0 0;
+				padding: 00px 30px 0 0;
 				font-size: 14px;
 }
+
 
 /**********************/
 /*Länkstil*/
@@ -740,6 +719,7 @@ a {
 								font-size: 17px;
 								border-radius: 15px;
 								background-size: 80px;
+
 				}
 
 				header {
