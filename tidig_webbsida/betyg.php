@@ -1,5 +1,5 @@
 <?php
-	$a = $_GET['a'];
+	$id = $_GET['a'];
 	$b = $_GET['b'];
 
 	$db = new PDO('sqlite:test2.db');
@@ -13,8 +13,10 @@
 		$b = -1;
 	}
 	$stmt->bindParam(':Betyg', $b);
-	$stmt->bindParam(':ID', $a);
+	$stmt->bindParam(':ID', $id);
 	$stmt->execute();
+	header("Location: recipe.php?id=$id");
+	die();
 ?>
 
 <!DOCTYPE html>

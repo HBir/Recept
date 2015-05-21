@@ -139,12 +139,18 @@ function courseselect(ratt) {
 	/*Hitta gamla markering och ta bort dem*/
 	var x = document.getElementsByClassName("kursmark");
 	var l = x.length;
-	
-	for (var i = 0; i < l; i++) {
+
+	for (var i = 0; i < x.length; i=i) {
 		x[i].className = "kursbox";
 	}
+	
 	if (ratt == course) {
 		course = 0;
+		var y = document.getElementsByClassName("kursbox");
+		y[0].className = "kursbox kursmark";
+		y[1].className = "kursbox kursmark";
+		y[2].className = "kursbox kursmark";
+
 	} else {
 		course = ratt;
 		var diver = document.getElementById(ratt);
