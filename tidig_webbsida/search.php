@@ -52,7 +52,7 @@ SQL;
         $sql = <<<SQL
         SELECT Recipes.rowid, Recipes.*, COUNT(*) AS Count FROM Recipes
         JOIN RecipesIngredients ON Recipes.rowid = RecipesIngredients.RecipeID
-        WHERE RecipesIngredients.Ingredient IN ({$ingredients})
+        WHERE LOWER(RecipesIngredients.Ingredient) IN ({$ingredients})
         AND Course {$course}
         GROUP BY Recipes.rowid
         ORDER BY Count DESC, Recipes.Rating DESC
@@ -65,7 +65,7 @@ SQL;
         SELECT COUNT(*) AS Count FROM (
         SELECT Recipes.rowid, Recipes.*, COUNT(*) AS Count FROM Recipes
         JOIN RecipesIngredients ON Recipes.rowid = RecipesIngredients.RecipeID
-        WHERE RecipesIngredients.Ingredient IN ({$ingredients})
+        WHERE LOWER(RecipesIngredients.Ingredient) IN ({$ingredients})
         AND Course {$course}
         GROUP BY Recipes.rowid)
 SQL;
