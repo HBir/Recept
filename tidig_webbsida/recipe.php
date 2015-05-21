@@ -75,7 +75,7 @@ SQL;
 						<div id="betygbox">
 						<a href="betyg.php?a=<?php echo $_GET['id'];?>&b=1"><img class="betygikon" src="bilder/thumbsup.png" alt="Betyg Upp"></a>
 						<a href="betyg.php?a=<?php echo $_GET['id'];?>&b=-1"><img class="betygikon" src="bilder/thumbsdown.png" alt="Betyg Ner"></a>
-						<span id="betygval"><?= $recipe['Rating'] ?></span>
+						<span id="betygval" class=<?= ($recipe['Rating'] >= 0) ? "green" : "red"?>><?= $recipe['Rating'] ?></span>
 						</div>
 						</div>
 
