@@ -178,7 +178,7 @@ SQL;
                 
             </div>
             <footer>
-                <p>Hannes Birgersson, Martin Gustavsson, Johan Stubbengaard, Maria Nguyen, Jenny Vuong</p>
+                <p>Hannes Birgersson, Martin Gustavsson, Johan Stubbergaard, Maria Nguyen, Jenny Vuong</p>
             </footer>
         
         </div>

@@ -86,7 +86,7 @@ SQL;
                            
                         <div class="recipedescription">
                             <p class="r_description"><?= $recipe['Description'] ?></p>
-                            <p class="">4 portioner</p>
+                            <p class="">2 portioner</p>
 
                         </div>
 
@@ -129,7 +129,7 @@ SQL;
                     </div><!--end related_recipe-->
             </div>
             <footer>
-                <p>Hannes Birgersson, Martin Gustavsson, Johan Stubbengaard, Maria Nguyen, Jenny Vuong</p>
+                <p>Hannes Birgersson, Martin Gustavsson, Johan Stubbergaard, Maria Nguyen, Jenny Vuong</p>
             </footer>
         
         </div>
