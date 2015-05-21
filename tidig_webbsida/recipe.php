@@ -20,7 +20,7 @@
         $recipe = $ret->fetchArray();
 
         // Hämta ingredienserna.
-        $q = $db->prepare("SELECT Ingredient, Amount FROM RecipesIngredients WHERE RecipeID=:id");
+        $q = $db->prepare("SELECT LOWER(Ingredient), Amount FROM RecipesIngredients WHERE RecipeID=:id");
         $q->bindValue(':id', $_GET['id'], SQLITE3_INTEGER);
         $ingredients = $q->execute();
 
@@ -30,7 +30,7 @@
             $ing_array[] = $i[0];
             $amounts[] = $i[1];
         }
-        $ing_string = "'" . mb_strtolower(implode("','", $ing_array)) . "'";
+        $ing_string = "'" . implode("','", $ing_array) . "'";
 
         $sql = <<<SQL
         SELECT Recipes.rowid, Recipes.*, COUNT(*) AS Count FROM Recipes

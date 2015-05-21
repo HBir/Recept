@@ -58,7 +58,7 @@
 				$q->bindValue(':description', $_POST["description"], SQLITE3_TEXT);
 				$q->bindValue(':course', mb_strtolower($_POST["course"]), SQLITE3_TEXT);
 				$q->bindValue(':views', 0, SQLITE3_INTEGER);
-				$q->bindValue(':rating', $_POST["rating"], SQLITE3_INTEGER);
+				$q->bindValue(':rating', 0, SQLITE3_INTEGER);
 				
 				$ret = $q->execute();
 				if(!$ret){
@@ -152,7 +152,6 @@
 								<option value="2">Huvudrätt</option>
 								<option value="3">Efterrätt</option>
 							</select>
-							<input type="number" name="rating" min="1" max="5"><br>
 							<input type="hidden" name="addtype" value="1">
 							<input type="submit" value="Klar" style="width:100px;">
 						</form>

@@ -44,6 +44,10 @@ SQL;
 			(RecipeID  INT NOT NULL,
 			Ingredient TEXT NOT NULL,
 			Amount     TEXT NOT NULL);
+
+			CREATE TABLE RecipesVotes
+			(RecipeID INT NOT NULL,
+			IP        TEXT NOT NULL);
 SQL;
 		$ret = $this->exec($sql);
 		if(!$ret){
