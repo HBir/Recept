@@ -20,7 +20,7 @@
         $recipe = $ret->fetchArray();
 
         // Hämta ingredienserna.
-        $q = $db->prepare("SELECT Ingredient FROM RecipesIngredients WHERE RecipeID=:id");
+        $q = $db->prepare("SELECT Ingredient, Amount FROM RecipesIngredients WHERE RecipeID=:id");
         $q->bindValue(':id', $_GET['id'], SQLITE3_INTEGER);
         $ingredients = $q->execute();
 
@@ -28,6 +28,7 @@
         // recepts ingredienser.
         while($i = $ingredients->fetchArray()) {
             $ing_array[] = $i[0];
+            $amounts[] = $i[1];
         }
         $ing_string = "'" . implode("','", $ing_array) . "'";
 
@@ -58,40 +59,30 @@ SQL;
             </header></a>
             <div id="main">
                 
-                
+
                 <div id="sok">
-                    <input type="text" id="sokruta" name="sok" placeholder="Sök recept">
+                    <input type="text" id="sokruta" name="sok" placeholder="Sök recept" onkeydown="if (event.keyCode == 13) document.getElementById('sokknapp').click()"/>
                     <button type="button" id="sokknapp" onclick="textSearch()">Hitta</button>
                 </div>
-                <div id="pagenav">
-                  
-                <hr class="side">  
-                </div>
+
                 <div id="recipepage">
                     
                     <div class="recipebox" id="recipeheader">
-                        <h1 class="title"><?= $recipe['Name'] ?></h1> 
-                        
-                        <div class="recipepic"><img alt="<?= $recipe['Name'] ?>" src="bilder/<?= $recipe['Picture'] ?>"/></div>
-                       
-                       <div class="rating"><strong>Betyg</strong>
-                           <span><a href="#"title="5 stjärnor"><input type="radio" name="rating" id="star5" value="5"><label for="star5">
-                            </label></a></span>
-                            <span><a href="#" title="4 stjärnor"><input type="radio" name="rating" id="star4" value="4"><label for="star4">
-                            </label></a></span>
-                            <span><a href="#" title="3 stjärnor"><input type="radio" name="rating" id="star3" value="3"><label for="star3">
-                            </label></a></span>
-                            <span><a href="#" title="2 stjärnor"><input type="radio" name="rating" id="star2" value="2"><label for="star2">
-                            </label></a></span>
-                            <span><a href="#" title="1 stjärna"><input type="radio" name="rating" id="star1" value="1"><label for="star1">
-                            </label></a></span>
-                        </div>
-						<div>
-							<?php?>
-						<a href="betyg.php?a=<?php echo $_GET['id'];?>&b=1">Upp</a>
-						<a href="betyg.php?a=<?php echo $_GET['id'];?>&b=-1">Ner</a>
-						
+                        <div>
+						<h1 class="title"><?= $recipe['Name'] ?></h1>
 						</div>
+							<div>
+						<div id="betygbox">
+						<a href="betyg.php?a=<?php echo $_GET['id'];?>&b=1"><img class="betygikon" src="bilder/thumbsup.png" alt="Betyg Upp"></a>
+						<a href="betyg.php?a=<?php echo $_GET['id'];?>&b=-1"><img class="betygikon" src="bilder/thumbsdown.png" alt="Betyg Ner"></a>
+						<span id="betygval"><?= $recipe['Rating'] ?></span>
+						</div>
+						</div>
+
+                        <div class="recipepic" style="background-image: url('bilder/<?php echo $recipe['Picture']; ?>'), url('bilder/no_image.jpg')"></div>
+                       
+						
+						
                            
                         <div class="recipedescription">
                             <p class="r_description"><?= $recipe['Description'] ?></p>
@@ -108,8 +99,8 @@ SQL;
                             <h2 class="">Ingredienser</h2>
                                 <ul class="ingridient-list">
                                     <?php // Ingredienslistan
-                                    foreach($ing_array as $i) { ?>
-                                    <li><?= $i ?></li>
+                                    foreach($ing_array as $key => $i) { ?>
+                                    <li><?= $amounts[$key] . ' ' . $i ?></li>
                                     <?php } ?>
                                 </ul>
                         </div>
