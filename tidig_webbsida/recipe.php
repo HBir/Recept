@@ -30,12 +30,12 @@
             $ing_array[] = $i[0];
             $amounts[] = $i[1];
         }
-        $ing_string = "'" . implode("','", $ing_array) . "'";
+        $ing_string = "'" . mb_strtolower(implode("','", $ing_array)) . "'";
 
         $sql = <<<SQL
         SELECT Recipes.rowid, Recipes.*, COUNT(*) AS Count FROM Recipes
         JOIN RecipesIngredients ON Recipes.rowid = RecipesIngredients.RecipeID
-        WHERE RecipesIngredients.Ingredient IN ({$ing_string})
+        WHERE LOWER(RecipesIngredients.Ingredient) IN ({$ing_string})
         AND Recipes.rowid <> {$recipe['rowid']}
         GROUP BY Recipes.rowid
         ORDER BY Count DESC, Recipes.Rating DESC
