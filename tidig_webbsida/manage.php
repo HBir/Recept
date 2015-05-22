@@ -51,12 +51,12 @@
 
 				$instructions = str_replace(PHP_EOL, '<br>', $_POST['instructions']);
 				
-				$q = $db->prepare("INSERT INTO Recipes VALUES(:name,:image,:instructions,:description,:course,:views,:rating)");
+				$q = $db->prepare("INSERT INTO Recipes VALUES(:name,:image,:instructions,:description,LOWER(:course),:views,:rating)");
 				$q->bindValue(':name', $_POST["name"], SQLITE3_TEXT);
 				$q->bindValue(':image', $_POST["pic"], SQLITE3_TEXT);
 				$q->bindValue(':instructions', $instructions, SQLITE3_TEXT);
 				$q->bindValue(':description', $_POST["description"], SQLITE3_TEXT);
-				$q->bindValue(':course', mb_strtolower($_POST["course"]), SQLITE3_TEXT);
+				$q->bindValue(':course', $_POST["course"], SQLITE3_TEXT);
 				$q->bindValue(':views', 0, SQLITE3_INTEGER);
 				$q->bindValue(':rating', 0, SQLITE3_INTEGER);
 				
@@ -70,10 +70,10 @@
 				// Gå genom alla ingredienser och lägg till koppling i RecipesIngredients.
 				foreach ($ingredients as $key => $ingredient) {
 					if ($ingredient !== '') {
-						$q = $db->prepare("INSERT INTO RecipesIngredients VALUES(:id,:ingredient,:amount)");
+						$q = $db->prepare("INSERT INTO RecipesIngredients VALUES(:id,LOWER(:ingredient),:amount)");
 						$q->bindValue(':id', $id, SQLITE3_INTEGER);
-						$q->bindValue(':ingredient', $ingredient, SQLITE3_TEXT);
-						$q->bindValue(':amount', $amounts[$key], SQLITE3_TEXT);
+						$q->bindValue(':ingredient', trim($ingredient), SQLITE3_TEXT);
+						$q->bindValue(':amount', trim($amounts[$key]), SQLITE3_TEXT);
 						$ret = $q->execute();
 		
 						if(!$ret){
@@ -82,7 +82,7 @@
 
 						// Samla ihop de ingredienser som inte finns i Ingredients-tabellen.
 						$q = $db->prepare("SELECT Count(*) FROM Ingredients WHERE UPPER(Ingredient) = UPPER(:ingredient)");
-						$q->bindValue(':ingredient', $ingredient, SQLITE3_TEXT);
+						$q->bindValue(':ingredient', trim($ingredient), SQLITE3_TEXT);
 						$ret = $q->execute()->fetchArray()[0];
 						if ($ret === 0) {
 							$missing[] = $ingredient;
@@ -102,8 +102,8 @@
 
 				foreach ($ingredients as $key => $ingredient) {
 					if ($ingredient !== '') {
-						$q = $db->prepare("INSERT OR IGNORE INTO Ingredients VALUES(:ingredient,:category)");
-						$q->bindValue(':ingredient', mb_strtolower($ingredient), SQLITE3_TEXT);
+						$q = $db->prepare("INSERT OR IGNORE INTO Ingredients VALUES(LOWER(:ingredient),:category)");
+						$q->bindValue(':ingredient', trim($ingredient), SQLITE3_TEXT);
 						$q->bindValue(':category', $categories[$key], SQLITE3_TEXT);
 						$ret = $q->execute();
 		
