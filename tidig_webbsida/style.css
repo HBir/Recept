@@ -353,6 +353,11 @@ footer {
 				color: gray;
 }
 
+#pagenav > a:hover {
+	text-decoration: underline;
+}
+
+
 /**********************/
 /*För search.php*/
 .resultbox {
