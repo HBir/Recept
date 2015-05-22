@@ -4,7 +4,15 @@
 	function letterSearch($char, $Category, $stmt) {
 		/*Ritar ut alla ingredienser som börjar på bokstaven $char, under kategorin $Category
 		 *$stmt är en SQL query*/
-		$a= $char."%";
+		$a = $char;
+		
+		if ($a == "Ä" || $a == "Ä" || $a == "Ö"){
+			$a = mb_strtolower($a, 'UTF-8');
+
+		}
+		
+		
+		$a= $a."%";
 	
 		$stmt->bindParam(':Category', $Category);
 		$stmt->bindParam(':Letter', $a);

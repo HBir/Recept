@@ -100,7 +100,7 @@ SQL;
                                 <ul class="ingridient-list">
                                     <?php // Ingredienslistan
                                     foreach($ing_array as $key => $i) { ?>
-                                    <li><?= $amounts[$key] . ' ' . $i ?></li>
+                                    <li><?= $amounts[$key] ."<b>". ' ' . $i."</b>" ?></li>
                                     <?php } ?>
                                 </ul>
                         </div>

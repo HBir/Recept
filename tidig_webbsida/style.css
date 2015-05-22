@@ -209,7 +209,8 @@ footer {
 }
 
 .catmark {
-	box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.45);
+	/*box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.45);*/
+	margin-top: 20px;
 	border-right: 4px solid red;
 	border-left: 4px solid red;
 }
@@ -602,20 +603,28 @@ hr.side {
 				position: relative;
 				width: 200px;
 				text-align: left;
-				margin-top: 20px;
+		
 				margin-right: 20px;
 				display: block;
 				line-height: 1.8em;
+				word-wrap: break-word;
+				border-right: 1px solid lightgray;
 }
 
 .instructions {
 				float: left;
 				position: relative;
-				width: 400px;
+				width: 470px;
 				text-align: left;
-				margin-top: 20px;
+	
 				line-height: 1.8em;
 				display: block;
+}
+.r_description {
+	font-weight: bold;
+}
+#recipepage > div.recipecontent > div.ingridients > ul {
+	padding-left: 20px;
 }
 
 .teaser {
@@ -930,5 +939,12 @@ a {
 @media screen and (max-width:530px) {
 				#refreshingrds > div:nth-child(2n+2) {
 								clear: both;
+				}
+}
+@media screen and (max-width:750px) {
+				.catmark {
+								box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.45);
+								margin-top: 5px;
+
 				}
 }
