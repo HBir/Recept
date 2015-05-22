@@ -12,26 +12,63 @@
 		.nyingrd { width: 175px;}
 		</style>
 		<script>
-	  var i = 1;
-	  function addrow(box, text1, text2) {
-		  i++;
-		  var input = document.createElement("INPUT");
-	  
-		  input.setAttribute("type", "text");
-		  input.setAttribute("name", "ingrdfield1[]");
-		  input.setAttribute("placeholder", text1);
-		  input.className = "nyingrd";
-		  document.getElementById(box).appendChild(input);
-	  
-	  
-		  var t = document.createElement("INPUT");
-		  t.setAttribute("type", "text");
-		  t.setAttribute("name", "ingrdfield2[]");
-		  t.setAttribute("placeholder", text2);
-		  t.className = "nyingrd";
-		  document.getElementById(box).appendChild(t);
-	  
-	  }
+  	var i = 1;
+  	function addrow(box, text1, text2) {
+  		i++;
+  		var input = document.createElement("INPUT");
+
+  		input.setAttribute("type", "text");
+  		input.setAttribute("name", "ingrdfield1[]");
+  		input.setAttribute("placeholder", text1);
+  		input.className = "nyingrd";
+  		document.getElementById(box).appendChild(input);
+
+
+
+  		if (text2 == "Mängd") {
+  			var t = document.createElement("INPUT");
+  			t.setAttribute("type", "text");
+  			t.setAttribute("name", "ingrdfield2[]");
+  			t.setAttribute("placeholder", text2);
+  			t.className = "nyingrd";
+  			document.getElementById(box).appendChild(t);
+  		} else {
+
+  			var selector = document.createElement('select');
+  			selector.className = 'nyingrd';
+  			selector.name = 'ingrdfield2[]';
+  			document.getElementById(box).appendChild(selector);
+
+  			var option = document.createElement('option');
+  			option.value = 'Kött';
+  			option.appendChild(document.createTextNode('Kött & Fisk'));
+  			selector.appendChild(option);
+
+  			option = document.createElement('option');
+  			option.value = 'Mejeri';
+  			option.appendChild(document.createTextNode('Mejeri & Ägg'));
+  			selector.appendChild(option);
+
+  			option = document.createElement('option');
+  			option.value = 'Pasta';
+  			option.appendChild(document.createTextNode('Mjöl, Gryn & Pasta'));
+  			selector.appendChild(option);
+
+  			option = document.createElement('option');
+  			option.value = 'Grönsak';
+  			option.appendChild(document.createTextNode('Frukt & Grönt'));
+  			selector.appendChild(option);
+
+  			option = document.createElement('option');
+  			option.value = 'Övrigt';
+  			option.appendChild(document.createTextNode('Övrigt'));
+  			selector.appendChild(option);
+  		}
+
+  		//document.getElementById(box).appendChild(selector);
+
+
+  	}
 		</script>
 	</head>
 	<?php
@@ -51,12 +88,12 @@
 
 				$instructions = str_replace(PHP_EOL, '<br>', $_POST['instructions']);
 				
-				$q = $db->prepare("INSERT INTO Recipes VALUES(:name,:image,:instructions,:description,:course,:views,:rating)");
+				$q = $db->prepare("INSERT INTO Recipes VALUES(:name,:image,:instructions,:description,LOWER(:course),:views,:rating)");
 				$q->bindValue(':name', $_POST["name"], SQLITE3_TEXT);
 				$q->bindValue(':image', $_POST["pic"], SQLITE3_TEXT);
 				$q->bindValue(':instructions', $instructions, SQLITE3_TEXT);
 				$q->bindValue(':description', $_POST["description"], SQLITE3_TEXT);
-				$q->bindValue(':course', mb_strtolower($_POST["course"]), SQLITE3_TEXT);
+				$q->bindValue(':course', $_POST["course"], SQLITE3_TEXT);
 				$q->bindValue(':views', 0, SQLITE3_INTEGER);
 				$q->bindValue(':rating', 0, SQLITE3_INTEGER);
 				
@@ -70,10 +107,10 @@
 				// Gå genom alla ingredienser och lägg till koppling i RecipesIngredients.
 				foreach ($ingredients as $key => $ingredient) {
 					if ($ingredient !== '') {
-						$q = $db->prepare("INSERT INTO RecipesIngredients VALUES(:id,:ingredient,:amount)");
+						$q = $db->prepare("INSERT INTO RecipesIngredients VALUES(:id,LOWER(:ingredient),:amount)");
 						$q->bindValue(':id', $id, SQLITE3_INTEGER);
-						$q->bindValue(':ingredient', $ingredient, SQLITE3_TEXT);
-						$q->bindValue(':amount', $amounts[$key], SQLITE3_TEXT);
+						$q->bindValue(':ingredient', trim($ingredient), SQLITE3_TEXT);
+						$q->bindValue(':amount', trim($amounts[$key]), SQLITE3_TEXT);
 						$ret = $q->execute();
 		
 						if(!$ret){
@@ -82,7 +119,7 @@
 
 						// Samla ihop de ingredienser som inte finns i Ingredients-tabellen.
 						$q = $db->prepare("SELECT Count(*) FROM Ingredients WHERE UPPER(Ingredient) = UPPER(:ingredient)");
-						$q->bindValue(':ingredient', $ingredient, SQLITE3_TEXT);
+						$q->bindValue(':ingredient', trim($ingredient), SQLITE3_TEXT);
 						$ret = $q->execute()->fetchArray()[0];
 						if ($ret === 0) {
 							$missing[] = $ingredient;
@@ -102,8 +139,8 @@
 
 				foreach ($ingredients as $key => $ingredient) {
 					if ($ingredient !== '') {
-						$q = $db->prepare("INSERT OR IGNORE INTO Ingredients VALUES(:ingredient,:category)");
-						$q->bindValue(':ingredient', mb_strtolower($ingredient), SQLITE3_TEXT);
+						$q = $db->prepare("INSERT OR IGNORE INTO Ingredients VALUES(LOWER(:ingredient),:category)");
+						$q->bindValue(':ingredient', trim($ingredient), SQLITE3_TEXT);
 						$q->bindValue(':category', $categories[$key], SQLITE3_TEXT);
 						$ret = $q->execute();
 		
@@ -160,7 +197,13 @@
 						<h2>Lägg till ingredienser</h2>
 						<form method="post">
 							<div id="nyingrdbox">
-								<input type="text" name="ingrdfield1[]" placeholder="Ny ingrediens" class="nyingrd"><input type="text" name="ingrdfield2[]" placeholder="Kategori" class="nyingrd" required>
+								<input type="text" name="ingrdfield1[]" placeholder="Ny ingrediens" class="nyingrd"><select name="ingrdfield2[]" class="nyingrd" required>
+									<option value="Kött">Kött & Fisk</option>
+									<option value="Mejeri">Mejeri & Ägg</option>
+									<option value="Pasta">Mjöl, Gryn & Pasta</option>
+									<option value="Grönsak">Frukt & Grönt</option>
+									<option value="Övrigt">Övrigt</option>
+								</select>
 							</div>
 							<p><button type="button" onclick="addrow('nyingrdbox','Ny ingrediens','Kategori')">+</button></p>
 							<input type="hidden" name="addtype" value="2">
