@@ -147,15 +147,17 @@ SQL;
                         </div>
                         </a>
                     <?php } ?>
-                    <div id="previous">
-                        <a href="<?=$prevpage?>" <?= ($page <= 1 ? 'class="hidden"' : '') ?>>Föregående sida</a>
-                    </div>
-                    <div id="resultnav">
-                        <?=$resultnav?>
-                    </div>
-                    <div id="next">
-                        <a href="<?=$nextpage?>" <?= ($hits <= $page * 10 ? 'class="hidden"' : '') ?>>Nästa sida</a>
-                    </div>
+                    <div id="pagination">
+						<div id="previous">
+							<a href="<?=$prevpage?>" <?= ($page <= 1 ? 'class="hidden"' : '') ?>>Föregående sida</a>
+						</div>
+						<div id="resultnav">
+							<?=$resultnav?>
+						</div>
+						<div id="next">
+							<a href="<?=$nextpage?>" <?= ($hits <= $page * 10 ? 'class="hidden"' : '') ?>>Nästa sida</a>
+						</div>
+					</div>
                 </div>
 
                 <div id="ingredienser" <?= ($search_mode != 's' ? 'class="hidden"' : '') ?>>

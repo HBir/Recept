@@ -371,6 +371,8 @@ footer {
 				position: relative;
 }
 
+
+
 .resultbox:hover {
 				background-color: #f0f0f0;
 }
@@ -468,29 +470,33 @@ footer {
 				overflow: hidden;
 				display: inline-block;
 }
-
-#previous {
-				float: left;
-				margin-right: 130px;
-				text-align: center;
-				font-weight: bold;
-}
-
 .hidden {
 				visibility: hidden;
 }
 
-#resultnav {
+#previous {
 				float: left;
+				width: 140px;
+				/*text-align: center;*/
+				font-weight: bold;
+}
+
+#resultnav {
+				display: inline-block;
 				text-align: center;
 				font-weight: bold;
 }
 
 #next {
-				margin-left: 130px;
+				
 				float: right;
-				text-align: right;
+				width: 140px;
 				font-weight: bold;
+				text-align: right;
+}
+
+#pagination {
+	overflow: hidden;
 }
 
 #navarea a:hover {
