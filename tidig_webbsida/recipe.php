@@ -3,7 +3,7 @@
     /* Ansvarig:
      * Johan Stubbergaard
      */
-    include("db.php");
+    include('db.php');
 
     $db = new DB();
     if(!$db){

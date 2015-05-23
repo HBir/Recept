@@ -72,7 +72,7 @@
 		</script>
 	</head>
 	<?php
-		include("db.php");
+		include('db.php');
 		
 		$db = new DB();
 		if(!$db){
@@ -80,20 +80,20 @@
 			exit();
 		}
 		
-		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			// Lägga till recept
-			if ($_POST["addtype"] == 1) {
+			if ($_POST['addtype'] == 1) {
 				$ingredients = $_POST['ingrdfield1'];
 				$amounts = $_POST['ingrdfield2'];
 
 				$instructions = str_replace(PHP_EOL, '<br>', $_POST['instructions']);
 				
 				$q = $db->prepare("INSERT INTO Recipes VALUES(:name,:image,:instructions,:description,:course,:views,:rating)");
-				$q->bindValue(':name', $_POST["name"], SQLITE3_TEXT);
-				$q->bindValue(':image', $_POST["pic"], SQLITE3_TEXT);
+				$q->bindValue(':name', $_POST['name'], SQLITE3_TEXT);
+				$q->bindValue(':image', $_POST['pic'], SQLITE3_TEXT);
 				$q->bindValue(':instructions', $instructions, SQLITE3_TEXT);
-				$q->bindValue(':description', $_POST["description"], SQLITE3_TEXT);
-				$q->bindValue(':course', mb_strtolower($_POST["course"], 'UTF-8'), SQLITE3_TEXT);
+				$q->bindValue(':description', $_POST['description'], SQLITE3_TEXT);
+				$q->bindValue(':course', mb_strtolower($_POST['course'], 'UTF-8'), SQLITE3_TEXT);
 				$q->bindValue(':views', 0, SQLITE3_INTEGER);
 				$q->bindValue(':rating', 0, SQLITE3_INTEGER);
 				
@@ -133,7 +133,7 @@
 			}
 		
 			// Lägga till ingredienser
-			if ($_POST["addtype"] == 2) {
+			if ($_POST['addtype'] == 2) {
 				$ingredients = $_POST['ingrdfield1'];
 				$categories = $_POST['ingrdfield2'];
 
@@ -154,7 +154,7 @@
 			}
 		
 			// Nuka databasen och lägg till tables igen (om schemat ändras t ex)
-			if ($_POST["addtype"] == 3) {
+			if ($_POST['addtype'] == 3) {
 				$db->drop_tables();
 				$db->init_tables();
 				$message = 'Rensat databasen :(';
