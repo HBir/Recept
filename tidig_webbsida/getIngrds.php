@@ -8,9 +8,7 @@
 		
 		if ($a == "Ä" || $a == "Ä" || $a == "Ö"){
 			$a = mb_strtolower($a, 'UTF-8');
-
 		}
-		
 		
 		$a= $a."%";
 	
@@ -48,9 +46,7 @@
 			$str = $first_letter . $str_end;
 			return $str;
 		}
-	}
-	
-	
+	}	
 ?>
 
 <!DOCTYPE html>
@@ -59,11 +55,9 @@
 		<meta charset="utf-8" />
 	</head>
 	<body>
-
 		<?php
 			$q = $_GET['q'];
 			$s = $_GET['s'];
-			
 			
 			$db = new PDO('sqlite:test2.db');
 			
@@ -97,7 +91,6 @@
 					}
 				}
 				echo "</div></ul></div>";
-			
 			}
 		?>
 	</body>

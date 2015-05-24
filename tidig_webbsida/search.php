@@ -106,10 +106,8 @@ SQL;
                 <h1>Receptsökare!</h1>
             </header></a>
             <div id="main">
-                
-                
                 <div id="sok">
-                    <input type="text" id="sokruta" name="sok" placeholder="Sök recept" onkeydown="if (event.keyCode == 13) document.getElementById('sokknapp').click()" <?= ($search_mode == 'r' ? 'value=' . $_GET['r'] : '') ?> />
+                    <input type="text" id="sokruta" name="sok" placeholder="Sök receptnamn" onkeydown="if (event.keyCode == 13) document.getElementById('sokknapp').click()" <?= ($search_mode == 'r' ? 'value=' . $_GET['r'] : '') ?> />
                     <button type="button" id="sokknapp" onclick="textSearch()">Hitta</button>
                 </div>
                 <div id="resultatarea">
@@ -159,10 +157,8 @@ SQL;
 						</div>
 					</div>
                 </div>
-
                 <div id="ingredienser" <?= ($search_mode != 's' ? 'class="hidden"' : '') ?>>
                     <p>Dina valda ingredienser:</p>
-                    
                     <ul>
                         <?php
                         // Befolka listan över valda ingredienser.
@@ -170,19 +166,14 @@ SQL;
                         <li><?= $i ?></li>
                         <?php } ?>
                     </ul>
-                    
                     <FORM ACTION="index.html">
                     <INPUT TYPE="submit" class="button bigbutton" id="redobutton" value="Ny sökning">
                     </FORM>
-                    
                 </div>
-
-                
             </div>
             <footer>
                 <p>Hannes Birgersson, Martin Gustavsson, Johan Stubbengaard, Maria Nguyen, Jenny Vuong</p>
             </footer>
-        
         </div>
     </body>
 </html>

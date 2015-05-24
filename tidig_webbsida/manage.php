@@ -14,6 +14,7 @@
 		<script>
   	var i = 1;
   	function addrow(box, text1, text2) {
+		/*Lägger till en till form input rad i diven box*/
   		i++;
   		var input = document.createElement("INPUT");
 
@@ -22,8 +23,6 @@
   		input.setAttribute("placeholder", text1);
   		input.className = "nyingrd";
   		document.getElementById(box).appendChild(input);
-
-
 
   		if (text2 == "Mängd") {
   			var t = document.createElement("INPUT");
@@ -64,10 +63,6 @@
   			option.appendChild(document.createTextNode('Övrigt'));
   			selector.appendChild(option);
   		}
-
-  		//document.getElementById(box).appendChild(selector);
-
-
   	}
 		</script>
 	</head>
@@ -222,6 +217,5 @@
 				<p>Hannes Birgersson, Martin Gustavsson, Johan Stubbergaard, Maria Nguyen, Jenny Vuong</p>
 			</footer>
 		</div>
-
 	</body>
 </html>

@@ -232,9 +232,8 @@ function showIngrds(str, sort) {
 }
 
 function markCat(e) {
+	/*Markerar den kategorirutan som klickas*/
     var x = document.getElementsByClassName("catmark");
-    
-   
     if (e.target.parentNode.innerHTML.indexOf("kategoricenter") < 0) {
 		x[0].className = "kategoribox";
     	e.target.className = "kategoribox catmark";

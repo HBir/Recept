@@ -485,8 +485,15 @@ footer {
 				display: inline-block;
 				text-align: center;
 				font-weight: bold;
+				max-width: 320px;
 }
 
+#resultnav > a {
+	padding: 5px;
+}
+pagination div a:hover {
+	text-decoration: underline;
+}
 #next {
 				
 				float: right;

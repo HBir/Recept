@@ -61,7 +61,7 @@ SQL;
                 
 
                 <div id="sok">
-                    <input type="text" id="sokruta" name="sok" placeholder="Sök recept" onkeydown="if (event.keyCode == 13) document.getElementById('sokknapp').click()"/>
+                    <input type="text" id="sokruta" name="sok" placeholder="Sök receptnamn" onkeydown="if (event.keyCode == 13) document.getElementById('sokknapp').click()"/>
                     <button type="button" id="sokknapp" onclick="textSearch()">Hitta</button>
                 </div>
 
